@@ -2,14 +2,14 @@
   "version": "1.2.3.dev0",
   "integration_state_schema": 1,
   "installed_integrations": [
-    "copilot"
+    "devin"
   ],
   "integration_settings": {
-    "copilot": {
+    "devin": {
       "script": "py",
       "invoke_separator": "-"
     }
   },
-  "integration": "copilot",
-  "default_integration": "copilot"
+  "integration": "devin",
+  "default_integration": "devin"
 }
