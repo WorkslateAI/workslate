@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>6/12</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">20% </span>
-                <span class="quiet">Branches</span>
-                <span class='fraction'>2/10</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
-                <span class="quiet">Functions</span>
-                <span class='fraction'>2/6</span>
+                <span class='fraction'>8/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">50% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>5/10</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">66.66% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>4/6</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/12</span>
+                <span class='fraction'>8/12</span>
             </div>
         
             
@@ -140,37 +140,37 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -215,8 +215,8 @@ import { faqItems } from '../../content/faq';
 export const FAQ: React.FC = () =&gt; {
   const [openIndex, setOpenIndex] = useState&lt;number | null&gt;(null);
 &nbsp;
-  const toggleItem = <span class="fstat-no" title="function not covered" >(i</span>ndex: number) =&gt; {
-<span class="cstat-no" title="statement not covered" >    setOpenIndex(openIndex === index ? null : index);</span>
+  const toggleItem = (index: number) =&gt; {
+    setOpenIndex(openIndex === index ? <span class="branch-0 cbranch-no" title="branch not covered" >null : i</span>ndex);
   };
 &nbsp;
   const handleKeyDown = <span class="fstat-no" title="function not covered" >(e</span>vent: React.KeyboardEvent, index: number) =&gt; {
@@ -243,7 +243,7 @@ export const FAQ: React.FC = () =&gt; {
               className="border border-navy-700 rounded-lg overflow-hidden"
             &gt;
               &lt;button
-                onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >t</span>oggleItem(index)}</span>
+                onClick={() =&gt; toggleItem(index)}
                 onKeyDown={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >handleKeyDown(e, index)}</span>
                 className="w-full flex items-center justify-between p-4 text-left bg-navy-800 hover:bg-navy-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
                 aria-expanded={openIndex === index}
@@ -252,7 +252,7 @@ export const FAQ: React.FC = () =&gt; {
                 &lt;span className="font-medium text-white"&gt;{item.question}&lt;/span&gt;
                 &lt;svg
                   className={`w-5 h-5 text-navy-300 transition-transform ${
-                    openIndex === index ? <span class="branch-0 cbranch-no" title="branch not covered" >'rotate-180' : '</span>'
+                    openIndex === index ? 'rotate-180' : ''
                   }`}
                   fill="none"
                   viewBox="0 0 24 24"
@@ -268,7 +268,7 @@ export const FAQ: React.FC = () =&gt; {
               &lt;/button&gt;
               
               {openIndex === index &amp;&amp; (
-<span class="branch-1 cbranch-no" title="branch not covered" >                &lt;div</span>
+                &lt;div
                   id={`faq-answer-${index}`}
                   className="p-4 bg-navy-800 border-t border-navy-700"
                 &gt;
@@ -289,7 +289,7 @@ export const FAQ: React.FC = () =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-10-23T20:41:25.670Z
+                at 2026-10-23T20:46:45.707Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

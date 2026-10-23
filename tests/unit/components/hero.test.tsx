@@ -39,4 +39,11 @@ describe('Hero Section', () => {
     
     expect(image).toBeVisible();
   });
+
+  it('renders eyebrow text', () => {
+    render(<Hero />);
+    const eyebrow = screen.getByText(/AI-POWERED/i);
+    
+    expect(eyebrow).toBeVisible();
+  });
 });

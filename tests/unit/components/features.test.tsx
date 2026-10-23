@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { describe, it, expect, vi } from 'vitest';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { Features } from '../../../src/components/sections/Features';
 
 describe('Features Section', () => {
@@ -34,5 +34,26 @@ describe('Features Section', () => {
     
     const images = screen.getAllByRole('img');
     expect(images.length).toBeGreaterThanOrEqual(3);
+  });
+
+  it('renders sidebar navigation buttons', () => {
+    render(<Features />);
+    
+    const sidebarButtons = screen.getAllByText(/Chain of wallet token movement|EVM nodes – your token home|Single source of truth/);
+    expect(sidebarButtons.length).toBeGreaterThan(0);
+  });
+
+  it('handles sidebar button clicks', () => {
+    render(<Features />);
+    
+    // Mock scrollIntoView
+    const mockScrollIntoView = vi.fn();
+    Element.prototype.scrollIntoView = mockScrollIntoView;
+    
+    const sidebarButtons = screen.getAllByRole('button');
+    if (sidebarButtons.length > 0) {
+      fireEvent.click(sidebarButtons[0]);
+      expect(mockScrollIntoView).toHaveBeenCalled();
+    }
   });
 });

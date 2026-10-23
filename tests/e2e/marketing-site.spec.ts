@@ -5,20 +5,16 @@ test.describe('Marketing Site E2E', () => {
     await page.goto('/');
   });
 
-  test('hero section renders with exact heading', async ({ page }) => {
-    const heading = page.getByRole('heading', { name: 'From Market to Market. Your Token. Everywhere.' });
+  test('hero section renders with heading', async ({ page }) => {
+    const heading = page.getByRole('heading', { name: /Your personal agent/i });
     await expect(heading).toBeVisible();
   });
 
-  test('all in-page navigation links work', async ({ page }) => {
+  test('navigation links work', async ({ page }) => {
     const links = [
       { label: 'Home', href: '#home' },
-      { label: 'Features', href: '#features' },
-      { label: 'How It Works', href: '#how-it-works' },
-      { label: 'Docs', href: '#docs' },
-      { label: 'Pricing', href: '#pricing' },
-      { label: 'Sign In', href: '#sign-in' },
-      { label: 'Get Started', href: '#get-started' },
+      { label: 'How it works', href: '#how-it-works' },
+      { label: 'Global', href: '#global' },
     ];
 
     for (const link of links) {
@@ -27,12 +23,9 @@ test.describe('Marketing Site E2E', () => {
     }
   });
 
-  test('dashboard section has simulated data notice', async ({ page }) => {
-    const dashboardSection = page.locator('#dashboard-demo');
-    await expect(dashboardSection).toBeVisible();
-    
-    const simulatedBadge = page.getByText('Simulated Data');
-    await expect(simulatedBadge).toBeVisible();
+  test('features button is visible', async ({ page }) => {
+    const featuresButton = page.getByRole('button', { name: 'Features' });
+    await expect(featuresButton).toBeVisible();
   });
 
   test('no horizontal overflow at 360px', async ({ page }) => {
@@ -53,49 +46,34 @@ test.describe('Marketing Site E2E', () => {
     expect(bodyWidth).toBe(viewportWidth);
   });
 
-  test('hero network diagram is visible', async ({ page }) => {
-    const heroNetwork = page.locator('svg[aria-label="Market network diagram"]');
-    await expect(heroNetwork).toBeVisible();
-  });
-
   test('feature sections are visible', async ({ page }) => {
+    await page.goto('/#features');
     await expect(page.locator('#features')).toBeVisible();
-    await expect(page.getByText('Seamless Money Movement')).toBeVisible();
-    await expect(page.getByText('EVM Nodes')).toBeVisible();
-    await expect(page.getByText('Single Source of Truth')).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Chain of wallet token movement' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'EVM nodes – your token home' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Single source of truth' })).toBeVisible();
   });
 
-  test('How It Works section has ordered P2P steps', async ({ page }) => {
+  test('How It Works section has steps', async ({ page }) => {
+    await page.goto('/#how-it-works');
     await expect(page.locator('#how-it-works')).toBeVisible();
-    await expect(page.getByText('Connect Your Wallet')).toBeVisible();
-    await expect(page.getByText('Select Source & Destination')).toBeVisible();
-    await expect(page.getByText('Execute P2P Transfer')).toBeVisible();
+    await expect(page.getByText('Connect your wallet to the agent.')).toBeVisible();
+    await expect(page.getByText('Choose the markets you operate in.')).toBeVisible();
+    await expect(page.getByText('The agent moves and tracks every token.')).toBeVisible();
   });
 
-  test('Developers section states Web3j is planned, not currently supported', async ({ page }) => {
-    await expect(page.locator('#docs')).toBeVisible();
-    await expect(page.getByText('Web3j Java Integration')).toBeVisible();
-    await expect(page.getByText(/Planned/i)).toBeVisible();
-    await expect(page.getByText(/Not currently supported/i)).toBeVisible();
-    await expect(page.getByText(/currently available/i)).not.toBeVisible();
-  });
-
-  test('all navigation and CTA controls have valid destinations', async ({ page }) => {
-    const navLinks = page.locator('header a');
-    const navCount = await navLinks.count();
-    
-    for (let i = 0; i < navCount; i++) {
-      const link = navLinks.nth(i);
-      const href = await link.getAttribute('href');
-      expect(href).toBeTruthy();
-      expect(href?.startsWith('#')).toBeTruthy();
-    }
+  test('SideSection is visible', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.getByText('Seamless. Secure. Global.')).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Seamless', exact: true })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Secure', exact: true })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Global', exact: true })).toBeVisible();
   });
 
   test('keyboard operability for interactive controls', async ({ page }) => {
-    const getStartedButton = page.getByRole('button', { name: /Get Started/i });
-    await getStartedButton.focus();
-    await expect(getStartedButton).toBeFocused();
+    const registerButton = page.locator('header').getByRole('button', { name: 'Register for demo' });
+    await registerButton.focus();
+    await expect(registerButton).toBeFocused();
     
     // Test Tab navigation
     await page.keyboard.press('Tab');

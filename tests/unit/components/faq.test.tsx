@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { FAQ } from '../../../src/components/sections/FAQ';
 import { faqItems } from '../../../src/content/faq';
 
@@ -24,5 +24,19 @@ describe('FAQ Component', () => {
     visibleQuestions.forEach((question, index) => {
       expect(visibleAnswers[index]).toBeDefined();
     });
+  });
+
+  it('toggles FAQ item on click', () => {
+    render(<FAQ />);
+    const firstQuestion = screen.getByText(faqItems[0].question);
+    
+    // Initially closed
+    const firstAnswer = screen.queryByText(faqItems[0].answer);
+    expect(firstAnswer).not.toBeInTheDocument();
+    
+    // Click to open
+    fireEvent.click(firstQuestion);
+    const openedAnswer = screen.queryByText(faqItems[0].answer);
+    expect(openedAnswer).toBeInTheDocument();
   });
 });
