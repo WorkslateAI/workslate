@@ -205,7 +205,7 @@ jobs:
 
 | Metric | Target |
 |--------|--------|
-| Lighthouse Performance / Accessibility / Best Practices / SEO | ≥ 95 each (mobile) |
+| Lighthouse Performance / Accessibility / Best Practices / SEO | ≥ 90 each (mobile) |
 | Largest Contentful Paint | < 2.0 s |
 | Cumulative Layout Shift | < 0.05 |
 | Total Blocking Time | < 150 ms |
