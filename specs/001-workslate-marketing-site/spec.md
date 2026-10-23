@@ -6,7 +6,7 @@
 
 **Status**: Draft
 
-**Input**: User description: "Single-page marketing site for Workslate AI (see design/Workslate–singlepage.png): a platform that tracks and moves tokens across markets and EVM-compatible blockchains with AI-driven automation, peer-to-peer (P2P) transfer workflows and a unified real-time dashboard. Sections: Header with logo, nav (Home, Features, How It Works, Docs, Pricing), Sign In, Get Started; Hero with eyebrow, h1 'From Market to Market. Your Token. Everywhere.', paragraph, two CTAs, SVG market-network illustration (Markets A/B/C, central W token); Feature 01 Seamless Money Movement (market flow with $, €, ₿); Feature 02 EVM Nodes (Ethereum, Polygon, BSC, Arbitrum, Optimism hub diagram); Feature 03 Single Source of Truth (dashboard card: volume, transactions, table); How It Works (P2P workflow steps); Developers (Web3j / Java integration overview); FAQ (supports FAQ structured data) and Footer. SEO keyword targets, used naturally in headings, body copy, alt/aria text and metadata: blockchain, EVM, EVM-compatible nodes, Web3j, Web3j Java integration, P2P workflows, peer-to-peer token transfer, multi-chain token tracking, Web3. Acceptance: matches reference at 1536px; stacks cleanly at 360px; Lighthouse 95+."
+**Input**: User description: "Single-page marketing site for Workslate AI (see design/Workslate–SinglePage.png): a platform that tracks and moves tokens across markets and EVM-compatible blockchains with AI-driven automation, peer-to-peer (P2P) transfer workflows and a unified real-time dashboard. Sections: Header with logo, nav (Home, Features, How It Works, Docs, Pricing), Sign In, Get Started; Hero with eyebrow, h1 'From Market to Market. Your Token. Everywhere.', paragraph, two CTAs, SVG market-network illustration (Markets A/B/C, central W token); Feature 01 Seamless Money Movement (market flow with $, €, ₿); Feature 02 EVM Nodes (Ethereum, Polygon, BSC, Arbitrum, Optimism hub diagram); Feature 03 Single Source of Truth (dashboard card: volume, transactions, table); How It Works (P2P workflow steps); Developers (Web3j / Java integration overview); FAQ (supports FAQ structured data) and Footer. SEO keyword targets, used naturally in headings, body copy, alt/aria text and metadata: blockchain, EVM, EVM-compatible nodes, Web3j, Web3j Java integration, P2P workflows, peer-to-peer token transfer, multi-chain token tracking, Web3. Acceptance: matches reference at 1536px; stacks cleanly at 360px; Lighthouse 95+."
 
 ## Clarifications
 
@@ -242,7 +242,7 @@ and footer links to verify that they are understandable and usable.
   Web3j / Java integration is planned and not currently supported. Additional claims,
   including specific AI behaviors or integration guarantees, require product
   verification.
-- `design/Workslate–singlepage.png` is the selected visual reference for the page.
+- `design/Workslate–SinglePage.png` is the selected visual reference for the page.
   The requested How It Works, Developers, and FAQ sections remain in scope.
 - The project constitution remains authoritative for implementation architecture,
   reusable component organization, mobile-first breakpoints, accessibility,

@@ -8,7 +8,7 @@ prerendering, performance, testing, and CI requirements provided by the user.
 ## Summary
 
 Create a responsive, single-page Workslate AI marketing site based on
-`design/Workslate–singlepage.png`. Use Vite, React 18, TypeScript, and Tailwind CSS,
+`design/Workslate–SinglePage.png`. Use Vite, React 18, TypeScript, and Tailwind CSS,
 without client-side routing. Build typed, reusable visual components and separate
 typed page content; prerender the complete HTML for crawlers; include SEO metadata,
 JSON-LD, sitemap, and robots directives; and verify usability, accessibility,

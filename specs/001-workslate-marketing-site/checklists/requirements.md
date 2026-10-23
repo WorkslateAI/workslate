@@ -33,6 +33,6 @@
 
 - The user-requested audit scores and performance thresholds are retained as explicit
   acceptance targets. The constitution governs implementation-level obligations.
-- `design/Workslate–singlepage.png` is the selected visual reference for the page.
+- `design/Workslate–SinglePage.png` is the selected visual reference for the page.
 - Docs, Pricing, Sign In, Get Started, and Watch Demo use the in-page destinations
   recorded in the spec. Any external footer destinations must be product-approved.

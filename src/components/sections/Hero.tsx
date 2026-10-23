@@ -1,0 +1,75 @@
+import React, { useState, useEffect } from 'react';
+import { Button } from '../atoms/Button';
+import { PlayIcon } from '../atoms/PlayIcon';
+
+export const Hero: React.FC = () => {
+  const [dots, setDots] = useState('');
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDots(prev => prev.length >= 3 ? '' : prev + '.');
+    }, 500);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <section id="home" className="relative bg-lavender-100 py-12 lg:py-20 lg:py-32">
+      <div className="max-w-[1200px] mx-auto px-6 lg:px-10">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          <div className="space-y-6 order-2 lg:order-1">
+            <p className="text-primary-600 font-semibold text-[10px] lg:text-xs uppercase tracking-widest">
+              AI-POWERED • BLOCKCHAIN-READY • GLOBAL REACH
+            </p>
+            
+            <div className="inline-flex items-center space-x-2 bg-white border border-border rounded-full px-3 lg:px-4 py-2">
+              <span className="text-primary-600 font-bold text-xs lg:text-sm">+ Prompt</span>
+              <span className="text-text-900 text-xs lg:text-sm hidden sm:inline">How do I manage my wallet from market to market?</span>
+            </div>
+            
+            <p className="text-primary-600 text-[10px] lg:text-xs font-medium flex items-center space-x-2">
+              <span className="flex space-x-1">
+                <span className="w-1.5 h-1.5 bg-primary-600 rounded-full animate-pulse"></span>
+                <span className="w-1.5 h-1.5 bg-primary-600 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></span>
+                <span className="w-1.5 h-1.5 bg-primary-600 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></span>
+              </span>
+              <span className="hidden sm:inline">Workslate AI is generating a response{dots}</span>
+            </p>
+            
+            <h1 className="text-[34px] lg:text-5xl font-heading font-bold text-text-900 leading-[1.1] tracking-tight">
+              Your personal agent for managing your wallet, market to market, everywhere.
+            </h1>
+            
+            <p className="text-text-500 text-sm lg:text-base leading-relaxed max-w-xl">
+              One agent that connects markets, blockchains and global networks, giving you complete visibility, control and trust in every token movement.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+              <Button variant="primary" size="lg" className="flex items-center justify-center space-x-2">
+                <PlayIcon className="w-4 h-4" />
+                <span>Register for demo</span>
+              </Button>
+              <Button variant="secondary" size="lg" className="flex items-center justify-center space-x-2">
+                <PlayIcon className="w-4 h-4" />
+                <span>Watch video</span>
+              </Button>
+            </div>
+          </div>
+          
+          <div className="relative order-1 lg:order-2">
+            <div className="rounded-2xl bg-lavender-50 p-4 lg:p-8">
+              <img 
+                src="/assets/images/hero-markets-abc-workslate-centre.png" 
+                alt="Hero illustration showing Workslate AI connecting markets A, B, and C with a central token"
+                className="w-full h-auto"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div className="max-w-[1200px] mx-auto px-6 lg:px-10 mt-12 lg:mt-20">
+        <div className="border-b border-border"></div>
+      </div>
+    </section>
+  );
+};

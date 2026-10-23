@@ -1,6 +1,10 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+
+# Node.js dependencies
+node_modules/
+
 # Editor-based HTTP Client requests
 /httpRequests/
 # Ignored default folder with query files
@@ -22,5 +26,3 @@ extensions/*/local-config.yml
 # Execution consent is stored separately in the user's local trust registry.
 integrations/packages/
 integrations/packages.json
-
-
