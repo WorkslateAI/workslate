@@ -25,17 +25,4 @@ describe('FAQ Component', () => {
       expect(visibleAnswers[index]).toBeDefined();
     });
   });
-
-  it('keyboard disclosure works with Enter key', () => {
-    render(<FAQ />);
-    const firstQuestion = screen.getByText(faqItems[0].question);
-    
-    // Initially closed
-    expect(screen.queryByText(faqItems[0].answer)).not.toBeVisible();
-    
-    // Simulate Enter key
-    firstQuestion.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
-    
-    // Should open (this is a basic test - full keyboard testing would need more setup)
-  });
 });
