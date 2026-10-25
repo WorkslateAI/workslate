@@ -1,4 +1,4 @@
-import type { DashboardData, Transaction } from './types';
+import type { DashboardData } from './types';
 
 export const dashboardData: DashboardData = {
   dataStatus: 'simulated',

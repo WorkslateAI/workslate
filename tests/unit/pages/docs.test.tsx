@@ -5,47 +5,66 @@ import { Docs } from '../../../src/pages/Docs';
 describe('Docs Page', () => {
   it('renders page heading', () => {
     render(<Docs />);
-    const heading = screen.getByText('Documentation');
+    const heading = screen.getByText(/Orchestrating value across/i);
     
     expect(heading).toBeVisible();
   });
 
   it('renders page description', () => {
     render(<Docs />);
-    const description = screen.getByText(/Explore comprehensive documentation/i);
+    const description = screen.getByText(/A practical reference for connecting Java applications through Web3j/i);
     
     expect(description).toBeVisible();
   });
 
-  it('renders all category headings', () => {
+  it('renders architectural building blocks section', () => {
     render(<Docs />);
     
-    expect(screen.getByText('Getting Started')).toBeVisible();
-    expect(screen.getByText('Core Concepts')).toBeVisible();
-    expect(screen.getByText('Advanced Topics')).toBeVisible();
+    const web3jElements = screen.getAllByText('Web3j');
+    expect(web3jElements.length).toBeGreaterThan(0);
+    expect(screen.getByText('BPMN orchestration')).toBeVisible();
+    expect(screen.getByText('EVM + consensus')).toBeVisible();
+    expect(screen.getByText('State + storage')).toBeVisible();
   });
 
-  it('renders resource cards', () => {
+  it('renders reference architecture section', () => {
     render(<Docs />);
     
-    expect(screen.getByText('Introduction to Web3j')).toBeVisible();
-    expect(screen.getByText('Smart Contracts')).toBeVisible();
-    expect(screen.getByText('Event Filters')).toBeVisible();
+    expect(screen.getByText('Reference architecture')).toBeVisible();
+    expect(screen.getByText('BPMN workflow engine')).toBeVisible();
+    expect(screen.getByText('Java service + Web3j')).toBeVisible();
+    expect(screen.getByText('EVM-compatible network')).toBeVisible();
   });
 
-  it('renders external links', () => {
+  it('renders terminology section with filter buttons', () => {
     render(<Docs />);
-    const links = screen.getAllByText('Read documentation');
     
-    expect(links.length).toBeGreaterThan(0);
+    expect(screen.getByText('Core terminology')).toBeVisible();
+    expect(screen.getByRole('button', { name: 'All terms' })).toBeVisible();
+    expect(screen.getByRole('button', { name: 'Workflow' })).toBeVisible();
+    expect(screen.getByRole('button', { name: 'Blockchain' })).toBeVisible();
+    expect(screen.getByRole('button', { name: 'Network' })).toBeVisible();
   });
 
-  it('renders help section', () => {
+  it('renders code example section', () => {
     render(<Docs />);
-    const helpHeading = screen.getByText('Need more help?');
-    const ctaButton = screen.getByText('Visit Official Docs');
     
-    expect(helpHeading).toBeVisible();
-    expect(ctaButton).toBeVisible();
+    expect(screen.getByText('Illustrative Java + Web3j flow')).toBeVisible();
+    expect(screen.getByRole('button', { name: 'Copy example' })).toBeVisible();
+  });
+
+  it('renders design decisions section', () => {
+    render(<Docs />);
+    
+    expect(screen.getByText('Reliability rules of thumb')).toBeVisible();
+    expect(screen.getByText('Separate responsibilities')).toBeVisible();
+    expect(screen.getByText('Assume asynchronous outcomes')).toBeVisible();
+  });
+
+  it('renders clarifications section', () => {
+    render(<Docs />);
+    
+    expect(screen.getByText('Common misconceptions')).toBeVisible();
+    expect(screen.getByText('Does BPMN execute smart contracts?')).toBeVisible();
   });
 });

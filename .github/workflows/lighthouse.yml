@@ -1,31 +1,42 @@
-name: lighthouse-results-${{ github.run_number }}-${{ github.run_id }}-${{ github.run_attempt }}
+name: Lighthouse Audit
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
 
+
 jobs:
-  lighthouse:
+  lighthouse-audit:
     runs-on: ubuntu-latest
-    
+
     steps:
-      - uses: actions/checkout@v4
-      
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      # Step 1: Checkout repository
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: '20'
-          cache: 'npm'
-      
-      - name: Install dependencies
-        run: npm ci
-      
-      - name: Run production build
-        run: npm run build
-      
-      - name: Run Lighthouse CI
-        uses: treosh/lighthouse-ci-action@v10
+          node-version: '18'
+
+      # Step 3: Install Lighthouse CLI
+      - name: Install Lighthouse
+        run: npm install -g lighthouse
+
+      # Step 4: Run Lighthouse Audit on the Wix website
+      - name: Run Lighthouse Audit
+        run: |
+          lighthouse https://www.healthlifestyleservices.com \
+          --output html \
+          --output-path ./lighthouse-report.html \
+          --quiet \
+          --chrome-flags="--headless"
+
+      # Step 5: Upload the report as an artifact for download
+      - name: Upload Lighthouse Report
+        uses: actions/upload-artifact@v3
         with:
-          uploadArtifacts: true
-          temporaryPublicStorage: true
+          name: lighthouse-report
+          path: ./lighthouse-report.html

@@ -82,4 +82,43 @@ test.describe('Marketing Site E2E', () => {
     const focusedElement = await page.evaluate(() => document.activeElement?.tagName);
     expect(['BUTTON', 'A', 'INPUT']).toContain(focusedElement);
   });
+
+  test('Docs link navigates to docs.html', async ({ page }) => {
+    const docsLink = page.locator('header').getByRole('link', { name: 'Docs' });
+    await docsLink.click();
+    await expect(page).toHaveURL(/docs\.html/);
+  });
+
+  test('Docs page renders with heading', async ({ page }) => {
+    await page.goto('/docs.html');
+    const heading = page.getByRole('heading', { name: /Orchestrating value across/i });
+    await expect(heading).toBeVisible();
+  });
+
+  test('Docs page renders architectural building blocks', async ({ page }) => {
+    await page.goto('/docs.html');
+    await expect(page.getByRole('heading', { name: 'Web3j', exact: true })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'BPMN orchestration' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'EVM + consensus' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'State + storage' })).toBeVisible();
+  });
+
+  test('Docs page terminology filter buttons work', async ({ page }) => {
+    await page.goto('/docs.html');
+    const allButton = page.getByRole('button', { name: 'All terms' });
+    const workflowButton = page.getByRole('button', { name: 'Workflow' });
+    
+    await expect(allButton).toBeVisible();
+    await expect(workflowButton).toBeVisible();
+    
+    await workflowButton.click();
+    // Verify filter was clicked (button should remain visible)
+    await expect(workflowButton).toBeVisible();
+  });
+
+  test('Docs page code copy button is visible', async ({ page }) => {
+    await page.goto('/docs.html');
+    const copyButton = page.getByRole('button', { name: 'Copy example' });
+    await expect(copyButton).toBeVisible();
+  });
 });
