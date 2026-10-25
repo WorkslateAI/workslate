@@ -15,7 +15,7 @@ export const HowItWorks: React.FC = () => {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <div className="space-y-6 lg:space-y-8 order-2 lg:order-1">
             <p className="text-primary-600 font-semibold text-[10px] lg:text-xs uppercase tracking-widest">
-              Section 2 · How it works
+              How it works
             </p>
             
             <h2 className="text-[28px] lg:text-[34px] font-heading font-bold text-text-900">

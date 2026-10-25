@@ -22,7 +22,7 @@ export const SideSection: React.FC = () => {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start mb-12 lg:mb-16">
           <div className="space-y-4 lg:space-y-6">
             <p className="text-primary-600 font-semibold text-[10px] lg:text-xs uppercase tracking-widest">
-              Section 3 · Side section
+              Global reach
             </p>
             
             <h2 className="text-[28px] lg:text-[34px] font-heading font-bold text-text-900">
@@ -51,6 +51,9 @@ export const SideSection: React.FC = () => {
           <img 
             src="/assets/images/local-wallet-international-tokens.png" 
             alt="Banner showing local wallet to international token movement"
+            width="1200"
+            height="600"
+            loading="lazy"
             className="w-full h-auto"
           />
         </div>

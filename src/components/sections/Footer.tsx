@@ -12,13 +12,16 @@ export const Footer: React.FC = () => {
             </div>
             
             <div className="flex flex-wrap items-center gap-4 lg:space-x-6">
-              <a href="#" className="text-text-400 hover:text-white text-sm transition-colors">
+              <a href="/docs.html" className="text-text-400 hover:text-white text-sm transition-colors">
+                Docs
+              </a>
+              <a href="/terms.html" className="text-text-400 hover:text-white text-sm transition-colors">
                 Terms of Service
               </a>
-              <a href="#" className="text-text-400 hover:text-white text-sm transition-colors">
+              <a href="/privacy.html" className="text-text-400 hover:text-white text-sm transition-colors">
                 Privacy Policy
               </a>
-              <a href="#" className="text-text-400 hover:text-white text-sm transition-colors">
+              <a href="/cookies.html" className="text-text-400 hover:text-white text-sm transition-colors">
                 Cookie Policy
               </a>
             </div>

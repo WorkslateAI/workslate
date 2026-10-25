@@ -32,6 +32,8 @@ export const Features: React.FC = () => {
   ];
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -108,6 +110,9 @@ export const Features: React.FC = () => {
                   <img
                     src={feature.image}
                     alt={feature.alt}
+                    width="720"
+                    height="480"
+                    loading="lazy"
                     className="max-w-[720px] w-full h-auto"
                   />
                 </div>

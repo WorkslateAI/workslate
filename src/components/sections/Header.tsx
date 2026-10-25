@@ -4,6 +4,7 @@ import { Logo } from '../atoms/Logo';
 
 export const Header: React.FC = () => {
   const [isFeaturesOpen, setIsFeaturesOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const features = [
@@ -13,6 +14,8 @@ export const Header: React.FC = () => {
   ];
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsFeaturesOpen(false);
@@ -22,6 +25,7 @@ export const Header: React.FC = () => {
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setIsFeaturesOpen(false);
+        setIsMobileMenuOpen(false);
       }
     };
 
@@ -52,6 +56,9 @@ export const Header: React.FC = () => {
             <a href="#global" className="text-text-900 font-medium text-sm hover:text-primary-600 transition-colors">
               Global
             </a>
+            <a href="/docs.html" className="text-text-900 font-medium text-sm hover:text-primary-600 transition-colors">
+              Docs
+            </a>
             <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setIsFeaturesOpen(!isFeaturesOpen)}
@@ -81,9 +88,6 @@ export const Header: React.FC = () => {
                 </div>
               )}
             </div>
-            <a href="https://docs.web3j.io/4.9.8/web3j_evm/" target="_blank" rel="noopener noreferrer" className="text-text-900 font-medium text-sm hover:text-primary-600 transition-colors">
-              Docs
-            </a>
           </div>
           
           <div className="hidden lg:block">
@@ -93,13 +97,70 @@ export const Header: React.FC = () => {
           </div>
           
           <div className="lg:hidden">
-            <button className="text-text-900 hover:text-primary-600" aria-label="Open menu">
+            <button 
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="text-text-900 hover:text-primary-600" 
+              aria-label="Open menu"
+              aria-expanded={isMobileMenuOpen}
+            >
               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
           </div>
         </div>
+        
+        {isMobileMenuOpen && (
+          <div className="lg:hidden border-t border-border bg-white">
+            <div className="px-6 py-4 space-y-4">
+              <a href="#" className="block text-primary-600 font-semibold text-sm">
+                Home
+              </a>
+              <a href="#how-it-works" className="block text-text-900 font-medium text-sm hover:text-primary-600 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+                How it works
+              </a>
+              <a href="#global" className="block text-text-900 font-medium text-sm hover:text-primary-600 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+                Global
+              </a>
+              <a href="/docs.html" className="block text-text-900 font-medium text-sm hover:text-primary-600 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+                Docs
+              </a>
+              <div className="space-y-2">
+                <button
+                  onClick={() => setIsFeaturesOpen(!isFeaturesOpen)}
+                  className="text-text-900 font-medium text-sm hover:text-primary-600 transition-colors flex items-center space-x-1"
+                  aria-expanded={isFeaturesOpen}
+                >
+                  <span>Features</span>
+                  <svg className={`w-4 h-4 transition-transform ${isFeaturesOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                {isFeaturesOpen && (
+                  <div className="pl-4 space-y-2">
+                    {features.map((feature) => (
+                      <a
+                        key={feature.id}
+                        href={feature.href}
+                        className="block text-text-900 text-sm hover:text-primary-600 transition-colors"
+                        onClick={() => {
+                          setIsFeaturesOpen(false);
+                          setIsMobileMenuOpen(false);
+                        }}
+                      >
+                        <span className="text-primary-600 font-semibold mr-2">{feature.id}</span>
+                        <span>{feature.title}</span>
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <Button variant="primary" size="md" className="w-full">
+                Register for demo
+              </Button>
+            </div>
+          </div>
+        )}
       </nav>
     </header>
   );

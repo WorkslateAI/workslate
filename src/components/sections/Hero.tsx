@@ -60,6 +60,8 @@ export const Hero: React.FC = () => {
               <img 
                 src="/assets/images/hero-markets-abc-workslate-centre.png" 
                 alt="Hero illustration showing Workslate AI connecting markets A, B, and C with a central token"
+                width="1200"
+                height="800"
                 className="w-full h-auto"
               />
             </div>
