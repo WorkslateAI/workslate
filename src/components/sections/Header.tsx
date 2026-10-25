@@ -13,6 +13,25 @@ export const Header: React.FC = () => {
     { id: '03', title: 'Single source of truth', href: '#feature-03' },
   ];
 
+  const handleMobileFeatureClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    setIsFeaturesOpen(false);
+    setIsMobileMenuOpen(false);
+
+    // Use requestAnimationFrame to scroll after menu closes and layout settles
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          // Set hash for browser history and scroll
+          window.location.hash = id;
+          // Also manually scroll to ensure it works
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  };
+
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
@@ -56,7 +75,7 @@ export const Header: React.FC = () => {
             <a href="#global" className="text-text-900 font-medium text-sm hover:text-primary-600 transition-colors">
               Global
             </a>
-            <a href="/docs.html" className="text-text-900 font-medium text-sm hover:text-primary-600 transition-colors">
+            <a href="#/docs" className="text-text-900 font-medium text-sm hover:text-primary-600 transition-colors">
               Docs
             </a>
             <div className="relative" ref={dropdownRef}>
@@ -122,7 +141,7 @@ export const Header: React.FC = () => {
               <a href="#global" className="block text-text-900 font-medium text-sm hover:text-primary-600 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
                 Global
               </a>
-              <a href="/docs.html" className="block text-text-900 font-medium text-sm hover:text-primary-600 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+              <a href="#/docs" className="block text-text-900 font-medium text-sm hover:text-primary-600 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
                 Docs
               </a>
               <div className="space-y-2">
@@ -143,10 +162,7 @@ export const Header: React.FC = () => {
                         key={feature.id}
                         href={feature.href}
                         className="block text-text-900 text-sm hover:text-primary-600 transition-colors"
-                        onClick={() => {
-                          setIsFeaturesOpen(false);
-                          setIsMobileMenuOpen(false);
-                        }}
+                        onClick={(e) => handleMobileFeatureClick(e, feature.href.substring(1))}
                       >
                         <span className="text-primary-600 font-semibold mr-2">{feature.id}</span>
                         <span>{feature.title}</span>

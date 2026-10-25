@@ -4,10 +4,10 @@
   "\u0000D:/git-repo/workslate/node_modules/prop-types/index.js?commonjs-module": [],
   "\u0000D:/git-repo/workslate/node_modules/react-dom/cjs/react-dom.production.min.js?commonjs-exports": [],
   "\u0000D:/git-repo/workslate/node_modules/react-dom/client.js?commonjs-es-import": [
-    "/assets/client-CVkLAI25.js"
+    "/assets/client-DBBdlYSg.js"
   ],
   "\u0000D:/git-repo/workslate/node_modules/react-dom/client.js?commonjs-exports": [
-    "/assets/client-CVkLAI25.js"
+    "/assets/client-DBBdlYSg.js"
   ],
   "\u0000D:/git-repo/workslate/node_modules/react-dom/index.js?commonjs-es-import": [],
   "\u0000D:/git-repo/workslate/node_modules/react-dom/index.js?commonjs-module": [],
@@ -25,13 +25,16 @@
   "\u0000vite/modulepreload-polyfill.js": [],
   "\u0000vite/preload-helper.js": [],
   "index.html": [],
+  "node_modules/fuse.js/dist/fuse.mjs": [
+    "/assets/fuse-BgFfDh5q.js"
+  ],
   "node_modules/invariant/browser.js": [],
   "node_modules/prop-types/factoryWithThrowingShims.js": [],
   "node_modules/prop-types/index.js": [],
   "node_modules/prop-types/lib/ReactPropTypesSecret.js": [],
   "node_modules/react-dom/cjs/react-dom.production.min.js": [],
   "node_modules/react-dom/client.js": [
-    "/assets/client-CVkLAI25.js"
+    "/assets/client-DBBdlYSg.js"
   ],
   "node_modules/react-dom/index.js": [],
   "node_modules/react-fast-compare/index.js": [],
@@ -50,9 +53,15 @@
   "src/components/atoms/Button.tsx": [],
   "src/components/atoms/Logo.tsx": [],
   "src/components/atoms/PlayIcon.tsx": [],
+  "src/components/atoms/SearchDialog.tsx": [
+    "/assets/Docs-BT2AZ8Qk.js"
+  ],
+  "src/components/atoms/SearchTrigger.tsx": [
+    "/assets/Docs-BT2AZ8Qk.js"
+  ],
   "src/components/sections/Features.tsx": [],
   "src/components/sections/Footer.tsx": [
-    "/assets/Footer-D5R_DIGt.js"
+    "/assets/Footer-Dd7yve9S.js"
   ],
   "src/components/sections/Header.tsx": [],
   "src/components/sections/Hero.tsx": [],
@@ -60,6 +69,15 @@
   "src/components/sections/SideSection.tsx": [],
   "src/content/faq.ts": [],
   "src/main.tsx": [],
+  "src/pages/Docs.tsx": [
+    "/assets/Docs-BT2AZ8Qk.js"
+  ],
+  "src/search/docsIndex.ts": [
+    "/assets/Docs-BT2AZ8Qk.js"
+  ],
+  "src/search/useSiteSearch.ts": [
+    "/assets/Docs-BT2AZ8Qk.js"
+  ],
   "src/seo/StructuredData.tsx": [],
   "src/styles/global.css": []
 }

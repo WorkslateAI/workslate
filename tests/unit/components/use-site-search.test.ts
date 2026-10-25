@@ -1,0 +1,44 @@
+import { describe, it, expect, vi } from 'vitest';
+import { renderHook, act } from '@testing-library/react';
+import { useSiteSearch } from '../../../src/search/useSiteSearch';
+
+describe('useSiteSearch', () => {
+  it('initializes with empty state', () => {
+    const { result } = renderHook(() => useSiteSearch());
+
+    expect(result.current.query).toBe('');
+    expect(result.current.results).toEqual([]);
+    expect(result.current.isLoading).toBe(false);
+    expect(result.current.isReady).toBe(false);
+    expect(result.current.error).toBe(null);
+  });
+
+  it('sets query correctly', () => {
+    const { result } = renderHook(() => useSiteSearch());
+
+    act(() => {
+      result.current.setQuery('web3j');
+    });
+
+    expect(result.current.query).toBe('web3j');
+  });
+
+  it('setQuery function is callable', () => {
+    const { result } = renderHook(() => useSiteSearch());
+
+    expect(typeof result.current.setQuery).toBe('function');
+  });
+
+  it('returns correct structure', () => {
+    const { result } = renderHook(() => useSiteSearch());
+
+    expect(Object.keys(result.current)).toEqual([
+      'query',
+      'setQuery',
+      'results',
+      'isLoading',
+      'isReady',
+      'error',
+    ]);
+  });
+});

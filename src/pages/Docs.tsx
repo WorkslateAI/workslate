@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Header } from '../components/sections/Header';
 import { Footer } from '../components/sections/Footer';
+import { SearchTrigger } from '../components/atoms/SearchTrigger';
+import { SearchDialog } from '../components/atoms/SearchDialog';
 
 export const Docs: React.FC = () => {
   const [termFilter, setTermFilter] = useState<string>('all');
   const [copyButtonText, setCopyButtonText] = useState<string>('Copy example');
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const handleFilterTerms = (category: string) => {
     setTermFilter(category);
@@ -25,7 +28,7 @@ if (!receipt.isStatusOK()) {
 String txHash = receipt.getTransactionHash();
 // Production: consider async submission, confirmations/finality, duplicate events,
 // reorg handling, key custody, gas and nonce coordination.`;
-    
+
     if (typeof navigator !== 'undefined' && navigator.clipboard) {
       navigator.clipboard.writeText(plain).then(() => {
         setCopyButtonText('Copied!');
@@ -35,6 +38,34 @@ String txHash = receipt.getTransactionHash();
       });
     }
   };
+
+  // Keyboard shortcuts for search
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Ctrl+K or Cmd+K to open search
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        setIsSearchOpen(true);
+        return;
+      }
+
+      // / to open search when no input is focused
+      if (e.key === '/' && !isSearchOpen) {
+        const activeElement = document.activeElement;
+        const isInputFocused = activeElement instanceof HTMLInputElement || activeElement instanceof HTMLTextAreaElement;
+        
+        if (!isInputFocused) {
+          e.preventDefault();
+          setIsSearchOpen(true);
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isSearchOpen]);
 
   const terms = [
     { id: 'web3j', cat: 'workflow', title: 'Web3j', badge: 'Java SDK', desc: 'Java integration library for Ethereum JSON-RPC, ABI encoding, contract wrappers, transaction submission and event/log access.', code: 'Java → JSON-RPC → node' },
@@ -64,12 +95,15 @@ String txHash = receipt.getTransactionHash();
       <Header />
       
       <main style={{ maxWidth: '1240px', margin: 'auto', padding: '28px max(4vw,18px) 70px' }}>
+        <div className="mb-6">
+          <SearchTrigger onClick={() => setIsSearchOpen(true)} />
+        </div>
         <div style={{ background: '#123b36', color: '#ffffff', padding: '38px max(5vw,22px) 32px', position: 'relative', overflow: 'hidden', borderRadius: '0' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#b9e8d8', textTransform: 'uppercase', letterSpacing: '.14em', fontSize: '11px', fontWeight: '800', marginBottom: '27px' }}>
             <span style={{ width: '30px', height: '30px', display: 'grid', placeItems: 'center', border: '1px solid #80cbb6', borderRadius: '9px', fontSize: '16px' }}>⬡</span>
             Architecture field guide · Web3 + workflow
           </div>
-          <h1 style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', letterSpacing: '-.035em', fontSize: 'clamp(34px, 5vw, 58px)', lineHeight: '1.02', maxWidth: '850px', margin: '0 0 18px' }}>
+          <h1 style={{ color: '#ffffff', fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', letterSpacing: '-.035em', fontSize: 'clamp(34px, 5vw, 58px)', lineHeight: '1.02', maxWidth: '850px', margin: '0 0 18px' }}>
             Orchestrating value across<br />workflows and the EVM
           </h1>
           <p style={{ maxWidth: '760px', color: '#d2e5de', fontSize: '16px', lineHeight: '1.7', margin: '0' }}>
@@ -86,7 +120,7 @@ String txHash = receipt.getTransactionHash();
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', gap: '20px', margin: '36px 0 18px' }}>
           <div>
             <div style={{ color: '#0c9b79', fontSize: '11px', letterSpacing: '.13em', textTransform: 'uppercase', fontWeight: '850' }}>01 / At a glance</div>
-            <h2 style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', letterSpacing: '-.035em', fontSize: '28px', margin: '7px 0 0' }}>Four architectural building blocks</h2>
+            <h2 id="building-blocks" style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', letterSpacing: '-.035em', fontSize: '28px', margin: '7px 0 0', scrollMarginTop: '80px' }}>Four architectural building blocks</h2>
           </div>
           <div style={{ color: '#62736e', fontSize: '13px', lineHeight: '1.65', maxWidth: '650px' }}>Keep business process coordination separate from blockchain execution and consensus.</div>
         </div>
@@ -121,7 +155,7 @@ String txHash = receipt.getTransactionHash();
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', gap: '20px', margin: '36px 0 18px' }}>
           <div>
             <div style={{ color: '#0c9b79', fontSize: '11px', letterSpacing: '.13em', textTransform: 'uppercase', fontWeight: '850' }}>02 / System view</div>
-            <h2 style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', letterSpacing: '-.035em', fontSize: '28px', margin: '7px 0 0' }}>Reference architecture</h2>
+            <h2 id="reference-architecture" style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', letterSpacing: '-.035em', fontSize: '28px', margin: '7px 0 0', scrollMarginTop: '80px' }}>Reference architecture</h2>
           </div>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', borderRadius: '99px', padding: '5px 9px', fontSize: '11px', fontWeight: '800', background: '#d9f1e8', color: '#163b34' }}>Illustrative design</span>
         </div>
@@ -206,7 +240,7 @@ String txHash = receipt.getTransactionHash();
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', gap: '20px', margin: '36px 0 18px' }}>
           <div>
             <div style={{ color: '#0c9b79', fontSize: '11px', letterSpacing: '.13em', textTransform: 'uppercase', fontWeight: '850' }}>03 / Vocabulary</div>
-            <h2 style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', letterSpacing: '-.035em', fontSize: '28px', margin: '7px 0 0' }}>Core terminology</h2>
+            <h2 id="core-terminology" style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', letterSpacing: '-.035em', fontSize: '28px', margin: '7px 0 0', scrollMarginTop: '80px' }}>Core terminology</h2>
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
             <button onClick={() => handleFilterTerms('all')} style={{ cursor: 'pointer', font: 'inherit', border: '1px solid #dce7e1', color: '#182a28', background: '#ffffff', borderRadius: '9px', padding: '9px 12px', fontSize: '12px', fontWeight: '750' }}>All terms</button>
@@ -232,7 +266,7 @@ String txHash = receipt.getTransactionHash();
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', gap: '20px', margin: '36px 0 18px' }}>
           <div>
             <div style={{ color: '#0c9b79', fontSize: '11px', letterSpacing: '.13em', textTransform: 'uppercase', fontWeight: '850' }}>04 / Lifecycle</div>
-            <h2 style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', letterSpacing: '-.035em', fontSize: '28px', margin: '7px 0 0' }}>Example: orchestrate a token transfer</h2>
+            <h2 id="token-transfer-lifecycle" style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', letterSpacing: '-.035em', fontSize: '28px', margin: '7px 0 0', scrollMarginTop: '80px' }}>Example: orchestrate a token transfer</h2>
           </div>
           <div style={{ color: '#62736e', fontSize: '13px', lineHeight: '1.65', maxWidth: '650px' }}>A BPMN process can span minutes or days even though contract execution is a discrete transaction.</div>
         </div>
@@ -268,7 +302,7 @@ String txHash = receipt.getTransactionHash();
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', gap: '20px', margin: '36px 0 18px' }}>
           <div>
             <div style={{ color: '#0c9b79', fontSize: '11px', letterSpacing: '.13em', textTransform: 'uppercase', fontWeight: '850' }}>05 / Example interaction</div>
-            <h2 style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', letterSpacing: '-.035em', fontSize: '28px', margin: '7px 0 0' }}>Illustrative Java + Web3j flow</h2>
+            <h2 id="web3j-flow" style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', letterSpacing: '-.035em', fontSize: '28px', margin: '7px 0 0', scrollMarginTop: '80px' }}>Illustrative Java + Web3j flow</h2>
           </div>
           <button onClick={handleCopyCode} style={{ cursor: 'pointer', font: 'inherit', border: '1px solid #dce7e1', color: '#182a28', background: '#123b36', borderRadius: '9px', padding: '9px 12px', fontSize: '12px', fontWeight: '750' }}>{copyButtonText}</button>
         </div>
@@ -293,7 +327,7 @@ String txHash = receipt.getTransactionHash();
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', gap: '20px', margin: '36px 0 18px' }}>
           <div>
             <div style={{ color: '#0c9b79', fontSize: '11px', letterSpacing: '.13em', textTransform: 'uppercase', fontWeight: '850' }}>06 / Design decisions</div>
-            <h2 style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', letterSpacing: '-.035em', fontSize: '28px', margin: '7px 0 0' }}>Reliability rules of thumb</h2>
+            <h2 id="reliability-rules" style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', letterSpacing: '-.035em', fontSize: '28px', margin: '7px 0 0', scrollMarginTop: '80px' }}>Reliability rules of thumb</h2>
           </div>
         </div>
 
@@ -327,7 +361,7 @@ String txHash = receipt.getTransactionHash();
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', gap: '20px', margin: '36px 0 18px' }}>
           <div>
             <div style={{ color: '#0c9b79', fontSize: '11px', letterSpacing: '.13em', textTransform: 'uppercase', fontWeight: '850' }}>07 / Clarifications</div>
-            <h2 style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', letterSpacing: '-.035em', fontSize: '28px', margin: '7px 0 0' }}>Common misconceptions</h2>
+            <h2 id="common-misconceptions" style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', letterSpacing: '-.035em', fontSize: '28px', margin: '7px 0 0', scrollMarginTop: '80px' }}>Common misconceptions</h2>
           </div>
         </div>
 
@@ -359,6 +393,8 @@ String txHash = receipt.getTransactionHash();
       </main>
 
       <Footer />
+      
+      <SearchDialog isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </div>
   );
 };

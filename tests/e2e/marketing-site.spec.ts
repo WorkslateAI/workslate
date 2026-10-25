@@ -83,20 +83,20 @@ test.describe('Marketing Site E2E', () => {
     expect(['BUTTON', 'A', 'INPUT']).toContain(focusedElement);
   });
 
-  test('Docs link navigates to docs.html', async ({ page }) => {
+  test('Docs link navigates to docs page', async ({ page }) => {
     const docsLink = page.locator('header').getByRole('link', { name: 'Docs' });
     await docsLink.click();
-    await expect(page).toHaveURL(/docs\.html/);
+    await expect(page).toHaveURL(/#\/docs/);
   });
 
   test('Docs page renders with heading', async ({ page }) => {
-    await page.goto('/docs.html');
+    await page.goto('/#/docs');
     const heading = page.getByRole('heading', { name: /Orchestrating value across/i });
     await expect(heading).toBeVisible();
   });
 
   test('Docs page renders architectural building blocks', async ({ page }) => {
-    await page.goto('/docs.html');
+    await page.goto('/#/docs');
     await expect(page.getByRole('heading', { name: 'Web3j', exact: true })).toBeVisible();
     await expect(page.getByRole('heading', { name: 'BPMN orchestration' })).toBeVisible();
     await expect(page.getByRole('heading', { name: 'EVM + consensus' })).toBeVisible();
@@ -104,7 +104,7 @@ test.describe('Marketing Site E2E', () => {
   });
 
   test('Docs page terminology filter buttons work', async ({ page }) => {
-    await page.goto('/docs.html');
+    await page.goto('/#/docs');
     const allButton = page.getByRole('button', { name: 'All terms' });
     const workflowButton = page.getByRole('button', { name: 'Workflow' });
     
@@ -117,8 +117,111 @@ test.describe('Marketing Site E2E', () => {
   });
 
   test('Docs page code copy button is visible', async ({ page }) => {
-    await page.goto('/docs.html');
+    await page.goto('/#/docs');
     const copyButton = page.getByRole('button', { name: 'Copy example' });
     await expect(copyButton).toBeVisible();
+  });
+
+  test('Search trigger button is visible on docs page', async ({ page }) => {
+    await page.goto('/#/docs');
+    const searchTrigger = page.getByRole('button', { name: /search docs/i });
+    await expect(searchTrigger).toBeVisible();
+  });
+
+  test('Search dialog opens when trigger is clicked', async ({ page }) => {
+    await page.goto('/#/docs');
+    const searchTrigger = page.getByRole('button', { name: /search docs/i });
+    await searchTrigger.click();
+
+    const dialog = page.getByRole('dialog', { name: /search docs/i });
+    await expect(dialog).toBeVisible();
+  });
+
+  test('Search dialog closes with Escape', async ({ page }) => {
+    await page.goto('/#/docs');
+    const searchTrigger = page.getByRole('button', { name: /search docs/i });
+    await searchTrigger.click();
+
+    await page.keyboard.press('Escape');
+
+    const dialog = page.getByRole('dialog', { name: /search docs/i });
+    await expect(dialog).not.toBeVisible();
+  });
+
+  test('Search input accepts text', async ({ page }) => {
+    await page.goto('/#/docs');
+    const searchTrigger = page.getByRole('button', { name: /search docs/i });
+    await searchTrigger.click();
+
+    const searchInput = page.getByPlaceholder('Search docs...');
+    await searchInput.fill('web3j');
+
+    await expect(searchInput).toHaveValue('web3j');
+  });
+
+  test('Search results are displayed for valid query', async ({ page }) => {
+    await page.goto('/#/docs');
+    const searchTrigger = page.getByRole('button', { name: /search docs/i });
+    await searchTrigger.click();
+
+    const searchInput = page.getByPlaceholder('Search docs...');
+    await searchInput.fill('web3j');
+
+    // Wait for results to load
+    await page.waitForTimeout(200);
+
+    const resultsList = page.getByRole('listbox');
+    await expect(resultsList).toBeVisible();
+  });
+
+  test('Keyboard navigation works in search results', async ({ page }) => {
+    await page.goto('/#/docs');
+    const searchTrigger = page.getByRole('button', { name: /search docs/i });
+    await searchTrigger.click();
+
+    const searchInput = page.getByPlaceholder('Search docs...');
+    await searchInput.fill('consensus');
+
+    await page.waitForTimeout(200);
+
+    // Test arrow keys are handled (no error thrown)
+    await page.keyboard.press('ArrowDown');
+    await page.keyboard.press('ArrowUp');
+    
+    // Verify results are still visible after navigation
+    const resultsList = page.getByRole('listbox');
+    await expect(resultsList).toBeVisible();
+  });
+
+  test('Search result can be selected with Enter', async ({ page }) => {
+    await page.goto('/#/docs');
+    const searchTrigger = page.getByRole('button', { name: /search docs/i });
+    await searchTrigger.click();
+
+    const searchInput = page.getByPlaceholder('Search docs...');
+    await searchInput.fill('evm');
+
+    await page.waitForTimeout(200);
+
+    await page.keyboard.press('ArrowDown');
+    await page.keyboard.press('Enter');
+
+    // Dialog should close after selection
+    const dialog = page.getByRole('dialog', { name: /search docs/i });
+    await expect(dialog).not.toBeVisible();
+  });
+
+  test('Clear button resets search query', async ({ page }) => {
+    await page.goto('/#/docs');
+    const searchTrigger = page.getByRole('button', { name: /search docs/i });
+    await searchTrigger.click();
+
+    const searchInput = page.getByPlaceholder('Search docs...');
+    await searchInput.fill('test query');
+
+    const clearButton = page.getByRole('button', { name: /clear search/i });
+    await clearButton.click();
+
+    await expect(searchInput).toHaveValue('');
   });
 });

@@ -58,7 +58,9 @@
   h1 {
     @apply text-5xl leading-[1.1] tracking-tight;
   }
-
+  .docsHeader {
+    color: #ffffff;
+  }
   h2 {
     @apply text-[34px];
   }
@@ -80,6 +82,20 @@
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
     }
+  }
+
+  /* Search result highlight animation */
+  @keyframes search-highlight {
+    0% {
+      background-color: #d9f1e8;
+    }
+    100% {
+      background-color: transparent;
+    }
+  }
+
+  :target {
+    animation: search-highlight 2s ease-out;
   }
 }
 

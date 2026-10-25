@@ -1,6 +1,6 @@
 {
-  "_client-CVkLAI25.js": {
-    "file": "assets/client-CVkLAI25.js",
+  "_client-DBBdlYSg.js": {
+    "file": "assets/client-DBBdlYSg.js",
     "name": "client",
     "isDynamicEntry": true,
     "imports": [
@@ -8,26 +8,46 @@
     ]
   },
   "index.html": {
-    "file": "assets/app-BnajEjM2.js",
+    "file": "assets/app-B2FKx9Ap.js",
     "name": "app",
     "src": "index.html",
     "isEntry": true,
     "dynamicImports": [
-      "_client-CVkLAI25.js",
-      "_client-CVkLAI25.js",
-      "src/components/sections/Footer.tsx"
+      "_client-DBBdlYSg.js",
+      "_client-DBBdlYSg.js",
+      "src/components/sections/Footer.tsx",
+      "src/pages/Docs.tsx"
     ],
     "css": [
-      "assets/app-4xMAggv8.css"
+      "assets/app-DObfCaGp.css"
     ]
   },
+  "node_modules/fuse.js/dist/fuse.mjs": {
+    "file": "assets/fuse-BgFfDh5q.js",
+    "name": "fuse",
+    "src": "node_modules/fuse.js/dist/fuse.mjs",
+    "isDynamicEntry": true
+  },
   "src/components/sections/Footer.tsx": {
-    "file": "assets/Footer-D5R_DIGt.js",
+    "file": "assets/Footer-Dd7yve9S.js",
     "name": "Footer",
     "src": "src/components/sections/Footer.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html"
+    ]
+  },
+  "src/pages/Docs.tsx": {
+    "file": "assets/Docs-BT2AZ8Qk.js",
+    "name": "Docs",
+    "src": "src/pages/Docs.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html",
+      "src/components/sections/Footer.tsx"
+    ],
+    "dynamicImports": [
+      "node_modules/fuse.js/dist/fuse.mjs"
     ]
   }
 }
