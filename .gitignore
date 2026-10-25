@@ -26,3 +26,8 @@ extensions/*/local-config.yml
 # Execution consent is stored separately in the user's local trust registry.
 integrations/packages/
 integrations/packages.json
+
+# Playwright test results
+playwright-report/
+test-results/
+

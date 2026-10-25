@@ -12,14 +12,16 @@ test.describe('Marketing Site E2E', () => {
 
   test('navigation links work', async ({ page }) => {
     const links = [
-      { label: 'Home', href: '#home' },
+      { label: 'Home', href: '#' },
       { label: 'How it works', href: '#how-it-works' },
       { label: 'Global', href: '#global' },
     ];
 
     for (const link of links) {
-      const navLink = page.getByRole('link', { name: link.label }).first();
-      await expect(navLink).toHaveAttribute('href', link.href);
+      const navLink = page.getByRole('link', { name: link.label, exact: true }).first();
+      await expect(navLink).toBeVisible();
+      const href = await navLink.getAttribute('href');
+      expect(href).toBe(link.href);
     }
   });
 
