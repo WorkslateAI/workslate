@@ -11,39 +11,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 0: setup /clean and fresh install
-      - name: Setup Node
+      #Step1 Checkout
+      - uses: actions/checkout@v4
+      #Step2 Checkout
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: npm
-
-      - name: Clean install dependencies
-        run: |
-          rm -rf node_modules
-          npm ci
-
-      # Optional hardening fallback for npm optional dependency bug:
-      - name: Verify Tailwind oxide binary
-        run: |
-          node -e "require('@tailwindcss/oxide')"
-        continue-on-error: true
-
-      - name: Reinstall if oxide is missing
-        if: ${{ failure() }}
-        run: |
-          rm -rf node_modules package-lock.json
-          npm install
-
-      # Step 1: Checkout repository
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      # Step 2: Set up Node.js
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
+          node-version: '20'
           cache: 'npm'
 
       # Step 3: Install dependencies
