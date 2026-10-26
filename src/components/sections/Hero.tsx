@@ -57,13 +57,39 @@ export const Hero: React.FC = () => {
           
           <div className="relative order-1 lg:order-2">
             <div className="rounded-2xl bg-lavender-50 p-4 lg:p-8">
-              <img 
-                src="/assets/images/hero-markets-abc-workslate-centre.png" 
-                alt="Hero illustration showing Workslate AI connecting markets A, B, and C with a central token"
-                width="1200"
-                height="800"
-                className="w-full h-auto"
-              />
+              <picture>
+                <source
+                  srcSet="/assets/images/hero-markets-abc-workslate-centre-480w.avif 480w,
+                          /assets/images/hero-markets-abc-workslate-centre-768w.avif 768w,
+                          /assets/images/hero-markets-abc-workslate-centre-1200w.avif 1200w,
+                          /assets/images/hero-markets-abc-workslate-centre.avif 1923w"
+                  sizes="(max-width: 480px) 480px, (max-width: 768px) 768px, (max-width: 1200px) 1200px, 1923px"
+                  type="image/avif"
+                />
+                <source
+                  srcSet="/assets/images/hero-markets-abc-workslate-centre-480w.webp 480w,
+                          /assets/images/hero-markets-abc-workslate-centre-768w.webp 768w,
+                          /assets/images/hero-markets-abc-workslate-centre-1200w.webp 1200w,
+                          /assets/images/hero-markets-abc-workslate-centre.webp 1923w"
+                  sizes="(max-width: 480px) 480px, (max-width: 768px) 768px, (max-width: 1200px) 1200px, 1923px"
+                  type="image/webp"
+                />
+                <img
+                  src="/assets/images/hero-markets-abc-workslate-centre-1200w.jpeg"
+                  srcSet="/assets/images/hero-markets-abc-workslate-centre-480w.jpeg 480w,
+                          /assets/images/hero-markets-abc-workslate-centre-768w.jpeg 768w,
+                          /assets/images/hero-markets-abc-workslate-centre-1200w.jpeg 1200w,
+                          /assets/images/hero-markets-abc-workslate-centre.jpeg 1923w"
+                  sizes="(max-width: 480px) 480px, (max-width: 768px) 768px, (max-width: 1200px) 1200px, 1923px"
+                  alt="Hero illustration showing Workslate AI connecting markets A, B, and C with a central token"
+                  width="1923"
+                  height="1282"
+                  loading="eager"
+                  fetchpriority="high"
+                  decoding="async"
+                  className="w-full h-auto"
+                />
+              </picture>
             </div>
           </div>
         </div>

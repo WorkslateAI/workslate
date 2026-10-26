@@ -221,6 +221,28 @@ Task: T022 Build feature SVG illustrations in src/components/illustrations/Marke
 4. Add US3 FAQs and footer.
 5. Integrate prerender, metadata, sitemap, responsive/a11y tests, and Lighthouse CI.
 
+## Phase 7: Performance Optimization
+
+**Purpose**: Raise Lighthouse scores to meet or exceed targets (Performance >= 90, Accessibility = 90, Best Practices = 90, SEO = 100) and improve Core Web Vitals (LCP < 2.0s, CLS < 0.02, TBT < 100ms, INP < 200ms, FCP < 1.5s, Speed Index < 2.5s).
+
+- [X] T057 [P] Run baseline Lighthouse audit: build production with `npm run build && npm run preview`, run Lighthouse 3 times on mobile profile with default throttling for URLs /, /docs, and other routes; save HTML/JSON reports to `reports/lighthouse/before/`.
+- [X] T058 [P] Record baseline metrics per URL: four category scores, Core Web Vitals (LCP, CLS, TBT, INP, FCP, Speed Index), LCP element, total transfer size, request count, JS and CSS size, and top opportunities/diagnostics.
+- [X] T059 [P] Run bundle analysis using `vite build --report` or rollup-plugin-visualizer and list the 10 largest modules/chunks; report baseline table and prioritized optimization plan.
+- [X] T060 [P] Identify all raster images in the project (hero, banners, feature images) and record their current sizes, formats, and dimensions.
+- [X] T061 [P] Install and configure image optimization tooling (vite-imagetools or sharp build script) for AVIF/WebP generation with PNG/JPEG fallback; target < 150KB for large images, < 80KB for smaller ones.
+- [X] T062 [P] Convert all raster images to modern formats (AVIF, WebP) with fallbacks; keep original files in source folder, not in shipped bundle.
+- [X] T063 [P] Generate responsive image sizes (480, 768, 1200, max width) for each image and implement srcset + sizes attributes matching rendered widths at breakpoints.
+- [X] T064 [P] Add explicit width and height attributes (or aspect-ratio CSS) to every image element to prevent CLS.
+- [X] T065 Identify the LCP image (typically hero image) and implement loading="eager", fetchpriority="high", decoding="async".
+- [X] T066 Add `<link rel="preload" as="image" imagesrcset="..." imagesizes="...">` in the pre-rendered `<head>` for the LCP image via react-helmet-async in `src/seo/StructuredData.tsx` or appropriate component.
+- [X] T067 Add loading="lazy" and decoding="async" to all below-the-fold images.
+- [X] T068 Convert logo and icons to SVG if faithful vector versions exist; otherwise ensure raster versions are correctly sized and optimized.
+- [X] T069 Re-run Lighthouse audit on production build after image optimizations; compare with baseline and verify targets are met.
+- [X] T070 [P] If performance targets not met after image optimization, analyze bundle for additional opportunities (code splitting, tree shaking, removing unused dependencies, minification improvements).
+- [X] T071 [P] Document final performance scores, Core Web Vitals, and optimization changes in `specs/001-workslate-marketing-site/performance-report.md`.
+
+**Checkpoint**: Lighthouse scores meet or exceed targets; Core Web Vitals within thresholds; no visual regressions.
+
 ## Notes
 
 - Task IDs are sequential and each task uses a checkbox, ID, explicit file path,

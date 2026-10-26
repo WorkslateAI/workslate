@@ -392,8 +392,6 @@ String txHash = receipt.getTransactionHash();
         </footer>
       </main>
 
-      <Footer />
-      
       <SearchDialog isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </div>
   );

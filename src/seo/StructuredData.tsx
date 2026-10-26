@@ -51,7 +51,19 @@ export const StructuredData: React.FC = () => {
       <title>Workslate AI - From Market to Market. Your Token. Everywhere.</title>
       <meta name="description" content="Track and move tokens across markets and EVM-compatible blockchains with AI-driven automation, peer-to-peer transfer workflows, and a unified real-time dashboard." />
       <link rel="canonical" href="https://workslate.ai/" />
-      
+
+      {/* Preload LCP image */}
+      <link
+        rel="preload"
+        as="image"
+        imagesrcset="/assets/images/hero-markets-abc-workslate-centre-480w.avif 480w,
+                     /assets/images/hero-markets-abc-workslate-centre-768w.avif 768w,
+                     /assets/images/hero-markets-abc-workslate-centre-1200w.avif 1200w,
+                     /assets/images/hero-markets-abc-workslate-centre.avif 1923w"
+        imagesizes="(max-width: 480px) 480px, (max-width: 768px) 768px, (max-width: 1200px) 1200px, 1923px"
+        fetchPriority="high"
+      />
+
       {/* Open Graph */}
       <meta property="og:title" content="Workslate AI - From Market to Market. Your Token. Everywhere." />
       <meta property="og:description" content="Track and move tokens across markets and EVM-compatible blockchains with AI-driven automation." />

@@ -16,19 +16,29 @@ export const Logo: React.FC<LogoProps> = ({ variant, size }) => (
         : 'inline-flex items-center'
     }
   >
-    <img
-      src="/assets/images/logo@1x.png"
-      srcSet="/assets/images/logo@1x.png 1x, /assets/images/logo.png 2x"
-      alt="Workslate AI"
-      width={LOGO_WIDTH}
-      height={LOGO_HEIGHT}
-      loading={variant === 'header' ? 'eager' : 'lazy'}
-      decoding="async"
-      style={{
-        width: 'auto',
-        height: variant === 'header' ? `clamp(28px, 8vw, ${size}px)` : `${size}px`,
-        maxWidth: '100%',
-      }}
-    />
+    <picture>
+      <source
+        srcSet="/assets/images/logo@1x.avif 1x, /assets/images/logo.avif 2x"
+        type="image/avif"
+      />
+      <source
+        srcSet="/assets/images/logo@1x.webp 1x, /assets/images/logo.webp 2x"
+        type="image/webp"
+      />
+      <img
+        src="/assets/images/logo@1x.jpeg"
+        srcSet="/assets/images/logo@1x.jpeg 1x, /assets/images/logo.jpeg 2x"
+        alt="Workslate AI"
+        width={LOGO_WIDTH}
+        height={LOGO_HEIGHT}
+        loading={variant === 'header' ? 'eager' : 'lazy'}
+        decoding="async"
+        style={{
+          width: 'auto',
+          height: variant === 'header' ? `clamp(28px, 8vw, ${size}px)` : `${size}px`,
+          maxWidth: '100%',
+        }}
+      />
+    </picture>
   </span>
 );

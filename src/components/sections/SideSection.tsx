@@ -48,14 +48,38 @@ export const SideSection: React.FC = () => {
         </div>
         
         <div className="rounded-xl lg:rounded-2xl border border-border p-4 lg:p-8">
-          <img 
-            src="/assets/images/local-wallet-international-tokens.png" 
-            alt="Banner showing local wallet to international token movement"
-            width="1200"
-            height="600"
-            loading="lazy"
-            className="w-full h-auto"
-          />
+          <picture>
+            <source
+              srcSet="/assets/images/local-wallet-international-tokens-480w.avif 480w,
+                      /assets/images/local-wallet-international-tokens-768w.avif 768w,
+                      /assets/images/local-wallet-international-tokens-1200w.avif 1200w,
+                      /assets/images/local-wallet-international-tokens.avif"
+              sizes="(max-width: 480px) 480px, (max-width: 768px) 768px, (max-width: 1200px) 1200px"
+              type="image/avif"
+            />
+            <source
+              srcSet="/assets/images/local-wallet-international-tokens-480w.webp 480w,
+                      /assets/images/local-wallet-international-tokens-768w.webp 768w,
+                      /assets/images/local-wallet-international-tokens-1200w.webp 1200w,
+                      /assets/images/local-wallet-international-tokens.webp"
+              sizes="(max-width: 480px) 480px, (max-width: 768px) 768px, (max-width: 1200px) 1200px"
+              type="image/webp"
+            />
+            <img
+              src="/assets/images/local-wallet-international-tokens-1200w.jpeg"
+              srcSet="/assets/images/local-wallet-international-tokens-480w.jpeg 480w,
+                      /assets/images/local-wallet-international-tokens-768w.jpeg 768w,
+                      /assets/images/local-wallet-international-tokens-1200w.jpeg 1200w,
+                      /assets/images/local-wallet-international-tokens.jpeg"
+              sizes="(max-width: 480px) 480px, (max-width: 768px) 768px, (max-width: 1200px) 1200px"
+              alt="Banner showing local wallet to international token movement"
+              width="1200"
+              height="600"
+              loading="lazy"
+              decoding="async"
+              className="w-full h-auto"
+            />
+          </picture>
         </div>
       </div>
       

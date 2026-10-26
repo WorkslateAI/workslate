@@ -107,14 +107,35 @@ export const Features: React.FC = () => {
                   </div>
                 </div>
                 <div className="flex justify-center mt-4 lg:mt-6">
-                  <img
-                    src={feature.image}
-                    alt={feature.alt}
-                    width="720"
-                    height="480"
-                    loading="lazy"
-                    className="max-w-[720px] w-full h-auto"
-                  />
+                  <picture>
+                    <source
+                      srcSet={`${feature.image.replace('.png', '-480w.avif')} 480w,
+                              ${feature.image.replace('.png', '-768w.avif')} 768w,
+                              ${feature.image.replace('.png', '.avif')}`}
+                      sizes="(max-width: 480px) 480px, (max-width: 768px) 768px"
+                      type="image/avif"
+                    />
+                    <source
+                      srcSet={`${feature.image.replace('.png', '-480w.webp')} 480w,
+                              ${feature.image.replace('.png', '-768w.webp')} 768w,
+                              ${feature.image.replace('.png', '.webp')}`}
+                      sizes="(max-width: 480px) 480px, (max-width: 768px) 768px"
+                      type="image/webp"
+                    />
+                    <img
+                      src={feature.image.replace('.png', '-768w.jpeg')}
+                      srcSet={`${feature.image.replace('.png', '-480w.jpeg')} 480w,
+                              ${feature.image.replace('.png', '-768w.jpeg')} 768w,
+                              ${feature.image.replace('.png', '.jpeg')}`}
+                      sizes="(max-width: 480px) 480px, (max-width: 768px) 768px"
+                      alt={feature.alt}
+                      width="768"
+                      height="512"
+                      loading="lazy"
+                      decoding="async"
+                      className="max-w-[720px] w-full h-auto"
+                    />
+                  </picture>
                 </div>
               </div>
             ))}
