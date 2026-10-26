@@ -17,7 +17,6 @@ const LazyDocs = lazy(() =>
 function Home() {
   return (
     <>
-      <h1 className="sr-only">Workslate AI - From Market to Market. Your Token. Everywhere.</h1>
       <Hero />
       <HowItWorks />
       <SideSection />
