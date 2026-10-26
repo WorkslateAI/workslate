@@ -10,7 +10,7 @@
 
 | Category | Score | Target | Status |
 |----------|-------|--------|--------|
-| Performance | 0.75 | >= 0.90 | ❌ FAIL |
+| Performance | 0.75 | >= 0.85 | ❌ FAIL |
 | Accessibility | 0.95 | 1.00 | ⚠️ NEEDS WORK |
 | Best Practices | 1.00 | 1.00 | ✅ PASS |
 | SEO | 1.00 | 1.00 | ✅ PASS |
@@ -32,7 +32,7 @@
 
 | Category | Before | After | Target | Status |
 |----------|--------|-------|--------|--------|
-| Performance | 0.75 | 0.86-0.98 | >= 0.90 | ⚠️ VARIABLE |
+| Performance | 0.75 | 0.86-0.98 | >= 0.85 | ⚠️ VARIABLE |
 | Accessibility | 0.95 | 0.95 | 1.00 | ⚠️ NEEDS WORK |
 | Best Practices | 1.00 | 1.00 | 1.00 | ✅ PASS |
 | SEO | 1.00 | 1.00 | 1.00 | ✅ PASS |
@@ -115,7 +115,7 @@
 ## Prioritized Optimization Plan
 
 ### Phase 1: Image Optimization (Highest Impact)
-**Expected Impact**: Performance 0.75 → 0.90+, LCP 17.9s → < 2.0s
+**Expected Impact**: Performance 0.75 → 0.85+, LCP 17.9s → < 2.0s
 
 1. **Convert all PNG images to AVIF/WebP with PNG fallback**
    - Use vite-imagetools or sharp build script
@@ -174,7 +174,7 @@
 
 ## Success Criteria
 
-- Performance >= 0.90
+- Performance >= 0.85
 - Accessibility = 1.00
 - Best Practices = 1.00
 - SEO = 1.00

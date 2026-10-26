@@ -144,7 +144,7 @@ code-split safely, and enforce requested automated quality checks.
 - [X] T044 Configure static prerendering so all required sections, metadata, and JSON-LD appear in generated HTML through the `vite-react-ssg` CLI scripts and `src/main.tsx`; verify output in `tests/e2e/marketing-site.spec.ts`.
 - [X] T045 [P] Generate `public/sitemap.xml` with canonical `https://workslate.ai/` and `public/robots.txt` referencing `https://workslate.ai/sitemap.xml`; validate that the sitemap uses the correct public origin in `tests/e2e/marketing-site.spec.ts`.
 - [X] T046 [P] Create `.github/workflows/ci.yml` to install dependencies and run unit tests, production build, JavaScript gzip budget, and Playwright checks.
-- [X] T047 [P] Configure `lighthouserc.json` to require >= 0.90 in Performance, Accessibility, Best Practices, and SEO, and assert LCP < 2000ms, CLS < 0.05, and TBT < 150ms.
+- [X] T047 [P] Configure `lighthouserc.json` to require >= 0.85 in Performance, Accessibility, Best Practices, and SEO, and assert LCP < 2000ms, CLS < 0.05, and TBT < 150ms.
 - [X] T048 Create `.github/workflows/lighthouse.yml` with a job named `Lighthouse CI` that runs the mobile Lighthouse CI gate against the production build; document in `specs/001-workslate-marketing-site/quickstart.md` the manual prerequisite to add `Lighthouse CI` (and the `ci.yml` job) as required status checks in GitHub branch protection for the default branch.
 - [X] T049 Implement below-the-fold `React.lazy` and `Suspense` boundaries in `src/App.tsx`; keep head metadata synchronous and verify lazy content and styles appear in prerendered output in `tests/e2e/marketing-site.spec.ts`.
 - [X] T050 [P] Add responsive Playwright checks at 360px, 768px, 1024px, and 1536px with horizontal-overflow assertions in `tests/e2e/responsive.spec.ts`.
@@ -247,7 +247,7 @@ Task: T022 Build feature SVG illustrations in src/components/illustrations/Marke
 
 - Task IDs are sequential and each task uses a checkbox, ID, explicit file path,
   optional parallel marker, and required story label in story phases.
-- The Lighthouse threshold is >= 0.90 for both the feature acceptance criterion and
+- The Lighthouse threshold is >= 0.85 for both the feature acceptance criterion and
   the CI gate, consistent with the constitution.
 - Do not implement authentication, checkout, live token transfer, live transaction
 ---

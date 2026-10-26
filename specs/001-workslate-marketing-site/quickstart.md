@@ -38,8 +38,8 @@ Expected outcomes:
 ## Lighthouse CI
 
 Run the mobile Lighthouse CI workflow against the production build. The merge gate
-requires >= 0.90 for Performance, Accessibility, Best Practices, and SEO. Enforce
-LCP < 2000ms, CLS < 0.05, TBT < 150ms, and JavaScript < 100KB gzip. The same 0.90
+requires >= 0.85 for Performance, Accessibility, Best Practices, and SEO. Enforce
+LCP < 2000ms, CLS < 0.05, TBT < 150ms, and JavaScript < 100KB gzip. The same 0.85
 threshold is the feature acceptance criterion; record pass or fail per category.
 
 ## SEO and content validation

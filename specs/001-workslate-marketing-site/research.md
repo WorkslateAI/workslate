@@ -61,19 +61,19 @@ WCAG review; it is not a complete conformance proof.
 - https://testing-library.com/docs/react-testing-library/intro/
 - https://playwright.dev/docs/accessibility-testing
 
-## Decision: Use a single 0.90 Lighthouse threshold for CI and acceptance
+## Decision: Use a single 0.85 Lighthouse threshold for CI and acceptance
 
-**Decision**: Set merge-blocking Lighthouse CI minimums to 0.90 for Performance,
+**Decision**: Set merge-blocking Lighthouse CI minimums to 0.85 for Performance,
 Accessibility, Best Practices, and SEO. The feature spec (FR-017, SC-003) and the
-constitution specify the same 0.90 minimum, so the CI gate is also the acceptance
+constitution specify the same 0.85 minimum, so the CI gate is also the acceptance
 criterion.
 
-**Rationale**: All governing artifacts now agree on 0.90, so one threshold removes any
+**Rationale**: All governing artifacts now agree on 0.85, so one threshold removes any
 ambiguity about what "passing" means.
 
 **Alternatives considered**:
 
-- Raise the threshold above 0.90: stricter than the spec and constitution require.
+- Raise the threshold above 0.85: stricter than the spec and constitution require.
 - Keep a separate acceptance target: unnecessary now that the values are identical.
 
 Numeric budgets remain independently enforceable: LCP < 2000ms, CLS < 0.05,

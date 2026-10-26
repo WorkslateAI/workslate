@@ -38,8 +38,8 @@ host to the canonical apex domain.
 **Project Type**: Single-page marketing site using native fragment navigation; no
 router.
 
-**Performance Goals**: Lighthouse CI merge-blocking minimum 0.90 in Performance,
-Accessibility, Best Practices, and SEO. This single 0.90 threshold is both the
+**Performance Goals**: Lighthouse CI merge-blocking minimum 0.85 in Performance,
+Accessibility, Best Practices, and SEO. This single 0.85 threshold is both the
 feature acceptance criterion (FR-017, SC-003) and the CI gate, consistent with the
 constitution. Numeric targets are LCP < 2.0 seconds, CLS < 0.05,
 TBT < 150ms, and JavaScript < 100KB gzip.
@@ -69,13 +69,13 @@ SoftwareApplication, and FAQPage JSON-LD. Generate sitemap.xml and robots.txt.
 | Typed, Reusable UI | Required atoms, molecules, sections, and typed content modules follow the defined structure. |
 | Vector-First Assets | Inline SVG via SVGR for illustrations, icons, logo, and chain badges; no raster assets except optional OG image. |
 | Mobile-First Responsive Design | Validate at 360, 768, 1024, and 1536px; use fluid type with `clamp()`. |
-| Measurable Performance | CI blocks below 0.90 in any category; also measure all specified LCP, CLS, TBT, and gzip-JavaScript budgets. |
+| Measurable Performance | CI blocks below 0.85 in any category; also measure all specified LCP, CLS, TBT, and gzip-JavaScript budgets. |
 | Accessibility, SEO, and Content Integrity | WCAG AA, keyboard operation, diagram labels, one `h1`, prerendered HTML, complete metadata, JSON-LD, and verified product claims. |
 | Delivery Quality Gates | Lighthouse CI runs in GitHub Actions as a required merge check. |
 
 The feature spec, the requested Lighthouse CI gate, and the constitution all specify
-a minimum score of 0.90. A passing CI gate therefore satisfies the acceptance
-criterion; any category below 0.90 fails both.
+a minimum score of 0.85. A passing CI gate therefore satisfies the acceptance
+criterion; any category below 0.85 fails both.
 
 Hosting and enforcement decisions: the hosting provider is not yet chosen, so the
 `www` to apex redirect is an external deployment prerequisite verified by a

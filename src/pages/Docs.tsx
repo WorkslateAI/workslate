@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Header } from '../components/sections/Header';
-import { Footer } from '../components/sections/Footer';
 import { SearchTrigger } from '../components/atoms/SearchTrigger';
 import { SearchDialog } from '../components/atoms/SearchDialog';
 
