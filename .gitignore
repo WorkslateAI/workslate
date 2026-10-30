@@ -31,3 +31,12 @@ integrations/packages.json
 playwright-report/
 test-results/
 
+# IDE configuration
+.idea/
+
+# GitHub settings and workflows
+.github/
+
+# Build output
+dist/
+
