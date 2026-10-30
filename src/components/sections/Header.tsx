@@ -59,7 +59,7 @@ export const Header: React.FC = () => {
 
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-border">
-      <nav className="max-w-[1200px] mx-auto px-10" aria-label="Main navigation">
+      <nav className="max-w-[1200px] mx-auto px-6 lg:px-10" aria-label="Main navigation">
         <div className="flex items-center justify-between h-16">
           <a href="#" className="flex items-center space-x-2 hover:opacity-90 transition-opacity">
             <Logo variant="header" size={36} />

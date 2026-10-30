@@ -12,7 +12,7 @@ export const Footer: React.FC = () => {
             </div>
             
             <div className="flex flex-wrap items-center gap-4 lg:space-x-6">
-              <a href="/docs.html" className="text-text-400 hover:text-white text-sm transition-colors">
+              <a href="#/docs" className="text-text-400 hover:text-white text-sm transition-colors">
                 Docs
               </a>
               <a href="/terms.html" className="text-text-400 hover:text-white text-sm transition-colors">

@@ -53,7 +53,8 @@ describe('Hero Section', () => {
     const image = screen.getByAltText(/Hero illustration/i);
     const container = image.closest('.rounded-2xl');
 
-    expect(container).toHaveClass('lg:scale-[1.20]');
+    expect(container).toHaveClass('lg:scale-105');
+    expect(container).toHaveClass('xl:scale-[1.20]');
     expect(container).toHaveClass('lg:p-3');
     expect(container).not.toHaveClass('scale-[1.20]');
   });

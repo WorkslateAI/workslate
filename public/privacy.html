@@ -69,7 +69,15 @@
         color: #7c3aed;
         font-weight: 500;
       }
+      html.pt-ready body { opacity: 0; animation: pt-fade-in 250ms ease-out forwards; }
+      html.pt-ready body.page-leaving { animation: none; transition: opacity 250ms ease-in-out; opacity: 0; }
+      @keyframes pt-fade-in { from { opacity: 0; } to { opacity: 1; } }
+      @media (prefers-reduced-motion: reduce) {
+        html.pt-ready body { animation: none; opacity: 1; }
+        html.pt-ready body.page-leaving { transition: none; opacity: 1; }
+      }
     </style>
+    <script src="/assets/js/page-transition.js"></script>
   </head>
   <body>
     <div class="container">

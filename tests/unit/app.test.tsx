@@ -1,6 +1,14 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, waitFor, act, fireEvent } from '@testing-library/react';
+import { HelmetProvider } from 'react-helmet-async';
 import App from '../../src/App';
+
+const renderApp = () =>
+  render(
+    <HelmetProvider>
+      <App />
+    </HelmetProvider>,
+  );
 
 function goToHash(hash: string) {
   act(() => {
@@ -22,7 +30,7 @@ describe('App navigation transitions', () => {
   });
 
   it('renders the home page with a persistent header', async () => {
-    render(<App />);
+    renderApp();
     expect(document.querySelector('header')).toBeInTheDocument();
     await waitFor(() =>
       expect(
@@ -32,7 +40,7 @@ describe('App navigation transitions', () => {
   });
 
   it('navigates to the docs page via the #/docs hash route', async () => {
-    render(<App />);
+    renderApp();
     goToHash('#/docs');
     await waitFor(
       () =>
@@ -44,7 +52,7 @@ describe('App navigation transitions', () => {
   });
 
   it('applies fade-out then fade-in classes during route swap', async () => {
-    render(<App />);
+    renderApp();
     goToHash('#/docs');
     // During the fade-out window the main element carries the fade-out class
     const main = document.querySelector('main');
@@ -56,7 +64,7 @@ describe('App navigation transitions', () => {
   });
 
   it('keeps the header mounted across the transition', async () => {
-    render(<App />);
+    renderApp();
     const header = document.querySelector('header');
     goToHash('#/docs');
     await waitFor(() =>
@@ -68,7 +76,7 @@ describe('App navigation transitions', () => {
   });
 
   it('moves focus to the page heading after navigation', async () => {
-    render(<App />);
+    renderApp();
     goToHash('#/docs');
     await waitFor(
       () => expect(document.activeElement?.id).toBe('page-heading'),
@@ -77,7 +85,7 @@ describe('App navigation transitions', () => {
   });
 
   it('fades out before navigating to a static .html page', () => {
-    render(<App />);
+    renderApp();
     const link = document.createElement('a');
     link.href = '/privacy.html';
     link.textContent = 'Privacy';
@@ -91,7 +99,7 @@ describe('App navigation transitions', () => {
   });
 
   it('does not intercept hash links', () => {
-    render(<App />);
+    renderApp();
     const link = document.createElement('a');
     link.href = '#/docs';
     link.textContent = 'Docs';
@@ -116,7 +124,7 @@ describe('App navigation transitions', () => {
       dispatchEvent: vi.fn(),
     }) as MediaQueryList);
 
-    render(<App />);
+    renderApp();
     goToHash('#/docs');
     // No fade-out phase: route commits immediately
     expect(document.querySelector('main')?.className).not.toContain('page-fade-out');

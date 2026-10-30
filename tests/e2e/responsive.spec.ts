@@ -1,23 +1,49 @@
 import { test, expect } from '@playwright/test';
 
 const viewports = [
-  { width: 360, height: 800, name: 'mobile' },
+  { width: 320, height: 800, name: 'small-mobile' },
+  { width: 375, height: 800, name: 'mobile' },
+  { width: 425, height: 800, name: 'large-mobile' },
   { width: 768, height: 1024, name: 'tablet' },
-  { width: 1024, height: 768, name: 'laptop' },
-  { width: 1536, height: 864, name: 'desktop' },
+  { width: 1024, height: 768, name: 'small-laptop' },
+  { width: 1440, height: 900, name: 'desktop' },
+  { width: 1920, height: 1080, name: 'large-desktop' },
+];
+
+const routes = [
+  { path: '/', name: 'home' },
+  { path: '/#/docs', name: 'docs' },
 ];
 
 viewports.forEach(({ width, height, name }) => {
   test.describe(`Responsive tests at ${name} (${width}px)`, () => {
     test.use({ viewport: { width, height } });
 
-    test('no horizontal overflow', async ({ page }) => {
-      await page.goto('/');
-      const body = page.locator('body');
-      const bodyWidth = await body.evaluate(el => el.scrollWidth);
-      const viewportWidth = await body.evaluate(el => el.clientWidth);
-      
-      expect(bodyWidth).toBe(viewportWidth);
+    routes.forEach(({ path, name: routeName }) => {
+      test(`no horizontal overflow on ${routeName}`, async ({ page }) => {
+        await page.goto(path);
+        const body = page.locator('body');
+        const bodyWidth = await body.evaluate((el) => el.scrollWidth);
+        const viewportWidth = await body.evaluate((el) => el.clientWidth);
+
+        expect(bodyWidth).toBe(viewportWidth);
+
+        // No element may extend beyond the document bounds
+        const overflowing = await page.evaluate(() => {
+          const docWidth = document.documentElement.clientWidth;
+          const offenders: string[] = [];
+          document.querySelectorAll('*').forEach((el) => {
+            const rect = el.getBoundingClientRect();
+            if (rect.width > 0 && (rect.left < -1 || rect.right > docWidth + 1)) {
+              offenders.push(
+                `${el.tagName.toLowerCase()}${el.id ? `#${el.id}` : ''} (right:${Math.round(rect.right)})`,
+              );
+            }
+          });
+          return offenders.slice(0, 10);
+        });
+        expect(overflowing).toEqual([]);
+      });
     });
 
     test('main sections are accessible', async ({ page }) => {

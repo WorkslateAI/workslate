@@ -27,7 +27,7 @@
   --color-lavender-100: #f5f7ff;
   --color-lavender-200: #eef2ff;
   --color-lavender-300: #e6ebff;
-  --color-lavender-400: #dde4ff;
+  --color-lavender-400: #f5f7ff;
   --color-lavender-500: #d4ddff;
 
   --color-border: #dfe5f7;
@@ -36,6 +36,22 @@
 
   --font-heading: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Typography scaled 1.2x globally. Tailwind v4 line-height defaults are
+     unitless ratios, so they scale proportionally with each font size. */
+  --text-xs: 0.9rem;    /* 0.75rem * 1.2 */
+  --text-sm: 1.05rem;   /* 0.875rem * 1.2 */
+  --text-base: 1.2rem;  /* 1rem * 1.2 */
+  --text-lg: 1.35rem;   /* 1.125rem * 1.2 */
+  --text-xl: 1.5rem;    /* 1.25rem * 1.2 */
+  --text-2xl: 1.8rem;   /* 1.5rem * 1.2 */
+  --text-3xl: 2.25rem;  /* 1.875rem * 1.2 */
+  --text-4xl: 2.7rem;   /* 2.25rem * 1.2 */
+  --text-5xl: 3.6rem;   /* 3rem * 1.2 */
+  --text-6xl: 4.5rem;   /* 3.75rem * 1.2 */
+  --text-7xl: 5.4rem;   /* 4.5rem * 1.2 */
+  --text-8xl: 7.2rem;   /* 6rem * 1.2 */
+  --text-9xl: 9.6rem;   /* 8rem * 1.2 */
 }
 
 @layer base {
@@ -62,11 +78,11 @@
     color: #ffffff;
   }
   h2 {
-    @apply text-[34px];
+    @apply text-[40.8px];
   }
 
   h3 {
-    @apply text-[22px] font-semibold;
+    @apply text-[26.4px] font-semibold;
   }
 
   a:focus-visible,
@@ -81,6 +97,84 @@
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Docs page load transition: light green -> indigo, matching the
+     lavender/indigo background used on other pages. */
+  @keyframes docs-page-bg-in {
+    from {
+      background-color: #f5f8f6;
+    }
+    to {
+      background-color: #f5f7ff;
+    }
+  }
+
+  .docs-page {
+    background-color: #f5f7ff;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .docs-page {
+      animation: docs-page-bg-in 0.8s ease-out;
+    }
+  }
+
+  /* Docs page: horizontal card->arrow->card flow rows stack vertically
+     on narrow viewports; arrows rotate to point downward. */
+  .docs-flow-row {
+    display: grid;
+    grid-template-columns: 1fr 30px 1fr 30px 1fr;
+    gap: 8px;
+    align-items: stretch;
+  }
+
+  @media (max-width: 768px) {
+    .docs-flow-row {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .docs-flow-arrow {
+      transform: rotate(90deg);
+    }
+  }
+
+  /* SPA route transitions: subtle fade between pages */
+  .page-transition {
+    transition: opacity 250ms ease-in-out;
+  }
+  .page-fade-out {
+    opacity: 0;
+  }
+  .page-fade-in {
+    opacity: 0;
+    animation: page-fade-in 250ms ease-out forwards;
+  }
+  @keyframes page-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  /* Fade the whole SPA shell out before a full-page navigation */
+  body.page-leaving {
+    opacity: 0;
+    transition: opacity 250ms ease-in-out;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .page-transition {
+      transition: none;
+    }
+    .page-fade-in {
+      animation: none;
+      opacity: 1;
+    }
+    body.page-leaving {
+      opacity: 1;
+      transition: none;
     }
   }
 

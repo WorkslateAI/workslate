@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Header } from '../components/sections/Header';
 import { SearchTrigger } from '../components/atoms/SearchTrigger';
 import { SearchDialog } from '../components/atoms/SearchDialog';
 
@@ -90,223 +89,221 @@ String txHash = receipt.getTransactionHash();
   const filteredTerms = termFilter === 'all' ? terms : terms.filter(t => t.cat === termFilter);
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#f5f8f6', color: '#182a28' }}>
-      <Header />
-      
-      <main style={{ maxWidth: '1240px', margin: 'auto', padding: '28px max(4vw,18px) 70px' }}>
+    <div className="min-h-screen flex flex-col docs-page" style={{ color: '#182a28' }}>
+      <div style={{ width: '100%', maxWidth: '1240px', margin: 'auto', padding: '28px max(4vw,18px) 70px', minWidth: '0' }}>
         <div className="mb-6">
           <SearchTrigger onClick={() => setIsSearchOpen(true)} />
         </div>
         <div style={{ background: '#123b36', color: '#ffffff', padding: '38px max(5vw,22px) 32px', position: 'relative', overflow: 'hidden', borderRadius: '0' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#b9e8d8', textTransform: 'uppercase', letterSpacing: '.14em', fontSize: '11px', fontWeight: '800', marginBottom: '27px' }}>
-            <span style={{ width: '30px', height: '30px', display: 'grid', placeItems: 'center', border: '1px solid #80cbb6', borderRadius: '9px', fontSize: '16px' }}>⬡</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#b9e8d8', textTransform: 'uppercase', letterSpacing: '.14em', fontSize: '13.2px', fontWeight: '800', marginBottom: '27px' }}>
+            <span style={{ width: '30px', height: '30px', display: 'grid', placeItems: 'center', border: '1px solid #80cbb6', borderRadius: '9px', fontSize: '19.2px' }}>⬡</span>
             Architecture field guide · Web3 + workflow
           </div>
-          <h1 style={{ color: '#ffffff', fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', letterSpacing: '-.035em', fontSize: 'clamp(34px, 5vw, 58px)', lineHeight: '1.02', maxWidth: '850px', margin: '0 0 18px' }}>
+          <h1 id="page-heading" tabIndex={-1} style={{ color: '#ffffff', fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', letterSpacing: '-.035em', fontSize: 'clamp(33.6px, 6vw, 69.6px)', lineHeight: '1.02', maxWidth: '850px', margin: '0 0 18px' }}>
             Orchestrating value across<br />workflows and the EVM
           </h1>
-          <p style={{ maxWidth: '760px', color: '#d2e5de', fontSize: '16px', lineHeight: '1.7', margin: '0' }}>
+          <p style={{ maxWidth: '760px', color: '#d2e5de', fontSize: '19.2px', lineHeight: '1.7', margin: '0' }}>
             A practical reference for connecting Java applications through Web3j, coordinating on-chain and off-chain work with BPMN, and understanding EVM consensus, state, storage and peer-to-peer networks.
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '9px', marginTop: '24px' }}>
-            <span style={{ border: '1px solid #ffffff38', borderRadius: '99px', padding: '7px 11px', fontSize: '12px', color: '#f3fffa', background: '#ffffff0b' }}>Web3j · Java ↔ EVM</span>
-            <span style={{ border: '1px solid #ffffff38', borderRadius: '99px', padding: '7px 11px', fontSize: '12px', color: '#f3fffa', background: '#ffffff0b' }}>BPMN · Durable orchestration</span>
-            <span style={{ border: '1px solid #ffffff38', borderRadius: '99px', padding: '7px 11px', fontSize: '12px', color: '#f3fffa', background: '#ffffff0b' }}>On-chain + off-chain</span>
-            <span style={{ border: '1px solid #ffffff38', borderRadius: '99px', padding: '7px 11px', fontSize: '12px', color: '#f3fffa', background: '#ffffff0b' }}>Consensus · State · P2P</span>
+            <span style={{ border: '1px solid #ffffff38', borderRadius: '99px', padding: '7px 11px', fontSize: '14.4px', color: '#f3fffa', background: '#ffffff0b' }}>Web3j · Java ↔ EVM</span>
+            <span style={{ border: '1px solid #ffffff38', borderRadius: '99px', padding: '7px 11px', fontSize: '14.4px', color: '#f3fffa', background: '#ffffff0b' }}>BPMN · Durable orchestration</span>
+            <span style={{ border: '1px solid #ffffff38', borderRadius: '99px', padding: '7px 11px', fontSize: '14.4px', color: '#f3fffa', background: '#ffffff0b' }}>On-chain + off-chain</span>
+            <span style={{ border: '1px solid #ffffff38', borderRadius: '99px', padding: '7px 11px', fontSize: '14.4px', color: '#f3fffa', background: '#ffffff0b' }}>Consensus · State · P2P</span>
           </div>
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', gap: '20px', margin: '36px 0 18px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', gap: '20px', margin: '36px 0 18px', flexWrap: 'wrap' }}>
           <div>
-            <div style={{ color: '#0c9b79', fontSize: '11px', letterSpacing: '.13em', textTransform: 'uppercase', fontWeight: '850' }}>01 / At a glance</div>
-            <h2 id="building-blocks" style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', letterSpacing: '-.035em', fontSize: '28px', margin: '7px 0 0', scrollMarginTop: '80px' }}>Four architectural building blocks</h2>
+            <div style={{ color: '#0c9b79', fontSize: '13.2px', letterSpacing: '.13em', textTransform: 'uppercase', fontWeight: '850' }}>01 / At a glance</div>
+            <h2 id="building-blocks" style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', letterSpacing: '-.035em', fontSize: '33.6px', margin: '7px 0 0', scrollMarginTop: '80px' }}>Four architectural building blocks</h2>
           </div>
-          <div style={{ color: '#62736e', fontSize: '13px', lineHeight: '1.65', maxWidth: '650px' }}>Keep business process coordination separate from blockchain execution and consensus.</div>
+          <div style={{ color: '#62736e', fontSize: '15.6px', lineHeight: '1.65', maxWidth: '650px' }}>Keep business process coordination separate from blockchain execution and consensus.</div>
         </div>
 
-        <div style={{ display: 'grid', gap: '15px', gridTemplateColumns: 'repeat(4,minmax(0,1fr))' }}>
+        <div style={{ display: 'grid', gap: '15px', gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,230px),1fr))' }}>
           <article style={{ background: '#ffffff', border: '1px solid #dce7e1', borderRadius: '16px', padding: '20px', minWidth: '0' }}>
-            <div style={{ width: '37px', height: '37px', display: 'grid', placeItems: 'center', borderRadius: '11px', background: '#edf4f0', color: '#0c9b79', fontSize: '18px', marginBottom: '16px', fontWeight: '850' }}>⇄</div>
-            <h3 style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', fontSize: '18px', margin: '0 0 8px' }}>Web3j</h3>
-            <p style={{ color: '#62736e', fontSize: '13px', lineHeight: '1.65', margin: '8px 0 0' }}>A Java library for connecting applications to Ethereum-compatible nodes, calling contracts, encoding transactions and reading chain data.</p>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', borderRadius: '99px', padding: '5px 9px', fontSize: '11px', fontWeight: '800', background: '#d9f1e8', color: '#163b34', marginTop: '8px' }}>Application integration</span>
+            <div style={{ width: '37px', height: '37px', display: 'grid', placeItems: 'center', borderRadius: '11px', background: '#edf4f0', color: '#0c9b79', fontSize: '21.6px', marginBottom: '16px', fontWeight: '850' }}>⇄</div>
+            <h3 style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', fontSize: '21.6px', margin: '0 0 8px' }}>Web3j</h3>
+            <p style={{ color: '#62736e', fontSize: '15.6px', lineHeight: '1.65', margin: '8px 0 0' }}>A Java library for connecting applications to Ethereum-compatible nodes, calling contracts, encoding transactions and reading chain data.</p>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', borderRadius: '99px', padding: '5px 9px', fontSize: '13.2px', fontWeight: '800', background: '#d9f1e8', color: '#163b34', marginTop: '8px' }}>Application integration</span>
           </article>
           <article style={{ background: '#ffffff', border: '1px solid #dce7e1', borderRadius: '16px', padding: '20px', minWidth: '0' }}>
-            <div style={{ width: '37px', height: '37px', display: 'grid', placeItems: 'center', borderRadius: '11px', background: '#edf4f0', color: '#0c9b79', fontSize: '18px', marginBottom: '16px', fontWeight: '850' }}>◷</div>
-            <h3 style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', fontSize: '18px', margin: '0 0 8px' }}>BPMN orchestration</h3>
-            <p style={{ color: '#62736e', fontSize: '13px', lineHeight: '1.65', margin: '8px 0 0' }}>A workflow model for sequencing tasks, handling waits and retries, applying business rules and coordinating services over time.</p>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', borderRadius: '99px', padding: '5px 9px', fontSize: '11px', fontWeight: '800', background: '#d9f1e8', color: '#163b34', marginTop: '8px' }}>Process coordination</span>
+            <div style={{ width: '37px', height: '37px', display: 'grid', placeItems: 'center', borderRadius: '11px', background: '#edf4f0', color: '#0c9b79', fontSize: '21.6px', marginBottom: '16px', fontWeight: '850' }}>◷</div>
+            <h3 style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', fontSize: '21.6px', margin: '0 0 8px' }}>BPMN orchestration</h3>
+            <p style={{ color: '#62736e', fontSize: '15.6px', lineHeight: '1.65', margin: '8px 0 0' }}>A workflow model for sequencing tasks, handling waits and retries, applying business rules and coordinating services over time.</p>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', borderRadius: '99px', padding: '5px 9px', fontSize: '13.2px', fontWeight: '800', background: '#d9f1e8', color: '#163b34', marginTop: '8px' }}>Process coordination</span>
           </article>
           <article style={{ background: '#ffffff', border: '1px solid #dce7e1', borderRadius: '16px', padding: '20px', minWidth: '0' }}>
-            <div style={{ width: '37px', height: '37px', display: 'grid', placeItems: 'center', borderRadius: '11px', background: '#edf4f0', color: '#0c9b79', fontSize: '18px', marginBottom: '16px', fontWeight: '850' }}>⬡</div>
-            <h3 style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', fontSize: '18px', margin: '0 0 8px' }}>EVM + consensus</h3>
-            <p style={{ color: '#62736e', fontSize: '13px', lineHeight: '1.65', margin: '8px 0 0' }}>The EVM executes compatible smart-contract bytecode. A consensus protocol helps participating validators agree on canonical blocks and ordering.</p>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', borderRadius: '99px', padding: '5px 9px', fontSize: '11px', fontWeight: '800', background: '#d9f1e8', color: '#163b34', marginTop: '8px' }}>Shared execution</span>
+            <div style={{ width: '37px', height: '37px', display: 'grid', placeItems: 'center', borderRadius: '11px', background: '#edf4f0', color: '#0c9b79', fontSize: '21.6px', marginBottom: '16px', fontWeight: '850' }}>⬡</div>
+            <h3 style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', fontSize: '21.6px', margin: '0 0 8px' }}>EVM + consensus</h3>
+            <p style={{ color: '#62736e', fontSize: '15.6px', lineHeight: '1.65', margin: '8px 0 0' }}>The EVM executes compatible smart-contract bytecode. A consensus protocol helps participating validators agree on canonical blocks and ordering.</p>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', borderRadius: '99px', padding: '5px 9px', fontSize: '13.2px', fontWeight: '800', background: '#d9f1e8', color: '#163b34', marginTop: '8px' }}>Shared execution</span>
           </article>
           <article style={{ background: '#ffffff', border: '1px solid #dce7e1', borderRadius: '16px', padding: '20px', minWidth: '0' }}>
-            <div style={{ width: '37px', height: '37px', display: 'grid', placeItems: 'center', borderRadius: '11px', background: '#edf4f0', color: '#0c9b79', fontSize: '18px', marginBottom: '16px', fontWeight: '850' }}>▤</div>
-            <h3 style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', fontSize: '18px', margin: '0 0 8px' }}>State + storage</h3>
-            <p style={{ color: '#62736e', fontSize: '13px', lineHeight: '1.65', margin: '8px 0 0' }}>Blockchain state represents current account and contract data; transaction history and logs provide evidence of how state changed.</p>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', borderRadius: '99px', padding: '5px 9px', fontSize: '11px', fontWeight: '800', background: '#d9f1e8', color: '#163b34', marginTop: '8px' }}>Verifiable records</span>
+            <div style={{ width: '37px', height: '37px', display: 'grid', placeItems: 'center', borderRadius: '11px', background: '#edf4f0', color: '#0c9b79', fontSize: '21.6px', marginBottom: '16px', fontWeight: '850' }}>▤</div>
+            <h3 style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', fontSize: '21.6px', margin: '0 0 8px' }}>State + storage</h3>
+            <p style={{ color: '#62736e', fontSize: '15.6px', lineHeight: '1.65', margin: '8px 0 0' }}>Blockchain state represents current account and contract data; transaction history and logs provide evidence of how state changed.</p>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', borderRadius: '99px', padding: '5px 9px', fontSize: '13.2px', fontWeight: '800', background: '#d9f1e8', color: '#163b34', marginTop: '8px' }}>Verifiable records</span>
           </article>
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', gap: '20px', margin: '36px 0 18px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', gap: '20px', margin: '36px 0 18px', flexWrap: 'wrap' }}>
           <div>
-            <div style={{ color: '#0c9b79', fontSize: '11px', letterSpacing: '.13em', textTransform: 'uppercase', fontWeight: '850' }}>02 / System view</div>
-            <h2 id="reference-architecture" style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', letterSpacing: '-.035em', fontSize: '28px', margin: '7px 0 0', scrollMarginTop: '80px' }}>Reference architecture</h2>
+            <div style={{ color: '#0c9b79', fontSize: '13.2px', letterSpacing: '.13em', textTransform: 'uppercase', fontWeight: '850' }}>02 / System view</div>
+            <h2 id="reference-architecture" style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', letterSpacing: '-.035em', fontSize: '33.6px', margin: '7px 0 0', scrollMarginTop: '80px' }}>Reference architecture</h2>
           </div>
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', borderRadius: '99px', padding: '5px 9px', fontSize: '11px', fontWeight: '800', background: '#d9f1e8', color: '#163b34' }}>Illustrative design</span>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', borderRadius: '99px', padding: '5px 9px', fontSize: '13.2px', fontWeight: '800', background: '#d9f1e8', color: '#163b34' }}>Illustrative design</span>
         </div>
 
         <section style={{ background: '#ffffff', border: '1px solid #dce7e1', borderRadius: '18px', padding: '22px' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 30px 1fr 30px 1fr', gap: '8px', alignItems: 'stretch' }}>
+          <div className="docs-flow-row">
             <div style={{ border: '1px solid #dce7e1', borderRadius: '13px', padding: '16px', background: '#edf4f0', minHeight: '124px', borderTop: '3px solid #8b67c9' }}>
-              <div style={{ fontSize: '20px' }}>◷</div>
-              <strong style={{ display: 'block', fontSize: '14px', margin: '9px 0 5px' }}>BPMN workflow engine</strong>
-              <small style={{ display: 'block', color: '#62736e', fontSize: '12px', lineHeight: '1.55' }}>Business process, timers, retries, approvals, compensation and durable wait states.</small>
+              <div style={{ fontSize: '24px' }}>◷</div>
+              <strong style={{ display: 'block', fontSize: '16.8px', margin: '9px 0 5px' }}>BPMN workflow engine</strong>
+              <small style={{ display: 'block', color: '#62736e', fontSize: '14.4px', lineHeight: '1.55' }}>Business process, timers, retries, approvals, compensation and durable wait states.</small>
             </div>
-            <div style={{ display: 'grid', placeItems: 'center', color: '#0c9b79', fontSize: '23px', fontWeight: '900' }}>→</div>
+            <div className="docs-flow-arrow" style={{ display: 'grid', placeItems: 'center', color: '#0c9b79', fontSize: '27.6px', fontWeight: '900' }}>→</div>
             <div style={{ border: '1px solid #dce7e1', borderRadius: '13px', padding: '16px', background: '#edf4f0', minHeight: '124px', borderTop: '3px solid #4777d8' }}>
-              <div style={{ fontSize: '20px' }}>☕</div>
-              <strong style={{ display: 'block', fontSize: '14px', margin: '9px 0 5px' }}>Java service + Web3j</strong>
-              <small style={{ display: 'block', color: '#62736e', fontSize: '12px', lineHeight: '1.55' }}>Build contract calls, sign or submit transactions, query receipts, logs and contract state.</small>
+              <div style={{ fontSize: '24px' }}>☕</div>
+              <strong style={{ display: 'block', fontSize: '16.8px', margin: '9px 0 5px' }}>Java service + Web3j</strong>
+              <small style={{ display: 'block', color: '#62736e', fontSize: '14.4px', lineHeight: '1.55' }}>Build contract calls, sign or submit transactions, query receipts, logs and contract state.</small>
             </div>
-            <div style={{ display: 'grid', placeItems: 'center', color: '#0c9b79', fontSize: '23px', fontWeight: '900' }}>→</div>
+            <div className="docs-flow-arrow" style={{ display: 'grid', placeItems: 'center', color: '#0c9b79', fontSize: '27.6px', fontWeight: '900' }}>→</div>
             <div style={{ border: '1px solid #dce7e1', borderRadius: '13px', padding: '16px', background: '#edf4f0', minHeight: '124px', borderTop: '3px solid #0c9b79' }}>
-              <div style={{ fontSize: '20px' }}>⬡</div>
-              <strong style={{ display: 'block', fontSize: '14px', margin: '9px 0 5px' }}>EVM-compatible network</strong>
-              <small style={{ display: 'block', color: '#62736e', fontSize: '12px', lineHeight: '1.55' }}>RPC endpoint → transaction pool → block proposal / consensus → EVM execution.</small>
+              <div style={{ fontSize: '24px' }}>⬡</div>
+              <strong style={{ display: 'block', fontSize: '16.8px', margin: '9px 0 5px' }}>EVM-compatible network</strong>
+              <small style={{ display: 'block', color: '#62736e', fontSize: '14.4px', lineHeight: '1.55' }}>RPC endpoint → transaction pool → block proposal / consensus → EVM execution.</small>
             </div>
           </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', gap: '12px', color: '#62736e', fontSize: '11px', margin: '12px 2px 22px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', gap: '12px', color: '#62736e', fontSize: '13.2px', margin: '12px 2px 22px', flexWrap: 'wrap' }}>
             <span>Business intent and long-running coordination</span>
             <span>Transaction boundary</span>
             <span>Network execution and shared ledger</span>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 30px 1fr 30px 1fr', gap: '8px', alignItems: 'stretch' }}>
+          <div className="docs-flow-row">
             <div style={{ border: '1px solid #dce7e1', borderRadius: '13px', padding: '16px', background: '#edf4f0', minHeight: '124px' }}>
-              <div style={{ fontSize: '20px' }}>▧</div>
-              <strong style={{ display: 'block', fontSize: '14px', margin: '9px 0 5px' }}>Off-chain systems</strong>
-              <small style={{ display: 'block', color: '#62736e', fontSize: '12px', lineHeight: '1.55' }}>Banking APIs, KYC/AML, ERP/POS, databases, notifications and document stores.</small>
+              <div style={{ fontSize: '24px' }}>▧</div>
+              <strong style={{ display: 'block', fontSize: '16.8px', margin: '9px 0 5px' }}>Off-chain systems</strong>
+              <small style={{ display: 'block', color: '#62736e', fontSize: '14.4px', lineHeight: '1.55' }}>Banking APIs, KYC/AML, ERP/POS, databases, notifications and document stores.</small>
             </div>
-            <div style={{ display: 'grid', placeItems: 'center', color: '#0c9b79', fontSize: '23px', fontWeight: '900' }}>↔</div>
+            <div className="docs-flow-arrow" style={{ display: 'grid', placeItems: 'center', color: '#0c9b79', fontSize: '27.6px', fontWeight: '900' }}>↔</div>
             <div style={{ border: '1px solid #dce7e1', borderRadius: '13px', padding: '16px', background: '#edf4f0', minHeight: '124px', borderTop: '3px solid #bd7a1c' }}>
-              <div style={{ fontSize: '20px' }}>▤</div>
-              <strong style={{ display: 'block', fontSize: '14px', margin: '9px 0 5px' }}>Event + state tracking</strong>
-              <small style={{ display: 'block', color: '#62736e', fontSize: '12px', lineHeight: '1.55' }}>Workflow variables, transaction hash, nonce, receipt status, block number and confirmation policy.</small>
+              <div style={{ fontSize: '24px' }}>▤</div>
+              <strong style={{ display: 'block', fontSize: '16.8px', margin: '9px 0 5px' }}>Event + state tracking</strong>
+              <small style={{ display: 'block', color: '#62736e', fontSize: '14.4px', lineHeight: '1.55' }}>Workflow variables, transaction hash, nonce, receipt status, block number and confirmation policy.</small>
             </div>
-            <div style={{ display: 'grid', placeItems: 'center', color: '#0c9b79', fontSize: '23px', fontWeight: '900' }}>↔</div>
+            <div className="docs-flow-arrow" style={{ display: 'grid', placeItems: 'center', color: '#0c9b79', fontSize: '27.6px', fontWeight: '900' }}>↔</div>
             <div style={{ border: '1px solid #dce7e1', borderRadius: '13px', padding: '16px', background: '#edf4f0', minHeight: '124px' }}>
-              <div style={{ fontSize: '20px' }}>⌘</div>
-              <strong style={{ display: 'block', fontSize: '14px', margin: '9px 0 5px' }}>Peer-to-peer nodes</strong>
-              <small style={{ display: 'block', color: '#62736e', fontSize: '12px', lineHeight: '1.55' }}>Nodes exchange transactions and blocks; validators / clients follow the network protocol.</small>
+              <div style={{ fontSize: '24px' }}>⌘</div>
+              <strong style={{ display: 'block', fontSize: '16.8px', margin: '9px 0 5px' }}>Peer-to-peer nodes</strong>
+              <small style={{ display: 'block', color: '#62736e', fontSize: '14.4px', lineHeight: '1.55' }}>Nodes exchange transactions and blocks; validators / clients follow the network protocol.</small>
             </div>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', marginTop: '18px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,280px),1fr))', gap: '15px', marginTop: '18px' }}>
             <div style={{ border: '1px dashed #dce7e1', borderRadius: '14px', padding: '17px' }}>
-              <h3 style={{ display: 'flex', gap: '8px', alignItems: 'center', fontSize: '15px', color: '#4777d8' }}>↗ Off-chain lane</h3>
-              <div style={{ color: '#62736e', fontSize: '13px', lineHeight: '1.65' }}>Flexible, private business operations</div>
+              <h3 style={{ display: 'flex', gap: '8px', alignItems: 'center', fontSize: '18px', color: '#4777d8' }}>↗ Off-chain lane</h3>
+              <div style={{ color: '#62736e', fontSize: '15.6px', lineHeight: '1.65' }}>Flexible, private business operations</div>
               <div style={{ marginTop: '9px' }}>
-                <span style={{ display: 'inline-block', margin: '4px 4px 0 0', padding: '6px 9px', borderRadius: '7px', background: '#edf4f0', fontSize: '11px', color: '#182a28' }}>Validate identity</span>
+                <span style={{ display: 'inline-block', margin: '4px 4px 0 0', padding: '6px 9px', borderRadius: '7px', background: '#edf4f0', fontSize: '13.2px', color: '#182a28' }}>Validate identity</span>
                 <span style={{ color: '#62736e', padding: '0 2px' }}>→</span>
-                <span style={{ display: 'inline-block', margin: '4px 4px 0 0', padding: '6px 9px', borderRadius: '7px', background: '#edf4f0', fontSize: '11px', color: '#182a28' }}>Check limits</span>
+                <span style={{ display: 'inline-block', margin: '4px 4px 0 0', padding: '6px 9px', borderRadius: '7px', background: '#edf4f0', fontSize: '13.2px', color: '#182a28' }}>Check limits</span>
                 <span style={{ color: '#62736e', padding: '0 2px' }}>→</span>
-                <span style={{ display: 'inline-block', margin: '4px 4px 0 0', padding: '6px 9px', borderRadius: '7px', background: '#edf4f0', fontSize: '11px', color: '#182a28' }}>Approve / enrich</span>
+                <span style={{ display: 'inline-block', margin: '4px 4px 0 0', padding: '6px 9px', borderRadius: '7px', background: '#edf4f0', fontSize: '13.2px', color: '#182a28' }}>Approve / enrich</span>
                 <span style={{ color: '#62736e', padding: '0 2px' }}>→</span>
-                <span style={{ display: 'inline-block', margin: '4px 4px 0 0', padding: '6px 9px', borderRadius: '7px', background: '#edf4f0', fontSize: '11px', color: '#182a28' }}>Call Java service</span>
+                <span style={{ display: 'inline-block', margin: '4px 4px 0 0', padding: '6px 9px', borderRadius: '7px', background: '#edf4f0', fontSize: '13.2px', color: '#182a28' }}>Call Java service</span>
               </div>
             </div>
             <div style={{ border: '1px dashed #dce7e1', borderRadius: '14px', padding: '17px' }}>
-              <h3 style={{ display: 'flex', gap: '8px', alignItems: 'center', fontSize: '15px', color: '#0c9b79' }}>⬡ On-chain lane</h3>
-              <div style={{ color: '#62736e', fontSize: '13px', lineHeight: '1.65' }}>Shared, deterministic contract execution</div>
+              <h3 style={{ display: 'flex', gap: '8px', alignItems: 'center', fontSize: '18px', color: '#0c9b79' }}>⬡ On-chain lane</h3>
+              <div style={{ color: '#62736e', fontSize: '15.6px', lineHeight: '1.65' }}>Shared, deterministic contract execution</div>
               <div style={{ marginTop: '9px' }}>
-                <span style={{ display: 'inline-block', margin: '4px 4px 0 0', padding: '6px 9px', borderRadius: '7px', background: '#edf4f0', fontSize: '11px', color: '#182a28' }}>Submit transaction</span>
+                <span style={{ display: 'inline-block', margin: '4px 4px 0 0', padding: '6px 9px', borderRadius: '7px', background: '#edf4f0', fontSize: '13.2px', color: '#182a28' }}>Submit transaction</span>
                 <span style={{ color: '#62736e', padding: '0 2px' }}>→</span>
-                <span style={{ display: 'inline-block', margin: '4px 4px 0 0', padding: '6px 9px', borderRadius: '7px', background: '#edf4f0', fontSize: '11px', color: '#182a28' }}>Consensus / inclusion</span>
+                <span style={{ display: 'inline-block', margin: '4px 4px 0 0', padding: '6px 9px', borderRadius: '7px', background: '#edf4f0', fontSize: '13.2px', color: '#182a28' }}>Consensus / inclusion</span>
                 <span style={{ color: '#62736e', padding: '0 2px' }}>→</span>
-                <span style={{ display: 'inline-block', margin: '4px 4px 0 0', padding: '6px 9px', borderRadius: '7px', background: '#edf4f0', fontSize: '11px', color: '#182a28' }}>EVM executes</span>
+                <span style={{ display: 'inline-block', margin: '4px 4px 0 0', padding: '6px 9px', borderRadius: '7px', background: '#edf4f0', fontSize: '13.2px', color: '#182a28' }}>EVM executes</span>
                 <span style={{ color: '#62736e', padding: '0 2px' }}>→</span>
-                <span style={{ display: 'inline-block', margin: '4px 4px 0 0', padding: '6px 9px', borderRadius: '7px', background: '#edf4f0', fontSize: '11px', color: '#182a28' }}>Receipt + event</span>
+                <span style={{ display: 'inline-block', margin: '4px 4px 0 0', padding: '6px 9px', borderRadius: '7px', background: '#edf4f0', fontSize: '13.2px', color: '#182a28' }}>Receipt + event</span>
               </div>
             </div>
           </div>
-          <div style={{ marginTop: '14px', padding: '13px 15px', borderLeft: '3px solid #bd7a1c', background: '#fff7e8', color: '#664719', borderRadius: '0 9px 9px 0', fontSize: '12px', lineHeight: '1.6' }}>
+          <div style={{ marginTop: '14px', padding: '13px 15px', borderLeft: '3px solid #bd7a1c', background: '#fff7e8', color: '#664719', borderRadius: '0 9px 9px 0', fontSize: '14.4px', lineHeight: '1.6' }}>
             <strong>Important boundary:</strong> BPMN does not itself create blockchain consensus, and Web3j is not a consensus engine. The workflow coordinates business actions; the blockchain protocol determines transaction ordering/finality; the smart contract enforces on-chain rules.
           </div>
         </section>
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', gap: '20px', margin: '36px 0 18px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', gap: '20px', margin: '36px 0 18px', flexWrap: 'wrap' }}>
           <div>
-            <div style={{ color: '#0c9b79', fontSize: '11px', letterSpacing: '.13em', textTransform: 'uppercase', fontWeight: '850' }}>03 / Vocabulary</div>
-            <h2 id="core-terminology" style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', letterSpacing: '-.035em', fontSize: '28px', margin: '7px 0 0', scrollMarginTop: '80px' }}>Core terminology</h2>
+            <div style={{ color: '#0c9b79', fontSize: '13.2px', letterSpacing: '.13em', textTransform: 'uppercase', fontWeight: '850' }}>03 / Vocabulary</div>
+            <h2 id="core-terminology" style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', letterSpacing: '-.035em', fontSize: '33.6px', margin: '7px 0 0', scrollMarginTop: '80px' }}>Core terminology</h2>
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-            <button onClick={() => handleFilterTerms('all')} style={{ cursor: 'pointer', font: 'inherit', border: '1px solid #dce7e1', color: '#182a28', background: '#ffffff', borderRadius: '9px', padding: '9px 12px', fontSize: '12px', fontWeight: '750' }}>All terms</button>
-            <button onClick={() => handleFilterTerms('workflow')} style={{ cursor: 'pointer', font: 'inherit', border: '1px solid #dce7e1', color: '#182a28', background: '#ffffff', borderRadius: '9px', padding: '9px 12px', fontSize: '12px', fontWeight: '750' }}>Workflow</button>
-            <button onClick={() => handleFilterTerms('chain')} style={{ cursor: 'pointer', font: 'inherit', border: '1px solid #dce7e1', color: '#182a28', background: '#ffffff', borderRadius: '9px', padding: '9px 12px', fontSize: '12px', fontWeight: '750' }}>Blockchain</button>
-            <button onClick={() => handleFilterTerms('network')} style={{ cursor: 'pointer', font: 'inherit', border: '1px solid #dce7e1', color: '#182a28', background: '#ffffff', borderRadius: '9px', padding: '9px 12px', fontSize: '12px', fontWeight: '750' }}>Network</button>
+            <button onClick={() => handleFilterTerms('all')} style={{ cursor: 'pointer', font: 'inherit', border: '1px solid #dce7e1', color: '#182a28', background: '#ffffff', borderRadius: '9px', padding: '9px 12px', fontSize: '14.4px', fontWeight: '750' }}>All terms</button>
+            <button onClick={() => handleFilterTerms('workflow')} style={{ cursor: 'pointer', font: 'inherit', border: '1px solid #dce7e1', color: '#182a28', background: '#ffffff', borderRadius: '9px', padding: '9px 12px', fontSize: '14.4px', fontWeight: '750' }}>Workflow</button>
+            <button onClick={() => handleFilterTerms('chain')} style={{ cursor: 'pointer', font: 'inherit', border: '1px solid #dce7e1', color: '#182a28', background: '#ffffff', borderRadius: '9px', padding: '9px 12px', fontSize: '14.4px', fontWeight: '750' }}>Blockchain</button>
+            <button onClick={() => handleFilterTerms('network')} style={{ cursor: 'pointer', font: 'inherit', border: '1px solid #dce7e1', color: '#182a28', background: '#ffffff', borderRadius: '9px', padding: '9px 12px', fontSize: '14.4px', fontWeight: '750' }}>Network</button>
           </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,minmax(0,1fr))', gap: '12px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,250px),1fr))', gap: '12px' }}>
           {filteredTerms.map((term) => (
             <article key={term.id} style={{ border: '1px solid #dce7e1', borderRadius: '12px', padding: '16px', background: '#ffffff' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', gap: '8px', alignItems: 'center', marginBottom: '7px' }}>
-                <strong style={{ fontSize: '14px' }}>{term.title}</strong>
-                <span style={{ fontSize: '10px', padding: '4px 7px', borderRadius: '6px', background: '#edf4f0', color: '#62736e', whiteSpace: 'nowrap' }}>{term.badge}</span>
+                <strong style={{ fontSize: '16.8px' }}>{term.title}</strong>
+                <span style={{ fontSize: '12px', padding: '4px 7px', borderRadius: '6px', background: '#edf4f0', color: '#62736e', whiteSpace: 'nowrap' }}>{term.badge}</span>
               </div>
-              <p style={{ color: '#62736e', fontSize: '12px', lineHeight: '1.6', margin: '0' }}>{term.desc}</p>
-              <code style={{ fontFamily: 'ui-monospace,SFMono-Regular,Consolas,monospace', fontSize: '10px', color: '#0c9b79' }}>{term.code}</code>
+              <p style={{ color: '#62736e', fontSize: '14.4px', lineHeight: '1.6', margin: '0' }}>{term.desc}</p>
+              <code style={{ fontFamily: 'ui-monospace,SFMono-Regular,Consolas,monospace', fontSize: '12px', color: '#0c9b79' }}>{term.code}</code>
             </article>
           ))}
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', gap: '20px', margin: '36px 0 18px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', gap: '20px', margin: '36px 0 18px', flexWrap: 'wrap' }}>
           <div>
-            <div style={{ color: '#0c9b79', fontSize: '11px', letterSpacing: '.13em', textTransform: 'uppercase', fontWeight: '850' }}>04 / Lifecycle</div>
-            <h2 id="token-transfer-lifecycle" style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', letterSpacing: '-.035em', fontSize: '28px', margin: '7px 0 0', scrollMarginTop: '80px' }}>Example: orchestrate a token transfer</h2>
+            <div style={{ color: '#0c9b79', fontSize: '13.2px', letterSpacing: '.13em', textTransform: 'uppercase', fontWeight: '850' }}>04 / Lifecycle</div>
+            <h2 id="token-transfer-lifecycle" style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', letterSpacing: '-.035em', fontSize: '33.6px', margin: '7px 0 0', scrollMarginTop: '80px' }}>Example: orchestrate a token transfer</h2>
           </div>
-          <div style={{ color: '#62736e', fontSize: '13px', lineHeight: '1.65', maxWidth: '650px' }}>A BPMN process can span minutes or days even though contract execution is a discrete transaction.</div>
+          <div style={{ color: '#62736e', fontSize: '15.6px', lineHeight: '1.65', maxWidth: '650px' }}>A BPMN process can span minutes or days even though contract execution is a discrete transaction.</div>
         </div>
 
-        <div style={{ counterReset: 'seq', display: 'grid', gridTemplateColumns: 'repeat(5,minmax(0,1fr))', gap: '10px' }}>
+        <div style={{ counterReset: 'seq', display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,200px),1fr))', gap: '10px' }}>
           <article style={{ counterIncrement: 'seq', background: '#ffffff', border: '1px solid #dce7e1', borderRadius: '13px', padding: '16px' }}>
-            <div style={{ color: '#0c9b79', fontWeight: '900', fontSize: '12px', marginBottom: '13px' }}>01</div>
-            <strong style={{ display: 'block', fontSize: '13px', marginBottom: '7px' }}>Start + validate</strong>
-            <p style={{ color: '#62736e', fontSize: '11px', lineHeight: '1.6', margin: '0' }}>Receive transfer request. Validate wallet, business limits, identity and sanctions using off-chain services.</p>
+            <div style={{ color: '#0c9b79', fontWeight: '900', fontSize: '14.4px', marginBottom: '13px' }}>01</div>
+            <strong style={{ display: 'block', fontSize: '15.6px', marginBottom: '7px' }}>Start + validate</strong>
+            <p style={{ color: '#62736e', fontSize: '13.2px', lineHeight: '1.6', margin: '0' }}>Receive transfer request. Validate wallet, business limits, identity and sanctions using off-chain services.</p>
           </article>
           <article style={{ counterIncrement: 'seq', background: '#ffffff', border: '1px solid #dce7e1', borderRadius: '13px', padding: '16px' }}>
-            <div style={{ color: '#0c9b79', fontWeight: '900', fontSize: '12px', marginBottom: '13px' }}>02</div>
-            <strong style={{ display: 'block', fontSize: '13px', marginBottom: '7px' }}>Prepare transaction</strong>
-            <p style={{ color: '#62736e', fontSize: '11px', lineHeight: '1.6', margin: '0' }}>Java worker uses Web3j to encode contract call, estimate gas and manage signer / nonce policy.</p>
+            <div style={{ color: '#0c9b79', fontWeight: '900', fontSize: '14.4px', marginBottom: '13px' }}>02</div>
+            <strong style={{ display: 'block', fontSize: '15.6px', marginBottom: '7px' }}>Prepare transaction</strong>
+            <p style={{ color: '#62736e', fontSize: '13.2px', lineHeight: '1.6', margin: '0' }}>Java worker uses Web3j to encode contract call, estimate gas and manage signer / nonce policy.</p>
           </article>
           <article style={{ counterIncrement: 'seq', background: '#ffffff', border: '1px solid #dce7e1', borderRadius: '13px', padding: '16px' }}>
-            <div style={{ color: '#0c9b79', fontWeight: '900', fontSize: '12px', marginBottom: '13px' }}>03</div>
-            <strong style={{ display: 'block', fontSize: '13px', marginBottom: '7px' }}>Submit + wait</strong>
-            <p style={{ color: '#62736e', fontSize: '11px', lineHeight: '1.6', margin: '0' }}>Submit signed transaction to an RPC node. Persist transaction hash and move BPMN instance to a durable wait state.</p>
+            <div style={{ color: '#0c9b79', fontWeight: '900', fontSize: '14.4px', marginBottom: '13px' }}>03</div>
+            <strong style={{ display: 'block', fontSize: '15.6px', marginBottom: '7px' }}>Submit + wait</strong>
+            <p style={{ color: '#62736e', fontSize: '13.2px', lineHeight: '1.6', margin: '0' }}>Submit signed transaction to an RPC node. Persist transaction hash and move BPMN instance to a durable wait state.</p>
           </article>
           <article style={{ counterIncrement: 'seq', background: '#ffffff', border: '1px solid #dce7e1', borderRadius: '13px', padding: '16px' }}>
-            <div style={{ color: '#0c9b79', fontWeight: '900', fontSize: '12px', marginBottom: '13px' }}>04</div>
-            <strong style={{ display: 'block', fontSize: '13px', marginBottom: '7px' }}>Confirm execution</strong>
-            <p style={{ color: '#62736e', fontSize: '11px', lineHeight: '1.6', margin: '0' }}>Poll or consume events, retrieve receipt, check status and apply network-specific confirmation / finality policy.</p>
+            <div style={{ color: '#0c9b79', fontWeight: '900', fontSize: '14.4px', marginBottom: '13px' }}>04</div>
+            <strong style={{ display: 'block', fontSize: '15.6px', marginBottom: '7px' }}>Confirm execution</strong>
+            <p style={{ color: '#62736e', fontSize: '13.2px', lineHeight: '1.6', margin: '0' }}>Poll or consume events, retrieve receipt, check status and apply network-specific confirmation / finality policy.</p>
           </article>
           <article style={{ counterIncrement: 'seq', background: '#ffffff', border: '1px solid #dce7e1', borderRadius: '13px', padding: '16px' }}>
-            <div style={{ color: '#0c9b79', fontWeight: '900', fontSize: '12px', marginBottom: '13px' }}>05</div>
-            <strong style={{ display: 'block', fontSize: '13px', marginBottom: '7px' }}>Reconcile + finish</strong>
-            <p style={{ color: '#62736e', fontSize: '11px', lineHeight: '1.6', margin: '0' }}>Update off-chain records idempotently. On failure, retry safely or start a defined compensation / manual review path.</p>
+            <div style={{ color: '#0c9b79', fontWeight: '900', fontSize: '14.4px', marginBottom: '13px' }}>05</div>
+            <strong style={{ display: 'block', fontSize: '15.6px', marginBottom: '7px' }}>Reconcile + finish</strong>
+            <p style={{ color: '#62736e', fontSize: '13.2px', lineHeight: '1.6', margin: '0' }}>Update off-chain records idempotently. On failure, retry safely or start a defined compensation / manual review path.</p>
           </article>
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', gap: '20px', margin: '36px 0 18px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', gap: '20px', margin: '36px 0 18px', flexWrap: 'wrap' }}>
           <div>
-            <div style={{ color: '#0c9b79', fontSize: '11px', letterSpacing: '.13em', textTransform: 'uppercase', fontWeight: '850' }}>05 / Example interaction</div>
-            <h2 id="web3j-flow" style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', letterSpacing: '-.035em', fontSize: '28px', margin: '7px 0 0', scrollMarginTop: '80px' }}>Illustrative Java + Web3j flow</h2>
+            <div style={{ color: '#0c9b79', fontSize: '13.2px', letterSpacing: '.13em', textTransform: 'uppercase', fontWeight: '850' }}>05 / Example interaction</div>
+            <h2 id="web3j-flow" style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', letterSpacing: '-.035em', fontSize: '33.6px', margin: '7px 0 0', scrollMarginTop: '80px' }}>Illustrative Java + Web3j flow</h2>
           </div>
-          <button onClick={handleCopyCode} style={{ cursor: 'pointer', font: 'inherit', border: '1px solid #dce7e1', color: '#182a28', background: '#123b36', borderRadius: '9px', padding: '9px 12px', fontSize: '12px', fontWeight: '750' }}>{copyButtonText}</button>
+          <button onClick={handleCopyCode} style={{ cursor: 'pointer', font: 'inherit', border: '1px solid #dce7e1', color: '#182a28', background: '#123b36', borderRadius: '9px', padding: '9px 12px', fontSize: '14.4px', fontWeight: '750' }}>{copyButtonText}</button>
         </div>
 
-        <div style={{ background: '#152a27', color: '#e1f6ed', padding: '19px', borderRadius: '14px', overflow: 'auto', fontFamily: 'ui-monospace,SFMono-Regular,Consolas,monospace', fontSize: '12px', lineHeight: '1.8' }}>
+        <div style={{ background: '#152a27', color: '#e1f6ed', padding: '19px', borderRadius: '14px', overflow: 'auto', overflowWrap: 'anywhere', fontFamily: 'ui-monospace,SFMono-Regular,Consolas,monospace', fontSize: '14.4px', lineHeight: '1.8' }}>
           <span style={{ color: '#85b8a7' }}>{'//'} Conceptual flow only — configure provider, signer and contract wrapper securely.</span><br />
           <span style={{ color: '#9fc2ff' }}>Web3j</span> web3 = Web3j.build(<span style={{ color: '#9fc2ff' }}>new</span> HttpService(rpcUrl));<br /><br />
           <span style={{ color: '#85b8a7' }}>{'//'} 1. Submit a contract method through a generated / loaded wrapper.</span><br />
@@ -321,75 +318,75 @@ String txHash = receipt.getTransactionHash();
           <span style={{ color: '#85b8a7' }}>{'//'} Production: consider async submission, receipt polling, confirmations/finality,</span><br />
           <span style={{ color: '#85b8a7' }}>{'//'} duplicate events, reorg handling, key custody, gas and nonce coordination.</span>
         </div>
-        <p style={{ color: '#62736e', fontSize: '13px', lineHeight: '1.65', maxWidth: '650px' }}>The snippet is illustrative and assumes a compatible contract wrapper and APIs. In production, avoid blocking a workflow worker for long confirmation waits; persist the hash and resume the process from a message, timer or job.</p>
+        <p style={{ color: '#62736e', fontSize: '15.6px', lineHeight: '1.65', maxWidth: '650px' }}>The snippet is illustrative and assumes a compatible contract wrapper and APIs. In production, avoid blocking a workflow worker for long confirmation waits; persist the hash and resume the process from a message, timer or job.</p>
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', gap: '20px', margin: '36px 0 18px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', gap: '20px', margin: '36px 0 18px', flexWrap: 'wrap' }}>
           <div>
-            <div style={{ color: '#0c9b79', fontSize: '11px', letterSpacing: '.13em', textTransform: 'uppercase', fontWeight: '850' }}>06 / Design decisions</div>
-            <h2 id="reliability-rules" style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', letterSpacing: '-.035em', fontSize: '28px', margin: '7px 0 0', scrollMarginTop: '80px' }}>Reliability rules of thumb</h2>
+            <div style={{ color: '#0c9b79', fontSize: '13.2px', letterSpacing: '.13em', textTransform: 'uppercase', fontWeight: '850' }}>06 / Design decisions</div>
+            <h2 id="reliability-rules" style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', letterSpacing: '-.035em', fontSize: '33.6px', margin: '7px 0 0', scrollMarginTop: '80px' }}>Reliability rules of thumb</h2>
           </div>
         </div>
 
-        <div style={{ display: 'grid', gap: '15px', gridTemplateColumns: 'repeat(3,minmax(0,1fr))' }}>
+        <div style={{ display: 'grid', gap: '15px', gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,260px),1fr))' }}>
           <article style={{ background: '#ffffff', border: '1px solid #dce7e1', borderRadius: '16px', padding: '20px', minWidth: '0' }}>
-            <h3 style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', fontSize: '18px', margin: '0 0 8px' }}>Separate responsibilities</h3>
-            <p style={{ color: '#62736e', fontSize: '13px', lineHeight: '1.65', margin: '8px 0 0' }}>BPMN owns business progression. Java/Web3j owns node integration. Smart contracts own on-chain invariants. Consensus belongs to the network protocol.</p>
+            <h3 style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', fontSize: '21.6px', margin: '0 0 8px' }}>Separate responsibilities</h3>
+            <p style={{ color: '#62736e', fontSize: '15.6px', lineHeight: '1.65', margin: '8px 0 0' }}>BPMN owns business progression. Java/Web3j owns node integration. Smart contracts own on-chain invariants. Consensus belongs to the network protocol.</p>
           </article>
           <article style={{ background: '#ffffff', border: '1px solid #dce7e1', borderRadius: '16px', padding: '20px', minWidth: '0' }}>
-            <h3 style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', fontSize: '18px', margin: '0 0 8px' }}>Assume asynchronous outcomes</h3>
-            <p style={{ color: '#62736e', fontSize: '13px', lineHeight: '1.65', margin: '8px 0 0' }}>A successful RPC submission is not the same as inclusion, and inclusion is not always finality. Model submitted, included, confirmed, failed and replaced states explicitly.</p>
+            <h3 style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', fontSize: '21.6px', margin: '0 0 8px' }}>Assume asynchronous outcomes</h3>
+            <p style={{ color: '#62736e', fontSize: '15.6px', lineHeight: '1.65', margin: '8px 0 0' }}>A successful RPC submission is not the same as inclusion, and inclusion is not always finality. Model submitted, included, confirmed, failed and replaced states explicitly.</p>
           </article>
           <article style={{ background: '#ffffff', border: '1px solid #dce7e1', borderRadius: '16px', padding: '20px', minWidth: '0' }}>
-            <h3 style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', fontSize: '18px', margin: '0 0 8px' }}>Design for duplicates</h3>
-            <p style={{ color: '#62736e', fontSize: '13px', lineHeight: '1.65', margin: '8px 0 0' }}>Workers retry; events may be replayed; processes may restart. Use idempotent handlers, unique operation IDs, contract-level safeguards and reconciliation.</p>
+            <h3 style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', fontSize: '21.6px', margin: '0 0 8px' }}>Design for duplicates</h3>
+            <p style={{ color: '#62736e', fontSize: '15.6px', lineHeight: '1.65', margin: '8px 0 0' }}>Workers retry; events may be replayed; processes may restart. Use idempotent handlers, unique operation IDs, contract-level safeguards and reconciliation.</p>
           </article>
           <article style={{ background: '#ffffff', border: '1px solid #dce7e1', borderRadius: '16px', padding: '20px', minWidth: '0' }}>
-            <h3 style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', fontSize: '18px', margin: '0 0 8px' }}>Protect keys and privacy</h3>
-            <p style={{ color: '#62736e', fontSize: '13px', lineHeight: '1.65', margin: '8px 0 0' }}>Keep private keys out of BPMN variables and logs. Use a signer / custody boundary. Put sensitive personal or commercial data off-chain where appropriate.</p>
+            <h3 style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', fontSize: '21.6px', margin: '0 0 8px' }}>Protect keys and privacy</h3>
+            <p style={{ color: '#62736e', fontSize: '15.6px', lineHeight: '1.65', margin: '8px 0 0' }}>Keep private keys out of BPMN variables and logs. Use a signer / custody boundary. Put sensitive personal or commercial data off-chain where appropriate.</p>
           </article>
           <article style={{ background: '#ffffff', border: '1px solid #dce7e1', borderRadius: '16px', padding: '20px', minWidth: '0' }}>
-            <h3 style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', fontSize: '18px', margin: '0 0 8px' }}>Know the network model</h3>
-            <p style={{ color: '#62736e', fontSize: '13px', lineHeight: '1.65', margin: '8px 0 0' }}>Consensus, finality, permissioning and validator roles depend on the chosen chain. Public Ethereum and a permissioned QBFT network are not interchangeable.</p>
+            <h3 style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', fontSize: '21.6px', margin: '0 0 8px' }}>Know the network model</h3>
+            <p style={{ color: '#62736e', fontSize: '15.6px', lineHeight: '1.65', margin: '8px 0 0' }}>Consensus, finality, permissioning and validator roles depend on the chosen chain. Public Ethereum and a permissioned QBFT network are not interchangeable.</p>
           </article>
           <article style={{ background: '#ffffff', border: '1px solid #dce7e1', borderRadius: '16px', padding: '20px', minWidth: '0' }}>
-            <h3 style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', fontSize: '18px', margin: '0 0 8px' }}>Make recovery explicit</h3>
-            <p style={{ color: '#62736e', fontSize: '13px', lineHeight: '1.65', margin: '8px 0 0' }}>Define timeout, transaction replacement, reorg, contract revert, low gas, RPC outage, manual review and compensation paths before production.</p>
+            <h3 style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', fontSize: '21.6px', margin: '0 0 8px' }}>Make recovery explicit</h3>
+            <p style={{ color: '#62736e', fontSize: '15.6px', lineHeight: '1.65', margin: '8px 0 0' }}>Define timeout, transaction replacement, reorg, contract revert, low gas, RPC outage, manual review and compensation paths before production.</p>
           </article>
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', gap: '20px', margin: '36px 0 18px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', gap: '20px', margin: '36px 0 18px', flexWrap: 'wrap' }}>
           <div>
-            <div style={{ color: '#0c9b79', fontSize: '11px', letterSpacing: '.13em', textTransform: 'uppercase', fontWeight: '850' }}>07 / Clarifications</div>
-            <h2 id="common-misconceptions" style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', letterSpacing: '-.035em', fontSize: '28px', margin: '7px 0 0', scrollMarginTop: '80px' }}>Common misconceptions</h2>
+            <div style={{ color: '#0c9b79', fontSize: '13.2px', letterSpacing: '.13em', textTransform: 'uppercase', fontWeight: '850' }}>07 / Clarifications</div>
+            <h2 id="common-misconceptions" style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', letterSpacing: '-.035em', fontSize: '33.6px', margin: '7px 0 0', scrollMarginTop: '80px' }}>Common misconceptions</h2>
           </div>
         </div>
 
         <details style={{ background: '#ffffff', border: '1px solid #dce7e1', borderRadius: '12px', padding: '14px 16px' }}>
-          <summary style={{ cursor: 'pointer', fontWeight: '750', fontSize: '13px' }}>Does BPMN execute smart contracts?</summary>
-          <p style={{ color: '#62736e', fontSize: '12px', lineHeight: '1.7', marginBottom: '0' }}>No. BPMN defines the process and invokes workers or services. A Java worker may use Web3j to interact with a node, which processes the transaction according to the chain\'s protocol.</p>
+          <summary style={{ cursor: 'pointer', fontWeight: '750', fontSize: '15.6px' }}>Does BPMN execute smart contracts?</summary>
+          <p style={{ color: '#62736e', fontSize: '14.4px', lineHeight: '1.7', marginBottom: '0' }}>No. BPMN defines the process and invokes workers or services. A Java worker may use Web3j to interact with a node, which processes the transaction according to the chain\'s protocol.</p>
         </details>
         <details style={{ background: '#ffffff', border: '1px solid #dce7e1', borderRadius: '12px', padding: '14px 16px', marginTop: '9px' }}>
-          <summary style={{ cursor: 'pointer', fontWeight: '750', fontSize: '13px' }}>Is blockchain storage the same as transaction history?</summary>
-          <p style={{ color: '#62736e', fontSize: '12px', lineHeight: '1.7', marginBottom: '0' }}>No. Contract storage is part of current world state. Transaction history, receipts and logs describe activity that led to state changes. Node implementations may prune or archive different data, so data availability should be planned.</p>
+          <summary style={{ cursor: 'pointer', fontWeight: '750', fontSize: '15.6px' }}>Is blockchain storage the same as transaction history?</summary>
+          <p style={{ color: '#62736e', fontSize: '14.4px', lineHeight: '1.7', marginBottom: '0' }}>No. Contract storage is part of current world state. Transaction history, receipts and logs describe activity that led to state changes. Node implementations may prune or archive different data, so data availability should be planned.</p>
         </details>
         <details style={{ background: '#ffffff', border: '1px solid #dce7e1', borderRadius: '12px', padding: '14px 16px', marginTop: '9px' }}>
-          <summary style={{ cursor: 'pointer', fontWeight: '750', fontSize: '13px' }}>Does P2P networking equal consensus?</summary>
-          <p style={{ color: '#62736e', fontSize: '12px', lineHeight: '1.7', marginBottom: '0' }}>No. P2P transports messages among nodes. Consensus rules determine how participants agree on block ordering and finality. Networking supports consensus but does not define it by itself.</p>
+          <summary style={{ cursor: 'pointer', fontWeight: '750', fontSize: '15.6px' }}>Does P2P networking equal consensus?</summary>
+          <p style={{ color: '#62736e', fontSize: '14.4px', lineHeight: '1.7', marginBottom: '0' }}>No. P2P transports messages among nodes. Consensus rules determine how participants agree on block ordering and finality. Networking supports consensus but does not define it by itself.</p>
         </details>
         <details style={{ background: '#ffffff', border: '1px solid #dce7e1', borderRadius: '12px', padding: '14px 16px', marginTop: '9px' }}>
-          <summary style={{ cursor: 'pointer', fontWeight: '750', fontSize: '13px' }}>Can an off-chain database transaction be rolled back by the EVM?</summary>
-          <p style={{ color: '#62736e', fontSize: '12px', lineHeight: '1.7', marginBottom: '0' }}>No. The database and blockchain have separate transaction boundaries. Use a saga-style process, explicit compensating actions and reconciliation to handle partial completion.</p>
+          <summary style={{ cursor: 'pointer', fontWeight: '750', fontSize: '15.6px' }}>Can an off-chain database transaction be rolled back by the EVM?</summary>
+          <p style={{ color: '#62736e', fontSize: '14.4px', lineHeight: '1.7', marginBottom: '0' }}>No. The database and blockchain have separate transaction boundaries. Use a saga-style process, explicit compensating actions and reconciliation to handle partial completion.</p>
         </details>
         <details style={{ background: '#ffffff', border: '1px solid #dce7e1', borderRadius: '12px', padding: '14px 16px', marginTop: '9px' }}>
-          <summary style={{ cursor: 'pointer', fontWeight: '750', fontSize: '13px' }}>Where should workflow state live?</summary>
-          <p style={{ color: '#62736e', fontSize: '12px', lineHeight: '1.7', marginBottom: '0' }}>Store process progress and operational metadata in the workflow engine and supporting application store; keep the authoritative on-chain facts in the contract / chain. Persist transaction hashes and enough metadata to resume and reconcile after restarts.</p>
+          <summary style={{ cursor: 'pointer', fontWeight: '750', fontSize: '15.6px' }}>Where should workflow state live?</summary>
+          <p style={{ color: '#62736e', fontSize: '14.4px', lineHeight: '1.7', marginBottom: '0' }}>Store process progress and operational metadata in the workflow engine and supporting application store; keep the authoritative on-chain facts in the contract / chain. Persist transaction hashes and enough metadata to resume and reconcile after restarts.</p>
         </details>
 
-        <footer style={{ borderTop: '1px solid #dce7e1', marginTop: '36px', paddingTop: '20px', display: 'flex', justifyContent: 'space-between', gap: '20px', color: '#62736e', fontSize: '11px' }}>
+        <footer style={{ borderTop: '1px solid #dce7e1', marginTop: '36px', paddingTop: '20px', display: 'flex', justifyContent: 'space-between', gap: '20px', color: '#62736e', fontSize: '13.2px', flexWrap: 'wrap' }}>
           <span>Web3j × BPMN × EVM · Architecture reference</span>
           <span>Self-contained document webpage · Use as a learning and design aid</span>
         </footer>
-      </main>
+      </div>
 
       <SearchDialog isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </div>

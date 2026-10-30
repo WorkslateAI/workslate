@@ -17,7 +17,7 @@ export const Hero: React.FC = () => {
       <div className="max-w-[1200px] mx-auto px-6 lg:px-10">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <div className="space-y-6 order-2 lg:order-1">
-            <p className="text-primary-600 font-semibold text-[10px] lg:text-xs uppercase tracking-widest">
+            <p className="text-primary-600 font-semibold text-[12px] lg:text-xs uppercase tracking-widest">
               AI-POWERED • BLOCKCHAIN-READY • GLOBAL REACH
             </p>
             
@@ -26,7 +26,7 @@ export const Hero: React.FC = () => {
               <span className="text-text-900 text-xs lg:text-sm hidden sm:inline">How do I manage my wallet from market to market?</span>
             </div>
             
-            <p className="text-primary-600 text-[10px] lg:text-xs font-medium flex items-center space-x-2">
+            <p className="text-primary-600 text-[12px] lg:text-xs font-medium flex items-center space-x-2">
               <span className="flex space-x-1">
                 <span className="w-1.5 h-1.5 bg-primary-600 rounded-full animate-pulse"></span>
                 <span className="w-1.5 h-1.5 bg-primary-600 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></span>
@@ -35,7 +35,7 @@ export const Hero: React.FC = () => {
               <span className="hidden sm:inline">Workslate AI is generating a response{dots}</span>
             </p>
             
-            <h1 className="text-[34px] lg:text-5xl font-heading font-bold text-text-900 leading-[1.1] tracking-tight">
+            <h1 id="page-heading" tabIndex={-1} className="text-[40.8px] lg:text-5xl font-heading font-bold text-text-900 leading-[1.1] tracking-tight">
               Your personal agent for managing your wallet, market to market, everywhere.
             </h1>
             
@@ -64,7 +64,7 @@ export const Hero: React.FC = () => {
           </div>
           
           <div className="relative order-1 lg:order-2">
-            <div className="rounded-2xl bg-lavender-50 p-4 lg:p-3 lg:scale-[1.20]">
+            <div className="rounded-2xl bg-lavender-50 p-4 lg:p-3 lg:scale-105 xl:scale-[1.20]">
               <picture>
                 <source
                   srcSet="/assets/images/hero-markets-abc-workslate-centre-480w.avif 480w,

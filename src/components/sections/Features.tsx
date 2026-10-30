@@ -100,7 +100,7 @@ export const Features: React.FC = () => {
                     {feature.number}
                   </span>
                   <div className="flex-1">
-                    <h3 className="text-[18px] lg:text-[22px] font-heading font-semibold text-text-900 mb-2">
+                    <h3 className="text-[21.6px] lg:text-[26.4px] font-heading font-semibold text-text-900 mb-2">
                       {feature.title}
                     </h3>
                     <p className="text-text-500 text-sm lg:text-base">{feature.subtitle}</p>

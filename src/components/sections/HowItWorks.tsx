@@ -22,11 +22,11 @@ export const HowItWorks: React.FC = () => {
       <div className="max-w-[1200px] mx-auto px-6 lg:px-10">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <div className="space-y-6 lg:space-y-8 order-2 lg:order-1">
-            <p className="text-primary-600 font-semibold text-[10px] lg:text-xs uppercase tracking-widest">
+            <p className="text-primary-600 font-semibold text-[12px] lg:text-xs uppercase tracking-widest">
               How it works
             </p>
             
-            <h2 className="text-[28px] lg:text-[34px] font-heading font-bold text-text-900">
+            <h2 className="text-[33.6px] lg:text-[40.8px] font-heading font-bold text-text-900">
               Three steps from wallet to market
             </h2>
             
