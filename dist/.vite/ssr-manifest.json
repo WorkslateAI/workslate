@@ -4,10 +4,10 @@
   "\u0000D:/git-repo/workslate/node_modules/prop-types/index.js?commonjs-module": [],
   "\u0000D:/git-repo/workslate/node_modules/react-dom/cjs/react-dom.production.min.js?commonjs-exports": [],
   "\u0000D:/git-repo/workslate/node_modules/react-dom/client.js?commonjs-es-import": [
-    "/assets/client-CEFGNfdI.js"
+    "/assets/client-BKtjz-b7.js"
   ],
   "\u0000D:/git-repo/workslate/node_modules/react-dom/client.js?commonjs-exports": [
-    "/assets/client-CEFGNfdI.js"
+    "/assets/client-BKtjz-b7.js"
   ],
   "\u0000D:/git-repo/workslate/node_modules/react-dom/index.js?commonjs-es-import": [],
   "\u0000D:/git-repo/workslate/node_modules/react-dom/index.js?commonjs-module": [],
@@ -34,7 +34,7 @@
   "node_modules/prop-types/lib/ReactPropTypesSecret.js": [],
   "node_modules/react-dom/cjs/react-dom.production.min.js": [],
   "node_modules/react-dom/client.js": [
-    "/assets/client-CEFGNfdI.js"
+    "/assets/client-BKtjz-b7.js"
   ],
   "node_modules/react-dom/index.js": [],
   "node_modules/react-fast-compare/index.js": [],
@@ -54,14 +54,14 @@
   "src/components/atoms/Logo.tsx": [],
   "src/components/atoms/PlayIcon.tsx": [],
   "src/components/atoms/SearchDialog.tsx": [
-    "/assets/Docs-CfmFT8Sz.js"
+    "/assets/Docs-BKqMweKN.js"
   ],
   "src/components/atoms/SearchTrigger.tsx": [
-    "/assets/Docs-CfmFT8Sz.js"
+    "/assets/Docs-BKqMweKN.js"
   ],
   "src/components/sections/Features.tsx": [],
   "src/components/sections/Footer.tsx": [
-    "/assets/Footer-DE5Vp4TL.js"
+    "/assets/Footer-47pDklJg.js"
   ],
   "src/components/sections/Header.tsx": [],
   "src/components/sections/Hero.tsx": [],
@@ -70,13 +70,13 @@
   "src/content/faq.ts": [],
   "src/main.tsx": [],
   "src/pages/Docs.tsx": [
-    "/assets/Docs-CfmFT8Sz.js"
+    "/assets/Docs-BKqMweKN.js"
   ],
   "src/search/docsIndex.ts": [
-    "/assets/Docs-CfmFT8Sz.js"
+    "/assets/Docs-BKqMweKN.js"
   ],
   "src/search/useSiteSearch.ts": [
-    "/assets/Docs-CfmFT8Sz.js"
+    "/assets/Docs-BKqMweKN.js"
   ],
   "src/seo/StructuredData.tsx": [],
   "src/styles/global.css": []

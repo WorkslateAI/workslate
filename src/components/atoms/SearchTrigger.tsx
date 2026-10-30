@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface SearchTriggerProps {
   onClick: () => void;
   variant?: 'default' | 'icon-only';

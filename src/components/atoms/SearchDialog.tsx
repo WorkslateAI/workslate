@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { useSiteSearch } from '../../search/useSiteSearch';
 import type { FuseResult } from 'fuse.js';
 import type { SearchRecord } from '../../search/docsIndex';

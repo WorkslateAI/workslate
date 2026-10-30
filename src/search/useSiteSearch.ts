@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, useMemo, useRef } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import type { FuseResult } from 'fuse.js';
 import { docsIndex, type SearchRecord } from './docsIndex';
 
@@ -19,7 +19,7 @@ export function useSiteSearch(): UseSiteSearchReturn {
   const [error, setError] = useState<string | null>(null);
   
   const fuseRef = useRef<any>(null);
-  const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const debounceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Lazy load Fuse.js and create instance
   const initializeFuse = useCallback(async () => {

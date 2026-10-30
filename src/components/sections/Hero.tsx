@@ -13,7 +13,7 @@ export const Hero: React.FC = () => {
   }, []);
 
   return (
-    <section id="home" className="relative bg-lavender-100 py-12 lg:py-20 lg:py-32">
+    <section id="home" className="relative bg-lavender-100 py-12 lg:py-20 lg:py-32 overflow-x-clip">
       <div className="max-w-[1200px] mx-auto px-6 lg:px-10">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <div className="space-y-6 order-2 lg:order-1">
@@ -48,7 +48,15 @@ export const Hero: React.FC = () => {
                 <PlayIcon className="w-4 h-4" />
                 <span>Register for demo</span>
               </Button>
-              <Button variant="secondary" size="lg" className="flex items-center justify-center space-x-2">
+              <Button
+                variant="secondary"
+                size="lg"
+                className="flex items-center justify-center space-x-2"
+                onClick={() => {
+                  document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' });
+                  window.dispatchEvent(new CustomEvent('workslate:play-how-it-works-video'));
+                }}
+              >
                 <PlayIcon className="w-4 h-4" />
                 <span>Watch video</span>
               </Button>
@@ -56,7 +64,7 @@ export const Hero: React.FC = () => {
           </div>
           
           <div className="relative order-1 lg:order-2">
-            <div className="rounded-2xl bg-lavender-50 p-4 lg:p-8">
+            <div className="rounded-2xl bg-lavender-50 p-4 lg:p-3 lg:scale-[1.20]">
               <picture>
                 <source
                   srcSet="/assets/images/hero-markets-abc-workslate-centre-480w.avif 480w,
@@ -85,7 +93,7 @@ export const Hero: React.FC = () => {
                   width="1923"
                   height="1282"
                   loading="eager"
-                  fetchpriority="high"
+                  fetchPriority="high"
                   decoding="async"
                   className="w-full h-auto"
                 />

@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '../atoms/Button';
 import { PlayIcon } from '../atoms/PlayIcon';
 
 export const HowItWorks: React.FC = () => {
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    const handlePlayRequest = () => setIsPlaying(true);
+    window.addEventListener('workslate:play-how-it-works-video', handlePlayRequest);
+    return () => window.removeEventListener('workslate:play-how-it-works-video', handlePlayRequest);
+  }, []);
+
   const steps = [
     { id: '1', text: 'Connect your wallet to the agent.' },
     { id: '2', text: 'Choose the markets you operate in.' },
@@ -37,15 +45,26 @@ export const HowItWorks: React.FC = () => {
           </div>
           
           <div className="relative order-1 lg:order-2">
-            <button 
-              className="w-full rounded-2xl lg:rounded-3xl bg-dark-panel p-6 lg:p-8 flex flex-col items-center justify-center aspect-video hover:bg-dark-panel-deep transition-colors"
-              aria-label="Watch how it works video"
-            >
-              <div className="w-12 h-12 lg:w-14 lg:h-14 bg-white rounded-full flex items-center justify-center mb-3 lg:mb-4">
-                <PlayIcon className="w-6 h-6 lg:w-8 lg:h-8 text-primary-600" />
-              </div>
-              <span className="text-white font-bold text-sm lg:text-base text-center">Watch how it works</span>
-            </button>
+            {isPlaying ? (
+              <video
+                src="/assets/videos/tokens_at_the_speed_of_rules.mp4"
+                className="w-full rounded-2xl lg:rounded-3xl aspect-video bg-dark-panel"
+                controls
+                autoPlay
+                playsInline
+              />
+            ) : (
+              <button
+                onClick={() => setIsPlaying(true)}
+                className="w-full rounded-2xl lg:rounded-3xl bg-dark-panel p-6 lg:p-8 flex flex-col items-center justify-center aspect-video hover:bg-dark-panel-deep transition-colors"
+                aria-label="Watch how it works video"
+              >
+                <div className="w-12 h-12 lg:w-14 lg:h-14 bg-white rounded-full flex items-center justify-center mb-3 lg:mb-4">
+                  <PlayIcon className="w-6 h-6 lg:w-8 lg:h-8 text-primary-600" />
+                </div>
+                <span className="text-white font-bold text-sm lg:text-base text-center">Watch how it works</span>
+              </button>
+            )}
           </div>
         </div>
       </div>

@@ -64,6 +64,37 @@ test.describe('Marketing Site E2E', () => {
     await expect(page.getByText('The agent moves and tracks every token.')).toBeVisible();
   });
 
+  test('How It Works video plays on click', async ({ page }) => {
+    await page.goto('/#how-it-works');
+
+    const playButton = page.getByRole('button', { name: 'Watch how it works video' });
+    await expect(playButton).toBeVisible();
+    await playButton.click();
+
+    const video = page.locator('#how-it-works video');
+    await expect(video).toBeVisible();
+    await expect(video).toHaveAttribute('src', '/assets/videos/tokens_at_the_speed_of_rules.mp4');
+
+    // Placeholder button is replaced by the video
+    await expect(playButton).not.toBeVisible();
+  });
+
+  test('Hero Watch video button triggers How It Works video', async ({ page }) => {
+    await page.goto('/');
+
+    const watchButton = page.getByRole('button', { name: 'Watch video' });
+    await expect(watchButton).toBeVisible();
+    await watchButton.click();
+
+    // Page scrolls to the How It Works section
+    await expect(page.locator('#how-it-works')).toBeInViewport();
+
+    // Video replaces the placeholder and starts playing
+    const video = page.locator('#how-it-works video');
+    await expect(video).toBeVisible();
+    await expect(video).toHaveAttribute('src', '/assets/videos/tokens_at_the_speed_of_rules.mp4');
+  });
+
   test('SideSection is visible', async ({ page }) => {
     await page.goto('/');
     await expect(page.getByText('Seamless. Secure. Global.')).toBeVisible();

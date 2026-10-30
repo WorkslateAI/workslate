@@ -56,11 +56,11 @@ export const StructuredData: React.FC = () => {
       <link
         rel="preload"
         as="image"
-        imagesrcset="/assets/images/hero-markets-abc-workslate-centre-480w.avif 480w,
+        imageSrcSet="/assets/images/hero-markets-abc-workslate-centre-480w.avif 480w,
                      /assets/images/hero-markets-abc-workslate-centre-768w.avif 768w,
                      /assets/images/hero-markets-abc-workslate-centre-1200w.avif 1200w,
                      /assets/images/hero-markets-abc-workslate-centre.avif 1923w"
-        imagesizes="(max-width: 480px) 480px, (max-width: 768px) 768px, (max-width: 1200px) 1200px, 1923px"
+        imageSizes="(max-width: 480px) 480px, (max-width: 768px) 768px, (max-width: 1200px) 1200px, 1923px"
         fetchPriority="high"
       />
 
