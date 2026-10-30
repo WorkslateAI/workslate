@@ -35,7 +35,7 @@ test-results/
 .idea/
 
 # GitHub settings and workflows
-.github/
+.github/skills
 
 # Build output
 dist/
