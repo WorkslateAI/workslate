@@ -243,6 +243,21 @@ Task: T022 Build feature SVG illustrations in src/components/illustrations/Marke
 
 **Checkpoint**: Lighthouse scores meet or exceed targets; Core Web Vitals within thresholds; no visual regressions.
 
+## Phase 8: ChatGPT-Style AI Text Rendering
+
+**Purpose**: Deliver a reusable progressive text-rendering component that simulates
+real-time AI-generated responses with a typing cursor, Markdown support, and
+reduced-motion compliance, applied only to designated AI text surfaces.
+
+- [X] T072 [P] Create the reusable `AITextRenderer` atom in `src/components/atoms/AITextRenderer.tsx` with configurable `mode` (`character` | `word`) and `speed`, blinking cursor removed on completion, streaming continuation for appended text without restarting, optional `autoScroll` to the nearest scrollable ancestor, timer cleanup on unmount, `useSyncExternalStore`-driven `prefers-reduced-motion` instant rendering, and a built-in Markdown subset (paragraphs, headings, ordered/unordered lists, fenced code blocks, inline code, bold, italic, links).
+- [X] T073 [P] Add `.ai-text-cursor` blink and `.ai-text-fade` per-unit fade-in styles gated behind `prefers-reduced-motion: no-preference` in `src/styles/global.css`.
+- [X] T074 Apply `AITextRenderer` to the Hero `+ Prompt` chip (inline span mode, character mode) and fade in the "Workslate AI is generating a response" status line on `onComplete` in `src/components/sections/Hero.tsx`.
+- [X] T075 [P] Add unit coverage for progressive character/word reveal, cursor lifecycle, streaming continuation vs restart, reduced-motion instant render, Markdown and fenced-code-block output, `onComplete`, and timer cleanup in `tests/unit/components/ai-text-renderer.test.tsx`.
+
+**Checkpoint**: The hero prompt types out like a ChatGPT response with a blinking
+cursor, the status line appears on completion, and the component is reusable for
+any future AI response surface.
+
 ## Notes
 
 - Task IDs are sequential and each task uses a checkbox, ID, explicit file path,

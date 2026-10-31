@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '../atoms/Button';
 import { PlayIcon } from '../atoms/PlayIcon';
+import { AITextRenderer } from '../atoms/AITextRenderer';
 
 export const Hero: React.FC = () => {
   const [dots, setDots] = useState('');
+  const [promptDone, setPromptDone] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -23,10 +25,17 @@ export const Hero: React.FC = () => {
             
             <div className="inline-flex items-center space-x-2 bg-white border border-border rounded-full px-3 lg:px-4 py-2">
               <span className="text-primary-600 font-bold text-xs lg:text-sm">+ Prompt</span>
-              <span className="text-text-900 text-xs lg:text-sm hidden sm:inline">How do I manage my wallet from market to market?</span>
+              <AITextRenderer
+                as="span"
+                text="How do I manage my wallet from market to market?"
+                mode="character"
+                speed={35}
+                className="text-text-900 text-xs lg:text-sm hidden sm:inline"
+                onComplete={() => setPromptDone(true)}
+              />
             </div>
             
-            <p className="text-primary-600 text-[12px] lg:text-xs font-medium flex items-center space-x-2">
+            <p className={`text-primary-600 text-[12px] lg:text-xs font-medium flex items-center space-x-2 transition-opacity duration-500 ${promptDone ? 'opacity-100' : 'opacity-0'}`}>
               <span className="flex space-x-1">
                 <span className="w-1.5 h-1.5 bg-primary-600 rounded-full animate-pulse"></span>
                 <span className="w-1.5 h-1.5 bg-primary-600 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></span>
@@ -35,7 +44,7 @@ export const Hero: React.FC = () => {
               <span className="hidden sm:inline">Workslate AI is generating a response{dots}</span>
             </p>
             
-            <h1 id="page-heading" tabIndex={-1} className="text-[40.8px] lg:text-5xl font-heading font-bold text-text-900 leading-[1.1] tracking-tight">
+            <h1 id="page-heading" className="text-[40.8px] font-heading font-bold text-text-900 leading-[1.1] tracking-tight">
               Your personal agent for managing your wallet, market to market, everywhere.
             </h1>
             

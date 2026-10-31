@@ -191,4 +191,44 @@
   :target {
     animation: search-highlight 2s ease-out;
   }
+
+  /* AITextRenderer: subtle blinking cursor at the end of actively
+     rendered text, and a short fade-in on newly revealed units. */
+  .ai-text-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    margin-left: 1px;
+    background-color: currentColor;
+    vertical-align: -0.15em;
+  }
+
+  @keyframes ai-text-cursor-blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes ai-text-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .ai-text-cursor {
+      animation: ai-text-cursor-blink 1s step-end infinite;
+    }
+
+    .ai-text-fade {
+      animation: ai-text-fade-in 200ms ease-out;
+    }
+  }
 }
