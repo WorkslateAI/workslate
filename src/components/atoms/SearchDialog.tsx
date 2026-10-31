@@ -1,7 +1,12 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState, useCallback } from 'react';
 import { useSiteSearch } from '../../search/useSiteSearch';
 import type { FuseResult } from 'fuse.js';
 import type { SearchRecord } from '../../search/docsIndex';
+
+// Layout effects don't run during SSR/prerender — fall back to useEffect there
+// to avoid React warnings while keeping synchronous listener attachment in the browser.
+const useIsomorphicLayoutEffect =
+  typeof window === 'undefined' ? useEffect : useLayoutEffect;
 
 interface SearchDialogProps {
   isOpen: boolean;
@@ -30,8 +35,9 @@ export function SearchDialog({ isOpen, onClose }: SearchDialogProps) {
     }
   }, [isOpen, setQuery]);
 
-  // Keyboard shortcuts
-  useEffect(() => {
+  // Keyboard shortcuts — bound in a layout effect so the listener is attached
+  // synchronously when the dialog opens (no gap where keypresses are missed).
+  useIsomorphicLayoutEffect(() => {
     if (!isOpen) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {

@@ -52,6 +52,17 @@ function App() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
+    // Reconcile in case the hash changed before this listener was attached
+    // (e.g. navigation during hydration) — otherwise the app stays on 'home'.
+    const current = getRoute();
+    if (current !== routeRef.current) {
+      pendingRouteRef.current = null;
+      routeRef.current = current;
+      window.scrollTo(0, 0);
+      setRoute(current);
+      setVisible(true);
+    }
+
     const handleHashChange = () => {
       const next = getRoute();
       if (next === routeRef.current) return;

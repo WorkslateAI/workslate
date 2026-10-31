@@ -189,9 +189,11 @@ test.describe('Marketing Site E2E', () => {
     const searchTrigger = page.getByRole('button', { name: /search docs/i });
     await searchTrigger.click();
 
+    const dialog = page.getByRole('dialog', { name: /search docs/i });
+    await expect(dialog).toBeVisible();
+
     await page.keyboard.press('Escape');
 
-    const dialog = page.getByRole('dialog', { name: /search docs/i });
     await expect(dialog).not.toBeVisible();
   });
 
@@ -229,14 +231,15 @@ test.describe('Marketing Site E2E', () => {
     const searchInput = page.getByPlaceholder('Search docs...');
     await searchInput.fill('consensus');
 
-    await page.waitForTimeout(200);
+    // Wait for results before navigating
+    const resultsList = page.getByRole('listbox');
+    await expect(resultsList).toBeVisible();
 
     // Test arrow keys are handled (no error thrown)
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('ArrowUp');
     
     // Verify results are still visible after navigation
-    const resultsList = page.getByRole('listbox');
     await expect(resultsList).toBeVisible();
   });
 
@@ -248,7 +251,9 @@ test.describe('Marketing Site E2E', () => {
     const searchInput = page.getByPlaceholder('Search docs...');
     await searchInput.fill('evm');
 
-    await page.waitForTimeout(200);
+    // Wait for results — Enter is a no-op until they render
+    const resultsList = page.getByRole('listbox');
+    await expect(resultsList).toBeVisible();
 
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('Enter');

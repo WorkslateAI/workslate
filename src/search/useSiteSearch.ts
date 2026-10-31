@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
-import type { FuseResult } from 'fuse.js';
+import Fuse, { type FuseResult } from 'fuse.js';
 import { docsIndex, type SearchRecord } from './docsIndex';
 
 interface UseSiteSearchReturn {
@@ -11,58 +11,31 @@ interface UseSiteSearchReturn {
   error: string | null;
 }
 
+// Fuse instance is created eagerly with the module — it ships inside the
+// lazy-loaded Docs chunk, so it never affects the initial page bundle and
+// can never fail to load at runtime.
+const fuse = new Fuse<SearchRecord>(docsIndex, {
+  keys: [
+    { name: 'title', weight: 0.5 },
+    { name: 'breadcrumb', weight: 0.2 },
+    { name: 'content', weight: 0.25 },
+    { name: 'code', weight: 0.05 },
+  ],
+  threshold: 0.3,
+  ignoreLocation: true,
+  minMatchCharLength: 2,
+  includeMatches: true,
+  includeScore: true,
+  useExtendedSearch: false,
+});
+
 export function useSiteSearch(): UseSiteSearchReturn {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<FuseResult<SearchRecord>[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isReady, setIsReady] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  
-  const fuseRef = useRef<any>(null);
   const debounceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Lazy load Fuse.js and create instance
-  const initializeFuse = useCallback(async () => {
-    if (fuseRef.current) return;
-
-    setIsLoading(true);
-    setError(null);
-
-    try {
-      const Fuse = (await import('fuse.js')).default;
-      
-      fuseRef.current = new Fuse(docsIndex, {
-        keys: [
-          { name: 'title', weight: 0.5 },
-          { name: 'breadcrumb', weight: 0.2 },
-          { name: 'content', weight: 0.25 },
-          { name: 'code', weight: 0.05 },
-        ],
-        threshold: 0.3,
-        ignoreLocation: true,
-        minMatchCharLength: 2,
-        includeMatches: true,
-        includeScore: true,
-        useExtendedSearch: false,
-      });
-
-      setIsReady(true);
-    } catch (err) {
-      setError('Failed to load search. Please try again.');
-      console.error('Failed to load Fuse.js:', err);
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
-
   // Debounced search
-  const performSearch = useCallback(async (searchQuery: string) => {
-    if (!fuseRef.current) {
-      await initializeFuse();
-    }
-
-    if (!fuseRef.current) return;
-
+  const performSearch = useCallback((searchQuery: string) => {
     const trimmedQuery = searchQuery.trim();
     
     if (trimmedQuery.length < 2) {
@@ -70,7 +43,7 @@ export function useSiteSearch(): UseSiteSearchReturn {
       return;
     }
 
-    const searchResults = fuseRef.current.search(trimmedQuery, { limit: 10 });
+    const searchResults = fuse.search(trimmedQuery, { limit: 10 });
     
     // Sort exact title matches first
     searchResults.sort((a: FuseResult<SearchRecord>, b: FuseResult<SearchRecord>) => {
@@ -85,7 +58,7 @@ export function useSiteSearch(): UseSiteSearchReturn {
     });
 
     setResults(searchResults);
-  }, [initializeFuse]);
+  }, []);
 
   // Debounced query handler
   const debouncedSetQuery = useCallback((newQuery: string) => {
@@ -113,8 +86,8 @@ export function useSiteSearch(): UseSiteSearchReturn {
     query,
     setQuery: debouncedSetQuery,
     results,
-    isLoading,
-    isReady,
-    error,
+    isLoading: false,
+    isReady: true,
+    error: null,
   };
 }
