@@ -10,6 +10,22 @@ test.describe('Marketing Site E2E', () => {
     await expect(heading).toBeVisible();
   });
 
+  test('hero prompt chip and AI status line render on mobile', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 800 });
+    await page.goto('/');
+
+    const hero = page.locator('#home');
+    await expect(hero.getByText('+ Prompt')).toBeVisible();
+
+    // Typewriter text completes, then the status line becomes visible
+    await expect(
+      hero.getByText('How do I manage my wallet from market to market?'),
+    ).toBeVisible({ timeout: 15000 });
+    await expect(
+      hero.getByText('Workslate AI is generating a response'),
+    ).toBeVisible();
+  });
+
   test('navigation links work', async ({ page }) => {
     const links = [
       { label: 'Home', href: '#' },

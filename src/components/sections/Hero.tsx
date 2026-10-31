@@ -30,7 +30,7 @@ export const Hero: React.FC = () => {
                 text="How do I manage my wallet from market to market?"
                 mode="character"
                 speed={35}
-                className="text-text-900 text-xs lg:text-sm hidden sm:inline"
+                className="text-text-900 text-xs lg:text-sm"
                 onComplete={() => setPromptDone(true)}
               />
             </div>
@@ -41,7 +41,7 @@ export const Hero: React.FC = () => {
                 <span className="w-1.5 h-1.5 bg-primary-600 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></span>
                 <span className="w-1.5 h-1.5 bg-primary-600 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></span>
               </span>
-              <span className="hidden sm:inline">Workslate AI is generating a response{dots}</span>
+              <span>Workslate AI is generating a response{dots}</span>
             </p>
             
             <h1 id="page-heading" className="text-[40.8px] font-heading font-bold text-text-900 leading-[1.1] tracking-tight">
