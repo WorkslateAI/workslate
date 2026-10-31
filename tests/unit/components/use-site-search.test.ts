@@ -3,13 +3,14 @@ import { renderHook, act } from '@testing-library/react';
 import { useSiteSearch } from '../../../src/search/useSiteSearch';
 
 describe('useSiteSearch', () => {
-  it('initializes with empty state', () => {
+  it('initializes ready with empty state', () => {
     const { result } = renderHook(() => useSiteSearch());
 
     expect(result.current.query).toBe('');
     expect(result.current.results).toEqual([]);
     expect(result.current.isLoading).toBe(false);
-    expect(result.current.isReady).toBe(false);
+    // Fuse.js is bundled with the module, so the hook is ready immediately
+    expect(result.current.isReady).toBe(true);
     expect(result.current.error).toBe(null);
   });
 
