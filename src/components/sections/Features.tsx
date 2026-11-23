@@ -8,26 +8,34 @@ export const Features: React.FC = () => {
     {
       id: 'feature-01',
       number: '01',
-      title: 'Chain of wallet token movement',
-      subtitle: 'Follow every token from wallet to wallet, step by step.',
+      title: 'Multi-Party Ledger Reconciliation',
+      subtitle: 'Match business obligations, invoices, credits and settlements across counterparties.',
       image: '/assets/images/market-a-b-c-currency-tokens.png',
-      alt: 'Market A B C currency tokens diagram',
+      alt: 'Multi-party ledger reconciliation across market counterparties',
     },
     {
       id: 'feature-02',
       number: '02',
-      title: 'EVM nodes – your token home',
-      subtitle: 'Know where your token lives and which chains it runs on.',
-      image: '/assets/images/evm-nodes-workslate.png',
-      alt: 'EVM nodes Workslate diagram',
+      title: 'Corporate Wallet Orchestration',
+      subtitle: 'Connect verified business wallets and coordinate token movements.',
+      image: '/assets/images/local-wallet-international-tokens.png',
+      alt: 'Corporate wallets orchestrating local and international token movements',
     },
     {
       id: 'feature-03',
       number: '03',
-      title: 'Single source of truth',
-      subtitle: 'One real-time view of all movements across chains and markets.',
+      title: 'Programmable Settlement Rules',
+      subtitle: 'Enforce compliance, transfer limits and conditional payment authorization.',
+      image: '/assets/images/evm-nodes-workslate.png',
+      alt: 'EVM nodes enforcing programmable settlement rules',
+    },
+    {
+      id: 'feature-04',
+      number: '04',
+      title: 'End-to-End Transaction Traceability',
+      subtitle: 'Link business records, workflows, smart contracts and blockchain transactions.',
       image: '/assets/images/token-movement-dashboard.png',
-      alt: 'Token movement dashboard',
+      alt: 'End-to-end transaction traceability dashboard',
     },
   ];
 
@@ -63,6 +71,15 @@ export const Features: React.FC = () => {
   return (
     <section id="features" className="py-12 lg:py-20 bg-white">
       <div className="max-w-[1200px] mx-auto px-6 lg:px-10">
+        <div className="flex flex-wrap items-baseline gap-x-3 mb-8 lg:mb-12">
+          <h2 className="text-[30.6px] lg:text-[40.8px] font-heading font-bold text-text-900 whitespace-nowrap">
+            Features-
+          </h2>
+          <p className="text-primary-600 font-semibold text-[12px] lg:text-xs uppercase tracking-widest">
+            Intelligence meets execution
+          </p>
+        </div>
+
         <div className="grid lg:grid-cols-[200px_1fr] gap-6 lg:gap-8">
           <div className="hidden lg:block sticky top-24 h-fit" ref={sidebarRef}>
             <div className="bg-white border border-border rounded-xl p-4 shadow-[0_4px_24px_rgba(30,50,150,0.06)]">

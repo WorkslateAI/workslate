@@ -39,4 +39,5 @@ test-results/
 
 # Build output
 dist/
-
+.lighthouseci
+public/assets/images/files.zip

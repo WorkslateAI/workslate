@@ -76,6 +76,8 @@ test.describe('Asset Verification', () => {
     for (const img of images) {
       const src = await img.getAttribute('src');
       if (src && !src.startsWith('data:')) {
+        // Lazy-loaded images must be scrolled into view before they render
+        await img.scrollIntoViewIfNeeded();
         await expect(img).toBeVisible();
       }
     }

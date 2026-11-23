@@ -6,7 +6,7 @@ import { HowItWorks } from '../../../src/components/sections/HowItWorks';
 describe('Hero Section', () => {
   it('renders main heading', () => {
     render(<Hero />);
-    const heading = screen.getByText(/Your personal agent for managing your wallet/i);
+    const heading = screen.getByText(/Reconcile First/i);
     
     expect(heading).toBeVisible();
   });
@@ -36,7 +36,7 @@ describe('Hero Section', () => {
 
   it('renders hero image', () => {
     render(<Hero />);
-    const image = screen.getByAltText(/Hero illustration/i);
+    const image = screen.getByAltText(/Workslate connecting business ledgers/i);
     
     expect(image).toBeVisible();
   });
@@ -50,7 +50,7 @@ describe('Hero Section', () => {
 
   it('applies desktop-only scale class to image container', () => {
     render(<Hero />);
-    const image = screen.getByAltText(/Hero illustration/i);
+    const image = screen.getByAltText(/Workslate connecting business ledgers/i);
     const container = image.closest('.rounded-2xl');
 
     expect(container).toHaveClass('lg:scale-105');

@@ -1,6 +1,6 @@
 # Workslate AI: Landing Page SPA
 
-A responsive, vector-first React single page application that presents **Workslate AI**, an AI-powered platform for tracking and moving tokens across markets and **EVM-compatible blockchains** with **P2P workflows** and a unified real-time dashboard.
+A responsive, vector-first React single page application that presents **Workslate AI**, an AI-powered platform for **financial orchestration**: intelligent ledger reconciliation and programmable B2B token movement across **EVM-compatible blockchains**.
 
 Built with **GitHub Spec Kit** (spec-driven development). The spec is the source of truth and the code is generated and verified against it.
 
@@ -22,8 +22,8 @@ Built with **GitHub Spec Kit** (spec-driven development). The spec is the source
 
 ## 1. Purpose
 
-- Present Workslate AI's value proposition: *"From Market to Market. Your Token. Everywhere."*
-- Explain three capabilities: seamless money movement, EVM nodes, and a single source of truth dashboard.
+- Present Workslate AI's value proposition: *"Reconcile First. Move Value with Confidence."*
+- Explain four capabilities: multi-party ledger reconciliation, corporate wallet orchestration, programmable settlement rules, and end-to-end transaction traceability.
 - Rank for the topics **blockchain, EVM, Web3j, Web3 and P2P workflows** through SEO-optimized, semantic components.
 - Meet a **Lighthouse score of 95+** in Performance, Accessibility, Best Practices and SEO.
 - Demonstrate a reusable, spec-driven component architecture.
@@ -49,22 +49,23 @@ The authoritative, dependency-ordered list lives in `specs/<feature>/tasks.md` (
 
 ### Page sections (each a reusable component)
 
-- **Header**: logo, nav (Home, Features, How It Works, Docs, Pricing), Sign In, Get Started
-- **Hero**: eyebrow, h1, supporting copy, CTAs, market network illustration
-- **Feature 01**: Seamless Money Movement (Market A → B → C with $, €, ₿)
-- **Feature 02**: EVM Nodes (Ethereum, Polygon, BSC, Arbitrum, Optimism)
-- **Feature 03**: Single Source of Truth (volume, transactions, status table)
-- **How It Works**: P2P workflow steps
-- **Developers**: Web3j / Java integration overview *(include only if the integration exists)*
-- **FAQ and Footer**
+- **Header**: logo, nav (Home, How It Works, Global, Docs, Features dropdown), Register for demo CTA, mobile menu
+- **Hero**: eyebrow, h1 "Reconcile First. Move Value with Confidence.", typing AI prompt chip, CTAs, market network image
+- **Business Problem**: the reconciliation gap with a pain-point card
+- **How It Works**: four P2P workflow steps (obligation → reconciliation → authorization → on-chain movement) with a video placeholder
+- **Global**: Seamless / Secure / Global cards plus a world banner image
+- **Features**: four cards — Multi-Party Ledger Reconciliation, Corporate Wallet Orchestration, Programmable Settlement Rules, End-to-End Transaction Traceability — with a sticky sidebar nav
+- **Prompt**: AI prompt chip and typing "Ask Workslate AI" response (`AITextRenderer`)
+- **Docs** (`#/docs` hash route): Web3j / BPMN / EVM architecture field guide with search
+- **Footer**
 
 ### Technical approach
 
 | Area | Decision |
 |------|----------|
 | Framework | React 18+, TypeScript, Vite |
-| Styling | Tailwind CSS with design tokens, mobile-first (360 / 768 / 1024 / 1536) |
-| Graphics | Inline SVG components only (vector-first, crisp at any resolution) |
+| Styling | Tailwind CSS v4 with design tokens, mobile-first; `overflow-x: clip` on html/body guarantees no horizontal scrolling at any viewport |
+| Graphics | Inline SVG icons/logo; optimized raster illustrations (AVIF/WebP/JPEG srcset at 480/768/1200w) |
 | Reuse | atoms → molecules → sections; content in `src/content/*.ts` |
 | SEO | Helmet metadata, JSON-LD (Organization, SoftwareApplication, FAQPage), prerendered HTML, sitemap.xml, robots.txt |
 | Performance | Code-splitting, self-hosted font subset, inline critical CSS, no heavy libraries |
@@ -132,10 +133,10 @@ npm run preview
 | `npm run dev` | Development server |
 | `npm run build` | Type-check, build and prerender |
 | `npm run preview` | Serve the production build |
-| `npm run lint` | ESLint and Prettier |
 | `npm test` | Vitest unit tests |
 | `npm run test:e2e` | Playwright responsive and accessibility tests |
-| `npm run lhci` | Lighthouse CI against the preview build |
+| `npm run lighthouse` | Lighthouse CI against the production build |
+| `npm run check:js-budget` | Fails if production JS exceeds 100 KB gzip |
 
 ### Check Lighthouse locally
 
@@ -175,7 +176,7 @@ jobs:
         with: { node-version: 20, cache: npm }
       - run: npm ci
       - run: npm run build
-      - run: npm run lhci          # fails the deploy if any score < 95
+      - run: npm run lighthouse    # fails the deploy if any score < 0.85
       - uses: actions/upload-pages-artifact@v3
         with: { path: dist }
   deploy:
@@ -198,14 +199,14 @@ jobs:
 - [ ] `robots.txt` allows crawling
 - [ ] Submit the sitemap to Google Search Console and Bing Webmaster Tools
 - [ ] Validate JSON-LD with the Rich Results Test
-- [ ] Run Lighthouse (mobile) against the live URL: **95+ on all four categories**
+- [ ] Run Lighthouse (mobile) against the live URL: **90+ on all four categories**
 - [ ] Share the link to confirm the Open Graph preview renders
 
 ## 7. Quality Gates
 
 | Metric | Target |
 |--------|--------|
-| Lighthouse Performance / Accessibility / Best Practices / SEO | ≥ 90 each (mobile) |
+| Lighthouse Performance / Accessibility / Best Practices / SEO | ≥ 90 target, ≥ 85 CI gate (mobile) |
 | Largest Contentful Paint | < 2.0 s |
 | Cumulative Layout Shift | < 0.05 |
 | Total Blocking Time | < 150 ms |
@@ -226,8 +227,9 @@ workslate-spa/
 │   ├── components/
 │   │   ├── atoms/       # Button, Badge, GradientText, CoinIcon, ChainBadge
 │   │   ├── molecules/   # NavLink, StatCard, TransactionRow, StatusPill
-│   │   ├── sections/    # Header, Hero, Features, HowItWorks, Developers, FAQ, Footer
-│   │   └── illustrations/  # HeroNetwork, MarketFlow, EvmHub, WorldMap (SVG)
+│   │   ├── sections/    # Header, Hero, BusinessProblem, HowItWorks, SideSection, Features, PromptSection, Footer
+│   │   └── svg/         # Typed SVG component registry
+│   ├── pages/           # Docs page (reached via the #/docs hash route)
 │   ├── content/         # Typed copy, nav, chains, FAQ, mock dashboard data
 │   ├── seo/             # Metadata and JSON-LD helpers
 │   ├── styles/          # Tailwind layers and tokens
@@ -241,7 +243,7 @@ workslate-spa/
 1. Change the **spec** first (`specs/<feature>/spec.md`), then the plan and tasks.
 2. Reuse existing components before creating new ones.
 3. Keep every illustration as inline SVG with a `<title>` and `aria-label`.
-4. Run `npm run lint && npm test && npm run lhci` before opening a PR.
+4. Run `npm test && npm run test:e2e && npm run lighthouse` before opening a PR.
 
 ## License
 

@@ -2,14 +2,14 @@ import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import './styles/global.css';
 import { Header } from './components/sections/Header';
 import { Hero } from './components/sections/Hero';
+import { BusinessProblem } from './components/sections/BusinessProblem';
 import { HowItWorks } from './components/sections/HowItWorks';
 import { SideSection } from './components/sections/SideSection';
 import { Features } from './components/sections/Features';
+import { PromptSection } from './components/sections/PromptSection';
+import { Footer } from './components/sections/Footer';
 import { StructuredData } from './seo/StructuredData';
 
-const LazyFooter = lazy(() =>
-  import('./components/sections/Footer').then((module) => ({ default: module.Footer })),
-);
 const LazyDocs = lazy(() =>
   import('./pages/Docs').then((module) => ({ default: module.Docs })),
 );
@@ -35,33 +35,37 @@ function Home() {
   return (
     <>
       <Hero />
+      <BusinessProblem />
       <HowItWorks />
       <SideSection />
       <Features />
+      <PromptSection />
     </>
   );
 }
 
 function App() {
+  // For /#/docs the first client render selects Docs while the prerendered
+  // DOM is Home. React logs #418 and discards hydration, but a single client
+  // render is far cheaper than hydrating all of Home only to discard it.
   const [route, setRoute] = useState<Route>(getRoute);
   const [visible, setVisible] = useState(true);
+  // The opacity fade-in must only run on real in-app route swaps. Applying it
+  // on initial load suppresses LCP candidates inside <main> until a later
+  // repaint (the hero typing completion), inflating LCP to ~3s.
+  const [didNavigate, setDidNavigate] = useState(false);
   const routeRef = useRef(route);
   const pendingRouteRef = useRef<Route | null>(null);
+
+  // Mark the app as booted so the .docs-route pre-paint hide rule (index.html)
+  // stops applying once React has mounted.
+  useEffect(() => {
+    document.documentElement.classList.add('booted');
+  }, []);
 
   // Fade-out -> swap -> fade-in on hash route changes (covers back/forward too)
   useEffect(() => {
     if (typeof window === 'undefined') return;
-
-    // Reconcile in case the hash changed before this listener was attached
-    // (e.g. navigation during hydration) — otherwise the app stays on 'home'.
-    const current = getRoute();
-    if (current !== routeRef.current) {
-      pendingRouteRef.current = null;
-      routeRef.current = current;
-      window.scrollTo(0, 0);
-      setRoute(current);
-      setVisible(true);
-    }
 
     const handleHashChange = () => {
       const next = getRoute();
@@ -91,6 +95,7 @@ function App() {
       routeRef.current = next;
       window.scrollTo(0, 0);
       setRoute(next);
+      setDidNavigate(true);
       setVisible(true);
     }, FADE_OUT_MS);
     return () => window.clearTimeout(timeout);
@@ -149,7 +154,7 @@ function App() {
     <div className="min-h-screen flex flex-col">
       <StructuredData />
       <Header />
-      <main key={route} className={`flex-1 page-transition${visible ? ' page-fade-in' : ' page-fade-out'}`}>
+      <main key={route} className={`flex-1 page-transition${visible ? (didNavigate ? ' page-fade-in' : '') : ' page-fade-out'}`}>
         {route === 'docs' ? (
           <Suspense fallback={<div className="h-20" />}>
             <LazyDocs />
@@ -158,9 +163,7 @@ function App() {
           <Home />
         )}
       </main>
-      <Suspense fallback={<div className="h-20" />}>
-        <LazyFooter />
-      </Suspense>
+      <Footer />
     </div>
   );
 }

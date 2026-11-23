@@ -6,7 +6,7 @@ test.describe('Marketing Site E2E', () => {
   });
 
   test('hero section renders with heading', async ({ page }) => {
-    const heading = page.getByRole('heading', { name: /Your personal agent/i });
+    const heading = page.getByRole('heading', { name: /Reconcile First/i });
     await expect(heading).toBeVisible();
   });
 
@@ -19,7 +19,7 @@ test.describe('Marketing Site E2E', () => {
 
     // Typewriter text completes, then the status line becomes visible
     await expect(
-      hero.getByText('How do I manage my wallet from market to market?'),
+      hero.getByText('How do I reconcile my business ledger and move tokens with confidence?'),
     ).toBeVisible({ timeout: 15000 });
     await expect(
       hero.getByText('Workslate AI is generating a response'),
@@ -67,17 +67,19 @@ test.describe('Marketing Site E2E', () => {
   test('feature sections are visible', async ({ page }) => {
     await page.goto('/#features');
     await expect(page.locator('#features')).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'Chain of wallet token movement' })).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'EVM nodes – your token home' })).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'Single source of truth' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Multi-Party Ledger Reconciliation' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Corporate Wallet Orchestration' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Programmable Settlement Rules' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'End-to-End Transaction Traceability' })).toBeVisible();
   });
 
   test('How It Works section has steps', async ({ page }) => {
     await page.goto('/#how-it-works');
     await expect(page.locator('#how-it-works')).toBeVisible();
-    await expect(page.getByText('Connect your wallet to the agent.')).toBeVisible();
-    await expect(page.getByText('Choose the markets you operate in.')).toBeVisible();
-    await expect(page.getByText('The agent moves and tracks every token.')).toBeVisible();
+    await expect(page.getByText('Connect Your Business Records')).toBeVisible();
+    await expect(page.getByText('Reconcile Before You Move')).toBeVisible();
+    await expect(page.getByText('Validate. Approve. Authorize.')).toBeVisible();
+    await expect(page.getByText('Execute. Verify. Settle.')).toBeVisible();
   });
 
   test('How It Works video plays on click', async ({ page }) => {

@@ -21,14 +21,12 @@ export const SideSection: React.FC = () => {
       <div className="max-w-[1200px] mx-auto px-6 lg:px-10">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start mb-12 lg:mb-16">
           <div className="space-y-4 lg:space-y-6">
-            <p className="text-primary-600 font-semibold text-[12px] lg:text-xs uppercase tracking-widest">
+            <h2 className="text-[30.6px] lg:text-[40.8px] font-heading font-bold text-text-900">
               Global reach
-            </p>
-            
-            <h2 className="text-[33.6px] lg:text-[40.8px] font-heading font-bold text-text-900">
-              Seamless. Secure. Global.
             </h2>
-            
+            <p className="text-primary-600 font-semibold text-[12px] lg:text-xs uppercase tracking-widest">
+              Seamless. Secure. Global.
+            </p>
             <p className="text-text-500 text-sm lg:text-base leading-relaxed">
               Move value across regions without friction, with security built into every transfer.
             </p>

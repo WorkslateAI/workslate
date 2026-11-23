@@ -5,17 +5,18 @@ import { HowItWorks } from '../../../src/components/sections/HowItWorks';
 describe('HowItWorks Section', () => {
   it('renders section heading', () => {
     render(<HowItWorks />);
-    const heading = screen.getByText('Three steps from wallet to market');
+    const heading = screen.getByText('Four steps from obligation to settlement');
     
     expect(heading).toBeVisible();
   });
 
-  it('renders all three steps', () => {
+  it('renders all four steps', () => {
     render(<HowItWorks />);
     
-    expect(screen.getByText('Connect your wallet to the agent.')).toBeVisible();
-    expect(screen.getByText('Choose the markets you operate in.')).toBeVisible();
-    expect(screen.getByText('The agent moves and tracks every token.')).toBeVisible();
+    expect(screen.getByText('Connect Your Business Records')).toBeVisible();
+    expect(screen.getByText('Reconcile Before You Move')).toBeVisible();
+    expect(screen.getByText('Validate. Approve. Authorize.')).toBeVisible();
+    expect(screen.getByText('Execute. Verify. Settle.')).toBeVisible();
   });
 
   it('renders video button', () => {
@@ -25,11 +26,13 @@ describe('HowItWorks Section', () => {
     expect(videoButton).toBeVisible();
   });
 
-  it('renders CTA button', () => {
+  it('renders all four step labels', () => {
     render(<HowItWorks />);
-    const ctaButton = screen.getByText('Register for demo');
     
-    expect(ctaButton).toBeVisible();
+    expect(screen.getByText('Business Obligation')).toBeVisible();
+    expect(screen.getByText('Intelligent Ledger Reconciliation')).toBeVisible();
+    expect(screen.getByText('Settlement Authorization')).toBeVisible();
+    expect(screen.getByText('On-Chain Token Movement')).toBeVisible();
   });
 
   it('plays video when placeholder button is clicked', () => {

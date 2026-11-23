@@ -36,6 +36,7 @@ export const Logo: React.FC<LogoProps> = ({ variant, size }) => (
         style={{
           width: 'auto',
           height: variant === 'header' ? `clamp(28px, 8vw, ${size}px)` : `${size}px`,
+          aspectRatio: `${LOGO_WIDTH} / ${LOGO_HEIGHT}`,
           maxWidth: '100%',
         }}
       />

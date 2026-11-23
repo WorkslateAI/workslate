@@ -11,23 +11,30 @@ interface UseSiteSearchReturn {
   error: string | null;
 }
 
-// Fuse instance is created eagerly with the module — it ships inside the
-// lazy-loaded Docs chunk, so it never affects the initial page bundle and
-// can never fail to load at runtime.
-const fuse = new Fuse<SearchRecord>(docsIndex, {
-  keys: [
-    { name: 'title', weight: 0.5 },
-    { name: 'breadcrumb', weight: 0.2 },
-    { name: 'content', weight: 0.25 },
-    { name: 'code', weight: 0.05 },
-  ],
-  threshold: 0.3,
-  ignoreLocation: true,
-  minMatchCharLength: 2,
-  includeMatches: true,
-  includeScore: true,
-  useExtendedSearch: false,
-});
+// Fuse instance is built lazily on first search — it ships inside the
+// lazy-loaded Docs chunk, so it never affects the initial page bundle, and
+// deferring index construction keeps it out of chunk evaluation (TBT).
+let fuse: Fuse<SearchRecord> | null = null;
+
+function getFuse(): Fuse<SearchRecord> {
+  if (!fuse) {
+    fuse = new Fuse<SearchRecord>(docsIndex, {
+      keys: [
+        { name: 'title', weight: 0.5 },
+        { name: 'breadcrumb', weight: 0.2 },
+        { name: 'content', weight: 0.25 },
+        { name: 'code', weight: 0.05 },
+      ],
+      threshold: 0.3,
+      ignoreLocation: true,
+      minMatchCharLength: 2,
+      includeMatches: true,
+      includeScore: true,
+      useExtendedSearch: false,
+    });
+  }
+  return fuse;
+}
 
 export function useSiteSearch(): UseSiteSearchReturn {
   const [query, setQuery] = useState('');
@@ -43,7 +50,7 @@ export function useSiteSearch(): UseSiteSearchReturn {
       return;
     }
 
-    const searchResults = fuse.search(trimmedQuery, { limit: 10 });
+    const searchResults = getFuse().search(trimmedQuery, { limit: 10 });
     
     // Sort exact title matches first
     searchResults.sort((a: FuseResult<SearchRecord>, b: FuseResult<SearchRecord>) => {

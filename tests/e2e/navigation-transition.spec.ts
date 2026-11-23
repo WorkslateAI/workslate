@@ -58,7 +58,7 @@ test.describe('Navigation transitions', () => {
 
     await page.goBack();
     await expect(
-      page.getByRole('heading', { name: /Your personal agent/i }),
+      page.getByRole('heading', { name: /Reconcile First/i }),
     ).toBeVisible();
 
     await page.goForward();
@@ -119,7 +119,7 @@ test.describe('Navigation transitions', () => {
       page.getByRole('link', { name: /Back to Home/ }).click(),
     ]);
     await expect(
-      page.getByRole('heading', { name: /Your personal agent/i }),
+      page.getByRole('heading', { name: /Reconcile First/i }),
     ).toBeVisible();
   });
 

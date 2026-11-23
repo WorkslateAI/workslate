@@ -8,9 +8,10 @@ export const Header: React.FC = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const features = [
-    { id: '01', title: 'Chain of wallet token movement', href: '#feature-01' },
-    { id: '02', title: 'EVM nodes – your token home', href: '#feature-02' },
-    { id: '03', title: 'Single source of truth', href: '#feature-03' },
+    { id: '01', title: 'Ledger Reconciliation', href: '#feature-01' },
+    { id: '02', title: 'Wallet Orchestration', href: '#feature-02' },
+    { id: '03', title: 'Settlement Rules', href: '#feature-03' },
+    { id: '04', title: 'End-to-End Traceability', href: '#feature-04' },
   ];
 
   const handleMobileFeatureClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {

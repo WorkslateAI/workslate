@@ -12,36 +12,64 @@ export const HowItWorks: React.FC = () => {
   }, []);
 
   const steps = [
-    { id: '1', text: 'Connect your wallet to the agent.' },
-    { id: '2', text: 'Choose the markets you operate in.' },
-    { id: '3', text: 'The agent moves and tracks every token.' },
+    {
+      id: '01',
+      label: 'Business Obligation',
+      title: 'Connect Your Business Records',
+      description: 'Connect invoices, payment terms and corporate wallets.',
+    },
+    {
+      id: '02',
+      label: 'Intelligent Ledger Reconciliation',
+      title: 'Reconcile Before You Move',
+      description: 'AI agents validate balances and resolve discrepancies.',
+    },
+    {
+      id: '03',
+      label: 'Settlement Authorization',
+      title: 'Validate. Approve. Authorize.',
+      description: 'Approve reconciled amounts, wallets and compliance rules',
+    },
+    {
+      id: '04',
+      label: 'On-Chain Token Movement',
+      title: 'Execute. Verify. Settle.',
+      description: 'Execute smart contract transfers and verify settlement.',
+    },
   ];
 
   return (
     <section id="how-it-works" className="py-12 lg:py-20 bg-white">
       <div className="max-w-[1200px] mx-auto px-6 lg:px-10">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          <div className="space-y-6 lg:space-y-8 order-2 lg:order-1">
-            <p className="text-primary-600 font-semibold text-[12px] lg:text-xs uppercase tracking-widest">
-              How it works
-            </p>
-            
-            <h2 className="text-[33.6px] lg:text-[40.8px] font-heading font-bold text-text-900">
-              Three steps from wallet to market
+          <div className="lg:col-span-2 flex flex-wrap items-baseline gap-x-3">
+            <h2 className="text-[30.6px] lg:text-[40.8px] font-heading font-bold text-text-900 whitespace-nowrap">
+              How it works-
             </h2>
-            
+            <p className="text-primary-600 font-semibold text-[12px] lg:text-xs uppercase tracking-widest">
+              Four steps from obligation to settlement
+            </p>
+          </div>
+
+          <div className="space-y-6 lg:space-y-8 order-2 lg:order-1">
             <ol className="space-y-4 lg:space-y-6">
               {steps.map((step) => (
                 <li key={step.id} className="flex items-start space-x-3 lg:space-x-4">
                   <span className="text-primary-600 font-bold text-base lg:text-lg flex-shrink-0">{step.id}</span>
-                  <p className="text-text-900 text-sm lg:text-base">{step.text}</p>
+                  <div className="space-y-1">
+                    <p className="text-primary-600 font-semibold text-[12px] lg:text-xs uppercase tracking-widest">
+                      {step.label}
+                    </p>
+                    <p className="text-text-900 font-semibold text-sm lg:text-base leading-relaxed">
+                      {step.title}
+                    </p>
+                    <p className="text-text-500 text-sm lg:text-base leading-relaxed">
+                      {step.description}
+                    </p>
+                  </div>
                 </li>
               ))}
             </ol>
-            
-            <Button variant="primary" size="md">
-              Register for demo
-            </Button>
           </div>
           
           <div className="relative order-1 lg:order-2">

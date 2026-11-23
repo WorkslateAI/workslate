@@ -39,15 +39,15 @@ describe('Header', () => {
     const featuresButton = screen.getByText('Features');
     
     // Initially closed
-    expect(screen.queryByText('Chain of wallet token movement')).not.toBeInTheDocument();
+    expect(screen.queryByText('Ledger Reconciliation')).not.toBeInTheDocument();
     
     // Click to open
     fireEvent.click(featuresButton);
-    expect(screen.getByText('Chain of wallet token movement')).toBeVisible();
+    expect(screen.getByText('Ledger Reconciliation')).toBeVisible();
     
     // Click to close
     fireEvent.click(featuresButton);
-    expect(screen.queryByText('Chain of wallet token movement')).not.toBeInTheDocument();
+    expect(screen.queryByText('Ledger Reconciliation')).not.toBeInTheDocument();
   });
 
   it('closes dropdown when clicking outside', () => {
@@ -56,11 +56,11 @@ describe('Header', () => {
     
     // Open dropdown
     fireEvent.click(featuresButton);
-    expect(screen.getByText('Chain of wallet token movement')).toBeVisible();
+    expect(screen.getByText('Ledger Reconciliation')).toBeVisible();
     
     // Click outside
     fireEvent.mouseDown(document.body);
-    expect(screen.queryByText('Chain of wallet token movement')).not.toBeInTheDocument();
+    expect(screen.queryByText('Ledger Reconciliation')).not.toBeInTheDocument();
   });
 
   it('closes dropdown on Escape key', () => {
@@ -69,11 +69,11 @@ describe('Header', () => {
     
     // Open dropdown
     fireEvent.click(featuresButton);
-    expect(screen.getByText('Chain of wallet token movement')).toBeVisible();
+    expect(screen.getByText('Ledger Reconciliation')).toBeVisible();
     
     // Press Escape
     fireEvent.keyDown(document, { key: 'Escape' });
-    expect(screen.queryByText('Chain of wallet token movement')).not.toBeInTheDocument();
+    expect(screen.queryByText('Ledger Reconciliation')).not.toBeInTheDocument();
   });
 
   it('renders all feature dropdown items', () => {
@@ -82,8 +82,9 @@ describe('Header', () => {
     
     fireEvent.click(featuresButton);
     
-    expect(screen.getByText('Chain of wallet token movement')).toBeVisible();
-    expect(screen.getByText('EVM nodes – your token home')).toBeVisible();
-    expect(screen.getByText('Single source of truth')).toBeVisible();
+    expect(screen.getByText('Ledger Reconciliation')).toBeVisible();
+    expect(screen.getByText('Wallet Orchestration')).toBeVisible();
+    expect(screen.getByText('Settlement Rules')).toBeVisible();
+    expect(screen.getByText('End-to-End Traceability')).toBeVisible();
   });
 });

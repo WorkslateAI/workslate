@@ -3,17 +3,20 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { Features } from '../../../src/components/sections/Features';
 
 describe('Features Section', () => {
-  it('renders all three feature cards', () => {
+  it('renders all four feature cards', () => {
     render(<Features />);
     
-    const feature1 = screen.getAllByText('Chain of wallet token movement');
+    const feature1 = screen.getAllByText('Multi-Party Ledger Reconciliation');
     expect(feature1.length).toBeGreaterThan(0);
     
-    const feature2 = screen.getAllByText('EVM nodes – your token home');
+    const feature2 = screen.getAllByText('Corporate Wallet Orchestration');
     expect(feature2.length).toBeGreaterThan(0);
     
-    const feature3 = screen.getAllByText('Single source of truth');
+    const feature3 = screen.getAllByText('Programmable Settlement Rules');
     expect(feature3.length).toBeGreaterThan(0);
+
+    const feature4 = screen.getAllByText('End-to-End Transaction Traceability');
+    expect(feature4.length).toBeGreaterThan(0);
   });
 
   it('renders feature numbers in cards', () => {
@@ -27,6 +30,9 @@ describe('Features Section', () => {
     
     const numbers03 = screen.getAllByText('03');
     expect(numbers03.length).toBeGreaterThan(0);
+
+    const numbers04 = screen.getAllByText('04');
+    expect(numbers04.length).toBeGreaterThan(0);
   });
 
   it('renders feature images', () => {
@@ -39,7 +45,7 @@ describe('Features Section', () => {
   it('renders sidebar navigation buttons', () => {
     render(<Features />);
     
-    const sidebarButtons = screen.getAllByText(/Chain of wallet token movement|EVM nodes – your token home|Single source of truth/);
+    const sidebarButtons = screen.getAllByText(/Multi-Party Ledger Reconciliation|Corporate Wallet Orchestration|Programmable Settlement Rules|End-to-End Transaction Traceability/);
     expect(sidebarButtons.length).toBeGreaterThan(0);
   });
 

@@ -34,7 +34,7 @@ describe('App navigation transitions', () => {
     expect(document.querySelector('header')).toBeInTheDocument();
     await waitFor(() =>
       expect(
-        screen.getByRole('heading', { name: /Your personal agent/i }),
+        screen.getByRole('heading', { name: /Reconcile First/i }),
       ).toBeInTheDocument(),
     );
   });
