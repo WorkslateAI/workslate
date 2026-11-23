@@ -258,6 +258,13 @@ reduced-motion compliance, applied only to designated AI text surfaces.
 cursor, the status line appears on completion, and the component is reusable for
 any future AI response surface.
 
+## Phase 9: Deployment
+
+**Purpose**: Deploy to Vercel from CI only after the production build and test
+gates pass.
+
+- [X] T076 Add a `Trigger Vercel deployment` step that POSTs to `secrets.VERCEL_DEPLOY_HOOK_URL` on pushes to `main` after unit tests, the production build, the JS budget check, and E2E tests pass in `.github/workflows/ci.yml`; document the Vercel deploy-hook creation and secret setup in `README.md`.
+
 ## Notes
 
 - Task IDs are sequential and each task uses a checkbox, ID, explicit file path,

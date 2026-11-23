@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from '../atoms/Button';
 import { PlayIcon } from '../atoms/PlayIcon';
 
 export const HowItWorks: React.FC = () => {

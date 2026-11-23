@@ -193,6 +193,15 @@ jobs:
 - Build command: `npm run build`. Output directory: `dist`.
 - Add your custom domain and enable HTTPS.
 
+**Deploy hook (CI-triggered deploys):** in Vercel, go to **Project Settings →
+Git → Deploy Hooks** and create a hook for the `main` branch. Save its URL as
+the `VERCEL_DEPLOY_HOOK_URL` secret in **GitHub → Settings → Secrets and
+variables → Actions**. The `CI` workflow POSTs to it after unit tests, the
+production build, the JS budget check, and Playwright E2E tests pass on pushes
+to `main`, so deployments only ship when CI is green. If the secret is not set,
+the step skips without failing CI. If you keep Vercel's GitHub-connected
+auto-deploys enabled, the hook is unnecessary.
+
 ### Post-deploy checklist
 
 - [ ] Canonical URL, Open Graph URL and `sitemap.xml` use the live domain
