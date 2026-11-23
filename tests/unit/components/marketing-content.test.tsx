@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
-import { heroCopy, featureCopy, p2pWorkflowCopy } from '../../../src/content/copy';
+import { heroCopy } from '../../../src/content/copy';
 import { headerNavigation } from '../../../src/content/navigation';
 import { markets, chains } from '../../../src/content/chains';
 import { features } from '../../../src/content/features';

@@ -1,5 +1,5 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { describe, it, expect, vi, beforeEach, type Mock } from 'vitest';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { SearchDialog } from '../../../src/components/atoms/SearchDialog';
 
 // Mock the useSiteSearch hook
@@ -17,7 +17,7 @@ describe('SearchDialog', () => {
   });
 
   it('does not render when isOpen is false', () => {
-    (useSiteSearch as vi.Mock).mockReturnValue({
+    (useSiteSearch as Mock).mockReturnValue({
       query: '',
       setQuery: vi.fn(),
       results: [],
@@ -31,7 +31,7 @@ describe('SearchDialog', () => {
   });
 
   it('renders dialog when isOpen is true', () => {
-    (useSiteSearch as vi.Mock).mockReturnValue({
+    (useSiteSearch as Mock).mockReturnValue({
       query: '',
       setQuery: vi.fn(),
       results: [],
@@ -47,7 +47,7 @@ describe('SearchDialog', () => {
   });
 
   it('calls onClose when backdrop is clicked', () => {
-    (useSiteSearch as vi.Mock).mockReturnValue({
+    (useSiteSearch as Mock).mockReturnValue({
       query: '',
       setQuery: vi.fn(),
       results: [],
@@ -70,7 +70,7 @@ describe('SearchDialog', () => {
   });
 
   it('calls onClose when Escape key is pressed', () => {
-    (useSiteSearch as vi.Mock).mockReturnValue({
+    (useSiteSearch as Mock).mockReturnValue({
       query: '',
       setQuery: vi.fn(),
       results: [],
@@ -87,7 +87,7 @@ describe('SearchDialog', () => {
   });
 
   it('shows loading state', () => {
-    (useSiteSearch as vi.Mock).mockReturnValue({
+    (useSiteSearch as Mock).mockReturnValue({
       query: 'test',
       setQuery: vi.fn(),
       results: [],
@@ -102,7 +102,7 @@ describe('SearchDialog', () => {
   });
 
   it('shows error state', () => {
-    (useSiteSearch as vi.Mock).mockReturnValue({
+    (useSiteSearch as Mock).mockReturnValue({
       query: 'test',
       setQuery: vi.fn(),
       results: [],
@@ -117,7 +117,7 @@ describe('SearchDialog', () => {
   });
 
   it('shows no results message', () => {
-    (useSiteSearch as vi.Mock).mockReturnValue({
+    (useSiteSearch as Mock).mockReturnValue({
       query: 'xyz',
       setQuery: vi.fn(),
       results: [],
@@ -132,7 +132,7 @@ describe('SearchDialog', () => {
   });
 
   it('shows type hint for short queries', () => {
-    (useSiteSearch as vi.Mock).mockReturnValue({
+    (useSiteSearch as Mock).mockReturnValue({
       query: 'a',
       setQuery: vi.fn(),
       results: [],
@@ -162,7 +162,7 @@ describe('SearchDialog', () => {
       },
     ];
 
-    (useSiteSearch as vi.Mock).mockReturnValue({
+    (useSiteSearch as Mock).mockReturnValue({
       query: 'test',
       setQuery: vi.fn(),
       results: mockResults,
@@ -180,7 +180,7 @@ describe('SearchDialog', () => {
 
   it('updates query when input changes', () => {
     const setQuery = vi.fn();
-    (useSiteSearch as vi.Mock).mockReturnValue({
+    (useSiteSearch as Mock).mockReturnValue({
       query: '',
       setQuery,
       results: [],
@@ -199,7 +199,7 @@ describe('SearchDialog', () => {
 
   it('clears query when clear button is clicked', () => {
     const setQuery = vi.fn();
-    (useSiteSearch as vi.Mock).mockReturnValue({
+    (useSiteSearch as Mock).mockReturnValue({
       query: 'test',
       setQuery,
       results: [],

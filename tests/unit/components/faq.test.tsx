@@ -21,7 +21,7 @@ describe('FAQ Component', () => {
     expect(visibleAnswers).toHaveLength(faqItems.length);
     
     // Ensure each question has a corresponding answer
-    visibleQuestions.forEach((question, index) => {
+    visibleQuestions.forEach((_question, index) => {
       expect(visibleAnswers[index]).toBeDefined();
     });
   });

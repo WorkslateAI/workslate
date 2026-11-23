@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, vi, beforeAll, beforeEach, afterEach } from 'vitest';
 import { render, screen, waitFor, act, fireEvent } from '@testing-library/react';
 import { HelmetProvider } from 'react-helmet-async';
 import App from '../../src/App';
@@ -18,6 +18,12 @@ function goToHash(hash: string) {
 }
 
 describe('App navigation transitions', () => {
+  beforeAll(async () => {
+    // Warm Vite's module cache for the lazy Docs route so the first hash
+    // swap isn't gated on a cold transform of Docs.tsx (and its deps).
+    await import('../../src/pages/Docs');
+  });
+
   beforeEach(() => {
     window.location.hash = '';
     document.body.classList.remove('page-leaving');
