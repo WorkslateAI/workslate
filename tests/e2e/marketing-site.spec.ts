@@ -17,9 +17,13 @@ test.describe('Marketing Site E2E', () => {
     const hero = page.locator('#home');
     await expect(hero.getByText('+ Prompt')).toBeVisible();
 
-    // Typewriter text completes, then the status line becomes visible
+    // Typewriter text completes, then the status line becomes visible.
+    // The prompt also exists in an invisible aria-hidden sizing span, so
+    // scope to the visible element to avoid a strict-mode violation.
     await expect(
-      hero.getByText('How do I reconcile my business ledger and move tokens with confidence?'),
+      hero
+        .getByText('How do I reconcile my business ledger and move tokens with confidence?')
+        .filter({ visible: true }),
     ).toBeVisible({ timeout: 15000 });
     await expect(
       hero.getByText('Workslate AI is generating a response'),
@@ -48,19 +52,21 @@ test.describe('Marketing Site E2E', () => {
 
   test('no horizontal overflow at 360px', async ({ page }) => {
     await page.setViewportSize({ width: 360, height: 800 });
-    const body = page.locator('body');
-    const bodyWidth = await body.evaluate(el => el.scrollWidth);
-    const viewportWidth = await body.evaluate(el => el.clientWidth);
-    
+    const { bodyWidth, viewportWidth } = await page.locator('body').evaluate(el => ({
+      bodyWidth: el.scrollWidth,
+      viewportWidth: el.clientWidth,
+    }));
+
     expect(bodyWidth).toBe(viewportWidth);
   });
 
   test('no horizontal overflow at 1536px', async ({ page }) => {
     await page.setViewportSize({ width: 1536, height: 800 });
-    const body = page.locator('body');
-    const bodyWidth = await body.evaluate(el => el.scrollWidth);
-    const viewportWidth = await body.evaluate(el => el.clientWidth);
-    
+    const { bodyWidth, viewportWidth } = await page.locator('body').evaluate(el => ({
+      bodyWidth: el.scrollWidth,
+      viewportWidth: el.clientWidth,
+    }));
+
     expect(bodyWidth).toBe(viewportWidth);
   });
 

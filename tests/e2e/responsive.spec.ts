@@ -11,20 +11,26 @@ const viewports = [
 ];
 
 const routes = [
-  { path: '/', name: 'home' },
-  { path: '/#/docs', name: 'docs' },
+  { path: '/', name: 'home', heading: /Reconcile First/i },
+  { path: '/#/docs', name: 'docs', heading: /Orchestrating value across/i },
 ];
 
 viewports.forEach(({ width, height, name }) => {
   test.describe(`Responsive tests at ${name} (${width}px)`, () => {
     test.use({ viewport: { width, height } });
 
-    routes.forEach(({ path, name: routeName }) => {
+    routes.forEach(({ path, name: routeName, heading }) => {
       test(`no horizontal overflow on ${routeName}`, async ({ page }) => {
         await page.goto(path);
-        const body = page.locator('body');
-        const bodyWidth = await body.evaluate((el) => el.scrollWidth);
-        const viewportWidth = await body.evaluate((el) => el.clientWidth);
+        // Wait until the target route is rendered so measurements are not
+        // taken mid-mount or during a route swap.
+        await expect(page.getByRole('heading', { name: heading }).first()).toBeVisible();
+        // Read both widths in one evaluate: a vertical scrollbar appearing
+        // between two separate reads otherwise produces a false mismatch.
+        const { bodyWidth, viewportWidth } = await page.locator('body').evaluate((el) => ({
+          bodyWidth: el.scrollWidth,
+          viewportWidth: el.clientWidth,
+        }));
 
         expect(bodyWidth).toBe(viewportWidth);
 

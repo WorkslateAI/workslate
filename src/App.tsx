@@ -2,14 +2,27 @@ import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import './styles/global.css';
 import { Header } from './components/sections/Header';
 import { Hero } from './components/sections/Hero';
-import { BusinessProblem } from './components/sections/BusinessProblem';
-import { HowItWorks } from './components/sections/HowItWorks';
-import { SideSection } from './components/sections/SideSection';
-import { Features } from './components/sections/Features';
-import { PromptSection } from './components/sections/PromptSection';
 import { Footer } from './components/sections/Footer';
 import { StructuredData } from './seo/StructuredData';
 
+// Below-fold sections are lazy: the streaming SSG render still emits their
+// full HTML (SEO/paint unaffected), but they leave the entry bundle and React
+// hydrates each Suspense boundary on demand — smaller eval, smaller TBT.
+const LazyBusinessProblem = lazy(() =>
+  import('./components/sections/BusinessProblem').then((module) => ({ default: module.BusinessProblem })),
+);
+const LazyHowItWorks = lazy(() =>
+  import('./components/sections/HowItWorks').then((module) => ({ default: module.HowItWorks })),
+);
+const LazySideSection = lazy(() =>
+  import('./components/sections/SideSection').then((module) => ({ default: module.SideSection })),
+);
+const LazyFeatures = lazy(() =>
+  import('./components/sections/Features').then((module) => ({ default: module.Features })),
+);
+const LazyPromptSection = lazy(() =>
+  import('./components/sections/PromptSection').then((module) => ({ default: module.PromptSection })),
+);
 const LazyDocs = lazy(() =>
   import('./pages/Docs').then((module) => ({ default: module.Docs })),
 );
@@ -35,11 +48,21 @@ function Home() {
   return (
     <>
       <Hero />
-      <BusinessProblem />
-      <HowItWorks />
-      <SideSection />
-      <Features />
-      <PromptSection />
+      <Suspense fallback={null}>
+        <LazyBusinessProblem />
+      </Suspense>
+      <Suspense fallback={null}>
+        <LazyHowItWorks />
+      </Suspense>
+      <Suspense fallback={null}>
+        <LazySideSection />
+      </Suspense>
+      <Suspense fallback={null}>
+        <LazyFeatures />
+      </Suspense>
+      <Suspense fallback={null}>
+        <LazyPromptSection />
+      </Suspense>
     </>
   );
 }
@@ -83,6 +106,10 @@ function App() {
     };
 
     window.addEventListener('hashchange', handleHashChange);
+    // Reconcile once on mount: bootstrap is deferred past first paint, so a
+    // hash change (e.g. navigating to /#/docs) may fire before this listener
+    // is attached. Without this the route captured at render time goes stale.
+    handleHashChange();
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 

@@ -23,8 +23,10 @@ test.describe('Navigation transitions', () => {
   test('page transition classes are applied during navigation', async ({ page }) => {
     await page.goto('/');
     const main = page.locator('main').first();
-    // On initial load the entry page fades in
-    await expect(main).toHaveClass(/page-fade-in/);
+    // Initial load skips the fade-in on purpose (it would defer LCP paint);
+    // fades only apply to in-app route swaps.
+    await expect(main).toHaveClass(/page-transition/);
+    await expect(main).not.toHaveClass(/page-fade-/);
 
     await page.locator('header').getByRole('link', { name: 'Docs' }).first().click();
     // During fade-out the main element carries page-fade-out

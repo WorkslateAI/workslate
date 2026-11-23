@@ -27,6 +27,7 @@ test.describe('Accessibility Tests', () => {
     await page.goto('/');
     
     const images = page.locator('img[alt]');
+    await images.first().waitFor({ state: 'attached' });
     const count = await images.count();
     
     expect(count).toBeGreaterThan(0);
