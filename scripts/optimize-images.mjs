@@ -75,8 +75,18 @@ async function optimizeImage(imageName) {
 
 async function main() {
   console.log('Starting image optimization...\n');
-  
-  for (const image of images) {
+
+  // Optional CLI filter: `node optimize-images.mjs <filename>` processes only
+  // that image; with no argument the full list is processed.
+  const filter = process.argv[2];
+  const targets = filter ? images.filter((name) => name === filter) : images;
+
+  if (filter && targets.length === 0) {
+    console.warn(`No image named "${filter}" in the optimization list.`);
+    return;
+  }
+
+  for (const image of targets) {
     try {
       await optimizeImage(image);
     } catch (error) {
