@@ -52,15 +52,22 @@ export const StructuredData: React.FC = () => {
       <meta name="description" content="Track and move tokens across markets and EVM-compatible blockchains with AI-driven automation, peer-to-peer transfer workflows, and a unified real-time dashboard." />
       <link rel="canonical" href="https://workslate.ai/" />
 
-      {/* Preload LCP image */}
+      {/* Preload LCP image — mobile gets the 480w variant, larger screens the responsive set */}
       <link
         rel="preload"
         as="image"
-        imageSrcSet="/assets/images/hero-markets-abc-workslate-centre-480w.avif 480w,
-                     /assets/images/hero-markets-abc-workslate-centre-768w.avif 768w,
+        href="/assets/images/hero-markets-abc-workslate-centre-480w.avif"
+        media="(max-width: 640px)"
+        fetchPriority="high"
+      />
+      <link
+        rel="preload"
+        as="image"
+        imageSrcSet="/assets/images/hero-markets-abc-workslate-centre-768w.avif 768w,
                      /assets/images/hero-markets-abc-workslate-centre-1200w.avif 1200w,
-                     /assets/images/hero-markets-abc-workslate-centre.avif 1923w"
-        imageSizes="(max-width: 480px) 480px, (max-width: 768px) 768px, (max-width: 1200px) 1200px, 1923px"
+                     /assets/images/hero-markets-abc-workslate-centre.avif 2400w"
+        imageSizes="(max-width: 1023px) calc(100vw - 48px), 680px"
+        media="(min-width: 641px)"
         fetchPriority="high"
       />
 

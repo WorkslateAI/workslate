@@ -36,7 +36,7 @@ describe('Hero Section', () => {
 
   it('renders hero image', () => {
     render(<Hero />);
-    const image = screen.getByAltText(/Workslate connecting business ledgers/i);
+    const image = screen.getByAltText(/Workslate AI performing intelligent reconciliation/i);
     
     expect(image).toBeVisible();
   });
@@ -50,7 +50,7 @@ describe('Hero Section', () => {
 
   it('applies desktop-only scale class to image container', () => {
     render(<Hero />);
-    const image = screen.getByAltText(/Workslate connecting business ledgers/i);
+    const image = screen.getByAltText(/Workslate AI performing intelligent reconciliation/i);
     const container = image.closest('.rounded-2xl');
 
     expect(container).toHaveClass('lg:scale-105');

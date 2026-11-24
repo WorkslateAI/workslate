@@ -93,20 +93,34 @@ export const Hero: React.FC = () => {
           <div className="relative order-1 lg:order-2">
             <div className="rounded-2xl bg-lavender-50 p-4 lg:p-3 lg:scale-105 xl:scale-[1.20]">
               <picture>
+                {/* Mobile (<=640px): fixed 480w variants per format */}
                 <source
-                  srcSet="/assets/images/hero-markets-abc-workslate-centre-480w.avif 480w,
-                          /assets/images/hero-markets-abc-workslate-centre-768w.avif 768w,
-                          /assets/images/hero-markets-abc-workslate-centre-1200w.avif 1200w,
-                          /assets/images/hero-markets-abc-workslate-centre.avif 1923w"
-                  sizes="(max-width: 480px) 480px, (max-width: 768px) 768px, (max-width: 1200px) 1200px, 1923px"
+                  media="(max-width: 640px)"
+                  srcSet="/assets/images/hero-markets-abc-workslate-centre-480w.avif"
                   type="image/avif"
                 />
                 <source
-                  srcSet="/assets/images/hero-markets-abc-workslate-centre-480w.webp 480w,
-                          /assets/images/hero-markets-abc-workslate-centre-768w.webp 768w,
+                  media="(max-width: 640px)"
+                  srcSet="/assets/images/hero-markets-abc-workslate-centre-480w.webp"
+                  type="image/webp"
+                />
+                <source
+                  media="(max-width: 640px)"
+                  srcSet="/assets/images/hero-markets-abc-workslate-centre-480w.jpeg"
+                />
+                {/* Tablet/desktop: responsive variants */}
+                <source
+                  srcSet="/assets/images/hero-markets-abc-workslate-centre-768w.avif 768w,
+                          /assets/images/hero-markets-abc-workslate-centre-1200w.avif 1200w,
+                          /assets/images/hero-markets-abc-workslate-centre.avif 2400w"
+                  sizes="(max-width: 1023px) calc(100vw - 48px), 680px"
+                  type="image/avif"
+                />
+                <source
+                  srcSet="/assets/images/hero-markets-abc-workslate-centre-768w.webp 768w,
                           /assets/images/hero-markets-abc-workslate-centre-1200w.webp 1200w,
-                          /assets/images/hero-markets-abc-workslate-centre.webp 1923w"
-                  sizes="(max-width: 480px) 480px, (max-width: 768px) 768px, (max-width: 1200px) 1200px, 1923px"
+                          /assets/images/hero-markets-abc-workslate-centre.webp 2400w"
+                  sizes="(max-width: 1023px) calc(100vw - 48px), 680px"
                   type="image/webp"
                 />
                 <img
@@ -114,11 +128,11 @@ export const Hero: React.FC = () => {
                   srcSet="/assets/images/hero-markets-abc-workslate-centre-480w.jpeg 480w,
                           /assets/images/hero-markets-abc-workslate-centre-768w.jpeg 768w,
                           /assets/images/hero-markets-abc-workslate-centre-1200w.jpeg 1200w,
-                          /assets/images/hero-markets-abc-workslate-centre.jpeg 1923w"
-                  sizes="(max-width: 480px) 480px, (max-width: 768px) 768px, (max-width: 1200px) 1200px, 1923px"
-                  alt="Workslate connecting business ledgers, financial obligations and corporate blockchain wallets to orchestrate secure, compliant and auditable B2B token movements."
-                  width="1923"
-                  height="1282"
+                          /assets/images/hero-markets-abc-workslate-centre.jpeg 2400w"
+                  sizes="(max-width: 640px) 480px, (max-width: 1023px) calc(100vw - 48px), 680px"
+                  alt="Workslate AI performing intelligent reconciliation of business records — invoices, adjustments and settlements — then moving programmable tokens securely and with trust between your business and your counterparty."
+                  width="2400"
+                  height="1350"
                   loading="eager"
                   fetchPriority="high"
                   decoding="async"
