@@ -47,20 +47,34 @@ export const SideSection: React.FC = () => {
         
         <div className="rounded-xl lg:rounded-2xl border border-border p-4 lg:p-8">
           <picture>
+            {/* Mobile (<=640px): fixed 480w variants per format */}
             <source
-              srcSet="/assets/images/local-wallet-international-tokens-480w.avif 480w,
-                      /assets/images/local-wallet-international-tokens-768w.avif 768w,
-                      /assets/images/local-wallet-international-tokens-1200w.avif 1200w,
-                      /assets/images/local-wallet-international-tokens.avif"
-              sizes="(max-width: 480px) 480px, (max-width: 768px) 768px, (max-width: 1200px) 1200px"
+              media="(max-width: 640px)"
+              srcSet="/assets/images/local-wallet-international-tokens-480w.avif"
               type="image/avif"
             />
             <source
-              srcSet="/assets/images/local-wallet-international-tokens-480w.webp 480w,
-                      /assets/images/local-wallet-international-tokens-768w.webp 768w,
+              media="(max-width: 640px)"
+              srcSet="/assets/images/local-wallet-international-tokens-480w.webp"
+              type="image/webp"
+            />
+            <source
+              media="(max-width: 640px)"
+              srcSet="/assets/images/local-wallet-international-tokens-480w.jpeg"
+            />
+            {/* Tablet/desktop: responsive variants */}
+            <source
+              srcSet="/assets/images/local-wallet-international-tokens-768w.avif 768w,
+                      /assets/images/local-wallet-international-tokens-1200w.avif 1200w,
+                      /assets/images/local-wallet-international-tokens.avif 1920w"
+              sizes="(max-width: 1023px) calc(100vw - 48px), 1136px"
+              type="image/avif"
+            />
+            <source
+              srcSet="/assets/images/local-wallet-international-tokens-768w.webp 768w,
                       /assets/images/local-wallet-international-tokens-1200w.webp 1200w,
-                      /assets/images/local-wallet-international-tokens.webp"
-              sizes="(max-width: 480px) 480px, (max-width: 768px) 768px, (max-width: 1200px) 1200px"
+                      /assets/images/local-wallet-international-tokens.webp 1920w"
+              sizes="(max-width: 1023px) calc(100vw - 48px), 1136px"
               type="image/webp"
             />
             <img
@@ -68,11 +82,11 @@ export const SideSection: React.FC = () => {
               srcSet="/assets/images/local-wallet-international-tokens-480w.jpeg 480w,
                       /assets/images/local-wallet-international-tokens-768w.jpeg 768w,
                       /assets/images/local-wallet-international-tokens-1200w.jpeg 1200w,
-                      /assets/images/local-wallet-international-tokens.jpeg"
-              sizes="(max-width: 480px) 480px, (max-width: 768px) 768px, (max-width: 1200px) 1200px"
+                      /assets/images/local-wallet-international-tokens.jpeg 1920w"
+              sizes="(max-width: 640px) 480px, (max-width: 1023px) calc(100vw - 48px), 1136px"
               alt="Banner showing local wallet to international token movement"
-              width="1200"
-              height="600"
+              width="1920"
+              height="1080"
               loading="lazy"
               decoding="async"
               className="w-full h-auto"

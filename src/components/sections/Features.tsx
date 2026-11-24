@@ -4,6 +4,8 @@ export const Features: React.FC = () => {
   const [activeId, setActiveId] = useState('feature-01');
   const sidebarRef = useRef<HTMLDivElement>(null);
 
+  // `widths` lists every generated variant width; the last entry is the
+  // intrinsic width served by the extensionless base filename.
   const features = [
     {
       id: 'feature-01',
@@ -11,6 +13,9 @@ export const Features: React.FC = () => {
       title: 'Multi-Party Ledger Reconciliation',
       subtitle: 'Match business obligations, invoices, credits and settlements across counterparties.',
       image: '/assets/images/market-a-b-c-currency-tokens.png',
+      widths: [480, 768, 1200],
+      width: 1200,
+      height: 571,
       alt: 'Multi-party ledger reconciliation across market counterparties',
     },
     {
@@ -19,6 +24,9 @@ export const Features: React.FC = () => {
       title: 'Corporate Wallet Orchestration',
       subtitle: 'Connect verified business wallets and coordinate token movements.',
       image: '/assets/images/local-wallet-international-tokens.png',
+      widths: [480, 768, 1200, 1920],
+      width: 1920,
+      height: 1080,
       alt: 'Corporate wallets orchestrating local and international token movements',
     },
     {
@@ -27,6 +35,9 @@ export const Features: React.FC = () => {
       title: 'Programmable Settlement Rules',
       subtitle: 'Enforce compliance, transfer limits and conditional payment authorization.',
       image: '/assets/images/evm-nodes-workslate.png',
+      widths: [480, 768, 1200],
+      width: 1200,
+      height: 654,
       alt: 'EVM nodes enforcing programmable settlement rules',
     },
     {
@@ -35,9 +46,23 @@ export const Features: React.FC = () => {
       title: 'End-to-End Transaction Traceability',
       subtitle: 'Link business records, workflows, smart contracts and blockchain transactions.',
       image: '/assets/images/token-movement-dashboard.png',
+      widths: [480, 768, 1200, 1300],
+      width: 1300,
+      height: 737,
       alt: 'End-to-end transaction traceability dashboard',
     },
   ];
+
+  // Builds "file-Nw.ext Nw, ..., file.ext BASEw" — the final (base) width has
+  // no size-suffixed file, it is the full-resolution asset itself.
+  const buildSrcSet = (image: string, widths: number[], ext: string) =>
+    widths
+      .map((w, i) =>
+        i === widths.length - 1
+          ? `${image.replace('.png', `.${ext}`)} ${w}w`
+          : `${image.replace('.png', `-${w}w.${ext}`)} ${w}w`
+      )
+      .join(', ');
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -125,29 +150,39 @@ export const Features: React.FC = () => {
                 </div>
                 <div className="flex justify-center mt-4 lg:mt-6">
                   <picture>
+                    {/* Mobile (<=640px): fixed 480w variants per format */}
                     <source
-                      srcSet={`${feature.image.replace('.png', '-480w.avif')} 480w,
-                              ${feature.image.replace('.png', '-768w.avif')} 768w,
-                              ${feature.image.replace('.png', '.avif')}`}
-                      sizes="(max-width: 480px) 480px, (max-width: 768px) 768px"
+                      media="(max-width: 640px)"
+                      srcSet={feature.image.replace('.png', '-480w.avif')}
                       type="image/avif"
                     />
                     <source
-                      srcSet={`${feature.image.replace('.png', '-480w.webp')} 480w,
-                              ${feature.image.replace('.png', '-768w.webp')} 768w,
-                              ${feature.image.replace('.png', '.webp')}`}
-                      sizes="(max-width: 480px) 480px, (max-width: 768px) 768px"
+                      media="(max-width: 640px)"
+                      srcSet={feature.image.replace('.png', '-480w.webp')}
+                      type="image/webp"
+                    />
+                    <source
+                      media="(max-width: 640px)"
+                      srcSet={feature.image.replace('.png', '-480w.jpeg')}
+                    />
+                    {/* Tablet/desktop: resolution-based variants */}
+                    <source
+                      srcSet={buildSrcSet(feature.image, feature.widths.slice(1), 'avif')}
+                      sizes="(max-width: 1023px) calc(100vw - 96px), 720px"
+                      type="image/avif"
+                    />
+                    <source
+                      srcSet={buildSrcSet(feature.image, feature.widths.slice(1), 'webp')}
+                      sizes="(max-width: 1023px) calc(100vw - 96px), 720px"
                       type="image/webp"
                     />
                     <img
                       src={feature.image.replace('.png', '-768w.jpeg')}
-                      srcSet={`${feature.image.replace('.png', '-480w.jpeg')} 480w,
-                              ${feature.image.replace('.png', '-768w.jpeg')} 768w,
-                              ${feature.image.replace('.png', '.jpeg')}`}
-                      sizes="(max-width: 480px) 480px, (max-width: 768px) 768px"
+                      srcSet={buildSrcSet(feature.image, feature.widths, 'jpeg')}
+                      sizes="(max-width: 640px) 480px, (max-width: 1023px) calc(100vw - 96px), 720px"
                       alt={feature.alt}
-                      width="768"
-                      height="512"
+                      width={feature.width}
+                      height={feature.height}
                       loading="lazy"
                       decoding="async"
                       className="max-w-[720px] w-full h-auto"
