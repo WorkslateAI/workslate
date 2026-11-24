@@ -29,10 +29,12 @@ Playwright, and @axe-core/playwright.
 responsive and end-to-end checks; axe scans in Playwright; Lighthouse CI in GitHub
 Actions.
 
-**Target Platform**: Prerendered static site deployed at `https://workslate.ai`.
-Hosting provider remains unspecified. Production hosting must serve Brotli/gzip,
-cache hashed assets for a long duration, revalidate HTML, and redirect the `www`
-host to the canonical apex domain.
+**Target Platform**: Prerendered static site deployed to **Vercel** at
+`https://workslate.ai`. Deploys are triggered from CI via the
+`VERCEL_DEPLOY_HOOK_URL` deploy hook after unit tests, the production build, the
+JS budget check, and Playwright e2e pass on `main`. Hosting serves Brotli/gzip,
+long-cache hashed assets, HTML revalidation, and redirects the `www` host to the
+canonical apex domain (verified by `scripts/check-www-redirect.mjs`).
 
 **Project Type**: Single-page marketing site using native fragment navigation; no
 router.
@@ -47,8 +49,8 @@ TBT < 150ms, and JavaScript < 100KB gzip.
 components; inline SVG artwork with explicit dimensions/aspect ratios for icons,
 logos, and badges; optimized responsive raster (AVIF/WebP/JPEG srcset) for hero,
 banner, and feature illustrations; typed content
-in `src/content`; one self-hosted variable font subset with `font-display: swap` and
-preload; critical CSS inline; CSS-only motion that respects
+in `src/content`; self-hosted variable font subsets (Inter, Plus Jakarta Sans)
+preloaded from `public/fonts/` with `font-display: swap`; critical CSS inline; CSS-only motion that respects
 `prefers-reduced-motion`; no heavy chart or animation libraries. Complete
 prerendered page content must remain available to crawlers when below-the-fold
 sections are code-split with `React.lazy` and `Suspense`. Keep metadata and JSON-LD
@@ -78,9 +80,9 @@ The feature spec, the requested Lighthouse CI gate, and the constitution all spe
 a minimum score of 0.85. A passing CI gate therefore satisfies the acceptance
 criterion; any category below 0.85 fails both.
 
-Hosting and enforcement decisions: the hosting provider is not yet chosen, so the
-`www` to apex redirect is an external deployment prerequisite verified by a
-post-deploy check script (see tasks). The Lighthouse workflow job is named
+Hosting and enforcement decisions: the site is deployed to Vercel; the `www`
+to apex redirect is configured there and verified post-deploy by
+`scripts/check-www-redirect.mjs`. The Lighthouse workflow job is named
 `Lighthouse CI` and must be made a required status check in branch protection. Footer
 links are limited to in-page anchors until product-approved external URLs are
 recorded in the spec.
@@ -108,7 +110,13 @@ vite.config.ts
 package.json
 public/
 ├── robots.txt
-└── sitemap.xml
+├── sitemap.xml
+├── docs.html                  # static companion to the #/docs field guide
+├── privacy.html
+├── terms.html
+├── cookies.html
+├── fonts/                     # self-hosted variable font subsets (preloaded)
+└── assets/                    # images, gifs, svg, videos, js (page-transition.js)
 src/
 ├── main.tsx
 ├── App.tsx
@@ -161,9 +169,9 @@ src/
 │   └── global.css
 ├── vite-env.d.ts
 └── assets/
-    ├── svg/                    # raw logo, icon, coin, chain sources
     └── fonts/
         └── workslate-variable.woff2
+scripts/                       # check-js-budget, check-www-redirect, lcp-diag, optimize-images
 tests/
 ├── unit/
 │   ├── components/

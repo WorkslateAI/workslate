@@ -274,6 +274,17 @@ implementation; add the Docs field-guide route; and remove the dashboard demo.
 - [X] T080 Remove the dashboard demo: delete `src/content/dashboard.ts`, `src/components/sections/DashboardDemo.tsx`, and the `StatCard`/`TransactionRow`/`StatusPill`/`FeatureHeading`/`FeatureColumns` components; clean `src/content/types.ts` and `tests/unit/components/marketing-content.test.tsx`.
 - [X] T081 [P] Rename `token-movement-dashboard` image assets to `token-movement-traceability` across `public/assets/images/` and `design/`, update the Features card image and `scripts/optimize-images.mjs`, and remove dashboard wording from `src/components/sections/Features.tsx`, `src/components/sections/SignIn.tsx`, `src/seo/StructuredData.tsx`, `README.md`, and the spec docs.
 
+## Phase 11: Post-Launch Hardening and Content Refresh
+
+**Purpose**: Ship static companion pages, route transitions, hydration tuning,
+expanded unit coverage, and the latest imagery updates applied after Phase 10.
+
+- [X] T082 [P] Add static companion and legal pages in `public/`: `docs.html` (crawlable Web3j / BPMN / EVM field-guide companion to the `#/docs` route, listed in `sitemap.xml`), `privacy.html`, `terms.html`, and `cookies.html`.
+- [X] T083 Implement hash-route fade transitions (250 ms, `prefers-reduced-motion`-aware) in `src/App.tsx`, exit-to-static-page fade via `public/assets/js/page-transition.js`, and the `.docs-route` pre-paint hide script in `index.html`.
+- [X] T084 Defer hydration one frame past first paint in `src/main.tsx` so the prerendered LCP element composites before React mounts; on `#/docs`, drop `data-server-rendered` so the route uses a single clean client render instead of discarding hydration.
+- [X] T085 [P] Expand unit coverage for search, routing, and sections in `tests/unit/components/` (`search-dialog`, `search-trigger`, `use-site-search`, `docs-index`, `prompt-section`, `side-section`, `header`) and `tests/unit/pages/docs.test.tsx`.
+- [X] T086 [P] Refresh imagery (PNR-0011): hero market image, feature banners, EVM illustration, and `token-movement-traceability` assets across `public/assets/images/` and `design/`.
+
 ## Notes
 
 - Task IDs are sequential and each task uses a checkbox, ID, explicit file path,

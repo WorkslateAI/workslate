@@ -1,6 +1,6 @@
-# Workslate AI: Landing Page SPA
+# Workslate AI: Marketing Site
 
-A responsive, vector-first React single page application that presents **Workslate AI**, an AI-powered platform for **financial orchestration**: intelligent ledger reconciliation and programmable B2B token movement across **EVM-compatible blockchains**.
+A responsive, vector-first React site — prerendered to static HTML at build time via `vite-react-ssg` — that presents **Workslate AI**, an AI-powered platform for **financial orchestration**: intelligent ledger reconciliation and programmable B2B token movement across **EVM-compatible blockchains**. Live at [workslate.ai](https://workslate.ai/).
 
 Built with **GitHub Spec Kit** (spec-driven development). The spec is the source of truth and the code is generated and verified against it.
 
@@ -22,7 +22,7 @@ Built with **GitHub Spec Kit** (spec-driven development). The spec is the source
 
 ## 1. Purpose
 
-- Present Workslate AI's value proposition: *"Reconcile First. Move Value with Confidence."*
+- Present Workslate AI's value proposition: hero *"Reconcile First. Move Value with Confidence."*, page title *"From Market to Market. Your Token. Everywhere."*
 - Explain four capabilities: multi-party ledger reconciliation, corporate wallet orchestration, programmable settlement rules, and end-to-end transaction traceability.
 - Rank for the topics **blockchain, EVM, Web3j, Web3 and P2P workflows** through SEO-optimized, semantic components.
 - Meet a **Lighthouse score of 95+** in Performance, Accessibility, Best Practices and SEO.
@@ -52,24 +52,28 @@ The authoritative, dependency-ordered list lives in `specs/<feature>/tasks.md` (
 - **Header**: logo, nav (Home, How It Works, Global, Docs, Features dropdown), Register for demo CTA, mobile menu
 - **Hero**: eyebrow, h1 "Reconcile First. Move Value with Confidence.", typing AI prompt chip, CTAs, market network image
 - **Business Problem**: the reconciliation gap with a pain-point card
-- **How It Works**: four P2P workflow steps (obligation → reconciliation → authorization → on-chain movement) with a video placeholder
-- **Global**: Seamless / Secure / Global cards plus a world banner image
+- **How It Works**: four P2P workflow steps (obligation → reconciliation → authorization → on-chain movement) with video (`public/assets/videos/`)
+- **Global** (`SideSection`): Seamless / Secure / Global cards plus a world banner image
 - **Features**: four cards — Multi-Party Ledger Reconciliation, Corporate Wallet Orchestration, Programmable Settlement Rules, End-to-End Transaction Traceability — with a sticky sidebar nav
 - **Prompt**: AI prompt chip and typing "Ask Workslate AI" response (`AITextRenderer`)
-- **Docs** (`#/docs` hash route): Web3j / BPMN / EVM architecture field guide with search
+- **Docs** (`#/docs` hash route): Web3j / BPMN / EVM architecture field guide with client-side full-text search (Fuse.js index in `src/search/`, `SearchDialog`/`SearchTrigger` atoms); a static companion lives at `public/docs.html`
+- **Legal pages**: static `privacy.html`, `terms.html`, `cookies.html` in `public/`
 - **Footer**
+
+Below-fold sections are lazy-loaded with `React.lazy`/`Suspense`: the SSG render still emits their full HTML, but hydration is deferred per boundary for a smaller entry bundle and lower TBT. Hash-route swaps (`/` ↔ `/#/docs`) use a 250 ms fade transition that respects `prefers-reduced-motion`.
 
 ### Technical approach
 
 | Area | Decision |
 |------|----------|
-| Framework | React 18+, TypeScript, Vite |
-| Styling | Tailwind CSS v4 with design tokens, mobile-first; `overflow-x: clip` on html/body guarantees no horizontal scrolling at any viewport |
-| Graphics | Inline SVG icons/logo; optimized raster illustrations (AVIF/WebP/JPEG srcset at 480/768/1200w) |
+| Framework | React 18, TypeScript, Vite 6 + `vite-react-ssg` (single-page SSG) |
+| Styling | Tailwind CSS v4 (`@tailwindcss/vite`) with design tokens, mobile-first; `overflow-x: clip` on html/body guarantees no horizontal scrolling at any viewport |
+| Graphics | Inline SVG icons/logo (`vite-plugin-svgr`); optimized raster illustrations (AVIF/WebP/JPEG/PNG srcset at 480/768/1200w), GIFs and MP4 in `public/assets/` |
 | Reuse | atoms → molecules → sections; content in `src/content/*.ts` |
-| SEO | Helmet metadata, JSON-LD (Organization, SoftwareApplication, FAQPage), prerendered HTML, sitemap.xml, robots.txt |
-| Performance | Code-splitting, self-hosted font subset, inline critical CSS, no heavy libraries |
-| Testing | Vitest, Playwright (responsive), axe (a11y), Lighthouse CI |
+| SEO | `react-helmet-async` metadata, JSON-LD via `src/seo/StructuredData.tsx`, prerendered HTML, sitemap.xml, robots.txt, Bing verification meta |
+| Search | Client-side Fuse.js index of the Docs guide (`src/search/docsIndex.ts`); built lazily inside the Docs chunk so it never hits the entry bundle |
+| Performance | Lazy below-fold sections, deferred hydration (`src/main.tsx`), self-hosted font subsets with preload, JS < 100 KB gzip budget, `dist/stats.html` bundle report (`rollup-plugin-visualizer`) |
+| Testing | Vitest + Testing Library (unit, `tests/unit/`), Playwright (marketing, responsive, navigation transitions), axe (a11y), Lighthouse CI |
 
 ### SEO keyword targets
 
@@ -85,8 +89,8 @@ Use each naturally in headings, body copy, SVG `<title>`/`aria-label` text and m
 
 ```bash
 uv tool install specify-cli --from git+https://github.com/github/spec-kit.git
-specify init workslate-spa --ai claude
-cd workslate-spa
+specify init workslate --ai claude
+cd workslate
 mkdir design   # place the reference screenshot at design/Workslate–SinglePage.png
 ```
 
@@ -110,8 +114,8 @@ If something is off, update the **spec or plan first**, then re-run `/speckit.ta
 
 ```bash
 # 1. Clone
-git clone https://github.com/<your-org>/workslate-spa.git
-cd workslate-spa
+git clone https://github.com/<your-org>/workslate.git
+cd workslate
 
 # 2. Install dependencies
 npm install
@@ -131,7 +135,7 @@ npm run preview
 | Script | Description |
 |--------|-------------|
 | `npm run dev` | Development server |
-| `npm run build` | Type-check, build and prerender |
+| `npm run build` | SSG prerender + production build (emits `dist/stats.html` bundle report) |
 | `npm run preview` | Serve the production build |
 | `npm test` | Vitest unit tests |
 | `npm run test:e2e` | Playwright responsive and accessibility tests |
@@ -222,28 +226,36 @@ auto-deploys enabled, the hook is unnecessary.
 | JavaScript (gzip) | < 100 KB |
 | Accessibility | WCAG AA, zero axe violations |
 
-CI blocks merges and deploys that fall below these targets.
+Two GitHub Actions workflows enforce this: `ci.yml` (unit tests → production build → JS budget → Playwright e2e → Vercel deploy hook on pushes to `main`) and `lighthouse.yml` (LHCI autorun on every push and PR, results uploaded as artifacts).
 
 ## 8. Project Structure
 
 ```
-workslate-spa/
+workslate/
 ├── .specify/            # Spec Kit workspace, templates, constitution
+├── .github/workflows/   # ci.yml (tests, build, budget, e2e, deploy hook), lighthouse.yml
 ├── specs/               # spec.md, plan.md, tasks.md and related artifacts
-├── design/              # Workslate–SinglePage.png
-├── public/              # robots.txt, sitemap.xml, favicon.svg
+├── design/              # Reference screenshots
+├── public/              # robots.txt, sitemap.xml, static pages (docs/privacy/terms/cookies.html),
+│   │                    #   assets/{images,gifs,svg,videos,js}, self-hosted fonts
+├── scripts/             # check-js-budget, check-www-redirect, lcp-diag, optimize-images
 ├── src/
 │   ├── components/
-│   │   ├── atoms/       # Button, Badge, GradientText, CoinIcon, ChainBadge
+│   │   ├── atoms/       # Button, Badge, GradientText, AITextRenderer, SearchDialog, SearchTrigger, ...
 │   │   ├── molecules/   # NavLink
 │   │   ├── sections/    # Header, Hero, BusinessProblem, HowItWorks, SideSection, Features, PromptSection, Footer
 │   │   └── svg/         # Typed SVG component registry
 │   ├── pages/           # Docs page (reached via the #/docs hash route)
-│   ├── content/         # Typed copy, nav, chains, FAQ
-│   ├── seo/             # Metadata and JSON-LD helpers
+│   ├── content/         # Typed copy, nav, chains, features, FAQ
+│   ├── search/          # docsIndex + useSiteSearch (Fuse.js)
+│   ├── seo/             # StructuredData JSON-LD
 │   ├── styles/          # Tailwind layers and tokens
-│   └── main.tsx
-├── tests/               # Playwright suites
+│   ├── App.tsx          # Hash routing, lazy sections, page transitions
+│   └── main.tsx         # vite-react-ssg entry, deferred hydration
+├── tests/
+│   ├── unit/            # Vitest + Testing Library (components, search, pages)
+│   └── e2e/             # Playwright: marketing, responsive, a11y, navigation transitions
+├── index.html           # Head metadata, font preloads, docs-route pre-paint script
 └── lighthouserc.json    # Lighthouse CI assertions
 ```
 

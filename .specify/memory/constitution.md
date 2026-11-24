@@ -1,8 +1,8 @@
 <!--
 Sync Impact Report
-Version change: uninitialized -> 1.0.0
-Modified principles: placeholder -> I. React SPA Architecture; placeholder -> II. Typed, Reusable UI; placeholder -> III. Vector-First Assets; placeholder -> IV. Mobile-First Responsive Design; placeholder -> V. Measurable Performance
-Added sections: Accessibility, SEO, and Content Integrity; Delivery Quality Gates
+Version change: 1.0.0 -> 1.1.0
+Modified principles: III. Vector-First Assets (raster now permitted for hero, banner, and feature illustrations via optimized responsive srcset); I. React SPA Architecture (clarified vite-react-ssg prerendering)
+Added sections: none
 Removed sections: none
 Follow-up TODOs: Confirm the original ratification date.
 -->
@@ -12,7 +12,8 @@ Follow-up TODOs: Confirm the original ratification date.
 
 ### I. React SPA Architecture
 The application MUST be a React 18 or newer single-page application built with Vite
-and TypeScript. UI MUST use functional components; class components are not permitted.
+and TypeScript, prerendered to static HTML (vite-react-ssg single-page mode). UI MUST
+use functional components; class components are not permitted.
 
 ### II. Typed, Reusable UI
 Every UI block MUST be implemented as a typed, props-driven component under
@@ -21,9 +22,11 @@ not be duplicated. Reusable content and page copy MUST live in `/src/content`, s
 from presentation, so changes remain consistent and maintainable.
 
 ### III. Vector-First Assets
-Illustrations, icons, logos, and chain badges MUST be inline SVG components handled
-through SVGR. Raster images MUST NOT be used, except for an optional Open Graph share
-image. This keeps visual assets crisp, scalable, and consistent across screen sizes.
+Icons, logos, and chain badges MUST be inline SVG components handled through SVGR.
+Raster imagery is permitted only for hero, banner, and feature illustrations (and an
+optional Open Graph share image), and MUST be served as optimized responsive
+AVIF/WebP/JPEG srcset variants with explicit dimensions and lazy loading below the
+fold. This keeps visual assets crisp, scalable, and consistent across screen sizes.
 
 ### IV. Mobile-First Responsive Design
 Layouts MUST be designed mobile-first and tested at the 360px, 768px, 1024px, and
@@ -69,4 +72,4 @@ Pull requests and release reviews MUST verify compliance with the applicable
 principles and quality gates. Any exception MUST document its rationale, scope, and
 approval in the change record; it MUST NOT silently weaken a required CI gate.
 
-**Version**: 1.0.0 | **Ratified**: TODO(RATIFICATION_DATE): confirm the original adoption date | **Last Amended**: 2026-10-22
+**Version**: 1.1.0 | **Ratified**: TODO(RATIFICATION_DATE): confirm the original adoption date | **Last Amended**: 2026-11-24

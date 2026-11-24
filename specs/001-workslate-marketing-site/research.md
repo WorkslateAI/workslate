@@ -113,8 +113,11 @@ assets, and HTML revalidation.
 **Rationale**: Compression and cache policy are deployment concerns; avoid generating
 duplicate compressed files unless the selected host requires them.
 
-**Assumption**: The static host will support compression negotiation and per-path
-cache headers. The host is not specified yet.
+**Resolution**: The site is deployed to **Vercel**, which provides compression
+negotiation, immutable caching for hashed assets, and HTML revalidation out of
+the box. Deploys are triggered by the CI workflow via the
+`VERCEL_DEPLOY_HOOK_URL` deploy hook; the `www` → apex redirect is configured on
+Vercel and verified by `scripts/check-www-redirect.mjs`.
 
 ## Addendum: Implementation Updates
 
@@ -151,3 +154,25 @@ illustrations. The `token-movement-dashboard` assets were renamed to
 
 **Rationale**: Product direction moved the marketing page to the reconciliation/
 orchestration feature set; simulated demo data is no longer presented.
+
+### Decision: Static companion pages for Docs and legal
+
+**Decision**: Crawlable static HTML pages ship in `public/`: `docs.html` (the
+Web3j / BPMN / EVM field-guide companion to the `#/docs` app route, listed in
+`sitemap.xml`) and the legal pages `privacy.html`, `terms.html`, and
+`cookies.html`.
+
+**Rationale**: Hash routes are not separately crawlable; a static `docs.html`
+gives the field guide a canonical URL for the sitemap, and the legal pages
+require no JavaScript.
+
+### Decision: Page transitions and deferred hydration
+
+**Decision**: Hash-route swaps (`/` ↔ `/#/docs`) use a 250 ms fade-out/swap/
+fade-in in `src/App.tsx`, exits to static `.html` pages fade via
+`public/assets/js/page-transition.js`, and hydration is deferred one frame past
+first paint in `src/main.tsx` so the prerendered LCP element composites before
+React mounts. All motion respects `prefers-reduced-motion`.
+
+**Rationale**: Keeps the perceived-navigation polish of a router without adding
+one, while protecting LCP and total blocking time budgets.

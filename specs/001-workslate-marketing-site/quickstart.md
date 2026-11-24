@@ -3,8 +3,11 @@
 ## Prerequisites
 
 - Supported Node.js LTS version and npm.
-- Static hosting configured for `dist/`, Brotli/gzip, immutable caching for hashed
-  assets, HTML revalidation, and redirect from `www.workslate.ai` to `workslate.ai`.
+- Deployed to **Vercel**: `dist/` static output with Brotli/gzip, immutable
+  caching for hashed assets, HTML revalidation, and a redirect from
+  `www.workslate.ai` to `workslate.ai`. Deploys run from `ci.yml` via the
+  `VERCEL_DEPLOY_HOOK_URL` secret after tests, build, JS budget, and e2e pass on
+  `main`.
 
 ## Local development
 
@@ -51,3 +54,12 @@ robots.txt references `https://workslate.ai/sitemap.xml`; the page has exactly o
 `h1`; all requested JSON-LD types are in the prerendered document; FAQ JSON-LD
 matches visible FAQ content; and Web3j integration is described as planned, not
 currently supported.
+
+## Post-deploy verification
+
+```powershell
+node scripts/check-www-redirect.mjs   # www.workslate.ai -> workslate.ai 301
+```
+
+Also confirm `https://workslate.ai/docs.html`, `/privacy.html`, `/terms.html`,
+and `/cookies.html` resolve, and that `sitemap.xml` URLs match the live pages.
