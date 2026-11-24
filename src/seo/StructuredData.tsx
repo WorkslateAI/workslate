@@ -49,7 +49,7 @@ export const StructuredData: React.FC = () => {
   return (
     <Helmet>
       <title>Workslate AI - From Market to Market. Your Token. Everywhere.</title>
-      <meta name="description" content="Track and move tokens across markets and EVM-compatible blockchains with AI-driven automation, peer-to-peer transfer workflows, and a unified real-time dashboard." />
+      <meta name="description" content="Track and move tokens across markets and EVM-compatible blockchains with AI-driven automation and peer-to-peer transfer workflows." />
       <link rel="canonical" href="https://workslate.ai/" />
 
       {/* Preload LCP image — mobile gets the 480w variant, larger screens the responsive set */}

@@ -1,7 +1,7 @@
 # Data Model: Workslate AI Marketing Site
 
 The site has no persistent database. Page content and examples are typed static
-records. Dashboard filter selections are transient browser state.
+records.
 
 ## Navigation Item
 
@@ -11,9 +11,10 @@ records. Dashboard filter selections are transient browser state.
 | href | string | Required fragment identifier or approved URL. |
 | location | `header` \| `footer` | Required. |
 
-Main page anchors include `#features`, `#how-it-works`, `#docs`, and `#pricing`.
-The Developers section uses `#docs`. CTA anchors include `#get-started` and
-`#dashboard-demo`.
+Main page anchors include `#home`, `#how-it-works`, `#global`, `#features`,
+`#feature-01` through `#feature-04`, `#prompt`, and `#footer`. The Docs page uses
+the `#/docs` hash route. Header links target Home, How it works, Global, Docs,
+and the Features dropdown; the footer uses the same in-page anchors.
 
 ## Content Section
 
@@ -29,13 +30,15 @@ The Developers section uses `#docs`. CTA anchors include `#get-started` and
 
 | Field | Type | Constraints |
 |---|---|---|
-| number | `01` \| `02` \| `03` | Required and unique. |
+| number | `01` \| `02` \| `03` \| `04` | Required and unique. |
 | title | string | Required user-visible heading. |
 | description | string | Required, accurate copy. |
-| illustration | inline SVG component reference | Accessible description and explicit intrinsic dimensions/aspect ratio required. |
+| illustration | optional raster image reference | Responsive AVIF/WebP/JPEG srcset with explicit intrinsic dimensions and accessible alt text. |
 
-Feature topics are Seamless Money Movement, EVM Nodes, and Single Source of Truth.
-The shared illustrations are HeroNetwork, MarketFlow, EvmHub, and WorldMap.
+Feature topics are Multi-Party Ledger Reconciliation, Corporate Wallet
+Orchestration, Programmable Settlement Rules, and End-to-End Transaction
+Traceability. Each feature card renders an optimized raster illustration under
+`public/assets/images/`.
 
 ## Market and Chain
 
@@ -47,22 +50,22 @@ The shared illustrations are HeroNetwork, MarketFlow, EvmHub, and WorldMap.
 | order | positive integer | Required unique order within category. |
 | icon | inline SVG component reference | Required where the diagram displays an icon. |
 
-Markets are A, B, and C. EVM networks are Ethereum, Polygon, BSC, Arbitrum, and
-Optimism. Accessible descriptions communicate diagram purpose and relationships.
+Markets are A, B, and C. Ethereum is the currently supported chain; Polygon,
+BSC, Arbitrum, and Optimism are roadmap chains. Accessible descriptions
+communicate diagram purpose and relationships.
 
-## Dashboard Demo and Transaction
+## Docs Entry and Search
 
 | Field | Type | Constraints |
 |---|---|---|
-| dataStatus | `simulated` | Required and visibly labeled; never represented as live. |
-| volume | formatted string | Illustrative value only. |
-| transactionCount | formatted string | Illustrative value only. |
-| transactions | `Transaction[]` | Sample rows only; no live transaction claims. |
-| selectedFilter | string or enum | Transient UI state; updates visible sample data. |
+| id | string | Required unique stable key. |
+| title | string | Required field-guide entry heading. |
+| category | string | Groups entries for filtering (e.g., architecture terms). |
+| body | string | Web3j / BPMN / EVM field-guide content. |
 
-Each transaction has a unique `id`, source and destination market labels, a chain
-label, formatted illustrative amount, and illustrative status. Referenced market
-and chain names must exist in their respective content lists.
+The Docs page at `#/docs` indexes entries in `src/search/docsIndex.ts` and
+searches them through `useSiteSearch` (Fuse.js) via the `SearchTrigger` and
+`SearchDialog` atoms (Ctrl/Cmd+K or `/` to open).
 
 ## FAQ Item
 

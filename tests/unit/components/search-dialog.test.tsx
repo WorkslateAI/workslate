@@ -215,4 +215,119 @@ describe('SearchDialog', () => {
 
     expect(setQuery).toHaveBeenCalledWith('');
   });
+
+  const mockTwoResults = [
+    {
+      item: {
+        id: 'r1',
+        title: 'Web3j',
+        breadcrumb: ['Docs', 'Terms'],
+        anchor: 'core-terminology',
+        content: 'Java integration library for Ethereum JSON-RPC and contracts',
+        path: '/docs.html',
+      },
+      score: 0.1,
+      matches: [
+        { key: 'title', indices: [[0, 4]] },
+        { key: 'content', indices: [[0, 3]] },
+      ],
+    },
+    {
+      item: {
+        id: 'r2',
+        title: 'BPMN',
+        breadcrumb: [],
+        anchor: '',
+        content: 'Business Process Model and Notation for workflows',
+        path: '/docs.html',
+      },
+      score: 0.3,
+      matches: [],
+    },
+  ];
+
+  const mockSearchWithResults = () =>
+    (useSiteSearch as Mock).mockReturnValue({
+      query: 'web',
+      setQuery: vi.fn(),
+      results: mockTwoResults,
+      isLoading: false,
+      isReady: true,
+      error: null,
+    });
+
+  it('navigates results with ArrowDown, ArrowUp, Home and End', () => {
+    mockSearchWithResults();
+    render(<SearchDialog isOpen={true} onClose={mockClose} />);
+
+    const options = screen.getAllByRole('option');
+    expect(options[0]).toHaveAttribute('aria-selected', 'true');
+
+    fireEvent.keyDown(document, { key: 'ArrowDown' });
+    expect(screen.getAllByRole('option')[1]).toHaveAttribute('aria-selected', 'true');
+
+    fireEvent.keyDown(document, { key: 'ArrowUp' });
+    expect(screen.getAllByRole('option')[0]).toHaveAttribute('aria-selected', 'true');
+
+    fireEvent.keyDown(document, { key: 'End' });
+    expect(screen.getAllByRole('option')[1]).toHaveAttribute('aria-selected', 'true');
+
+    fireEvent.keyDown(document, { key: 'Home' });
+    expect(screen.getAllByRole('option')[0]).toHaveAttribute('aria-selected', 'true');
+  });
+
+  it('selects the active result with Enter and closes', () => {
+    mockSearchWithResults();
+    render(<SearchDialog isOpen={true} onClose={mockClose} />);
+
+    fireEvent.keyDown(document, { key: 'Enter' });
+
+    expect(mockClose).toHaveBeenCalledTimes(1);
+  });
+
+  it('selects a result on click and closes', () => {
+    mockSearchWithResults();
+    render(<SearchDialog isOpen={true} onClose={mockClose} />);
+
+    fireEvent.click(screen.getAllByRole('option')[0]);
+
+    expect(mockClose).toHaveBeenCalledTimes(1);
+  });
+
+  it('activates a result on mouse hover', () => {
+    mockSearchWithResults();
+    render(<SearchDialog isOpen={true} onClose={mockClose} />);
+
+    fireEvent.mouseEnter(screen.getAllByRole('option')[1]);
+
+    expect(screen.getAllByRole('option')[1]).toHaveAttribute('aria-selected', 'true');
+  });
+
+  it('highlights matched terms and renders a match snippet', () => {
+    mockSearchWithResults();
+    const { container } = render(<SearchDialog isOpen={true} onClose={mockClose} />);
+
+    // Only the content snippet renders real <mark> elements (via innerHTML);
+    // the title highlight is inserted as escaped text.
+    const marks = container.querySelectorAll('mark');
+    expect(marks.length).toBeGreaterThan(0);
+    expect(marks[0].textContent).toBe('Java');
+  });
+
+  it('renders the retry button in the error state', () => {
+    (useSiteSearch as Mock).mockReturnValue({
+      query: 'test',
+      setQuery: vi.fn(),
+      results: [],
+      isLoading: false,
+      isReady: true,
+      error: 'Search index failed',
+    });
+
+    render(<SearchDialog isOpen={true} onClose={mockClose} />);
+
+    const retry = screen.getByRole('button', { name: 'Retry' });
+    // jsdom logs "not implemented: navigation" for reload; click should not throw.
+    expect(() => fireEvent.click(retry)).not.toThrow();
+  });
 });

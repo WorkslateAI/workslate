@@ -20,11 +20,10 @@ responsive layouts, and Lighthouse performance through automated tests and CI.
 selected Vite release.
 
 **Primary Dependencies**: Vite, React 18, Tailwind CSS with its Vite plugin,
-vite-plugin-svgr (SVGR) with SVGO, vite-react-ssg single-page mode, react-helmet-async, Vitest, React Testing Library,
+vite-plugin-svgr (SVGR) with SVGO, vite-react-ssg single-page mode, react-helmet-async, Fuse.js (Docs search), sharp (image pipeline), Vitest, React Testing Library,
 Playwright, and @axe-core/playwright.
 
-**Storage**: None. Typed content and dashboard demo values are static source data;
-interactive dashboard state is transient and simulated.
+**Storage**: None. Typed content and example values are static source data.
 
 **Testing**: Vitest and React Testing Library for component behavior; Playwright for
 responsive and end-to-end checks; axe scans in Playwright; Lighthouse CI in GitHub
@@ -45,20 +44,22 @@ constitution. Numeric targets are LCP < 2.0 seconds, CLS < 0.05,
 TBT < 150ms, and JavaScript < 100KB gzip.
 
 **Constraints**: Mobile-first design at 360, 768, 1024, and 1536px; functional React
-components; inline SVG artwork with explicit dimensions/aspect ratios; typed content
+components; inline SVG artwork with explicit dimensions/aspect ratios for icons,
+logos, and badges; optimized responsive raster (AVIF/WebP/JPEG srcset) for hero,
+banner, and feature illustrations; typed content
 in `src/content`; one self-hosted variable font subset with `font-display: swap` and
 preload; critical CSS inline; CSS-only motion that respects
 `prefers-reduced-motion`; no heavy chart or animation libraries. Complete
 prerendered page content must remain available to crawlers when below-the-fold
 sections are code-split with `React.lazy` and `Suspense`. Keep metadata and JSON-LD
 outside those boundaries and verify the SSG renderer includes lazy sections in the
-final HTML. Web3j integration is roadmap-only; dashboard values are simulated and
-must be labeled.
+final HTML. Web3j integration is roadmap-only and must be labeled as such.
 
-**Scale/Scope**: One public marketing page: Header, Hero, three feature columns,
-How It Works, Developers, FAQ, and Footer. Include anchor destinations
-`#features`, `#how-it-works`, `#docs`, and `#pricing`, plus the remaining CTA/demo
-anchors required by the feature specification. Emit Organization, WebSite,
+**Scale/Scope**: One public marketing page plus the `#/docs` hash route: Header,
+Hero, Business Problem, How It Works, Global, Features (four cards), Prompt, and
+Footer, plus the Docs field-guide page with search. Include anchor destinations
+`#home`, `#how-it-works`, `#global`, `#features`, `#feature-01` through `#feature-04`,
+`#prompt`, and `#footer`. Emit Organization, WebSite,
 SoftwareApplication, and FAQPage JSON-LD. Generate sitemap.xml and robots.txt.
 
 ## Constitution Check
@@ -67,7 +68,7 @@ SoftwareApplication, and FAQPage JSON-LD. Generate sitemap.xml and robots.txt.
 |---|---|
 | React SPA Architecture | Vite + React 18 + TypeScript; functional components; one page and no router. |
 | Typed, Reusable UI | Required atoms, molecules, sections, and typed content modules follow the defined structure. |
-| Vector-First Assets | Inline SVG via SVGR for illustrations, icons, logo, and chain badges; no raster assets except optional OG image. |
+| Vector-First Assets | Inline SVG via SVGR for icons, logo, and badges; optimized responsive raster (AVIF/WebP/JPEG srcset) for hero, banner, and feature illustrations per updated FR-012. |
 | Mobile-First Responsive Design | Validate at 360, 768, 1024, and 1536px; use fluid type with `clamp()`. |
 | Measurable Performance | CI blocks below 0.85 in any category; also measure all specified LCP, CLS, TBT, and gzip-JavaScript budgets. |
 | Accessibility, SEO, and Content Integrity | WCAG AA, keyboard operation, diagram labels, one `h1`, prerendered HTML, complete metadata, JSON-LD, and verified product claims. |
@@ -115,52 +116,65 @@ src/
 │   ├── copy.ts
 │   ├── navigation.ts
 │   ├── chains.ts
-│   ├── faq.ts
-│   └── dashboard.ts
+│   ├── features.ts
+│   ├── types.ts
+│   └── faq.ts
 ├── components/
 │   ├── atoms/
+│   │   ├── AITextRenderer.tsx
 │   │   ├── Button.tsx
 │   │   ├── Badge.tsx
 │   │   ├── GradientText.tsx
 │   │   ├── Icon.tsx
 │   │   ├── CoinIcon.tsx
-│   │   └── ChainBadge.tsx
+│   │   ├── ChainBadge.tsx
+│   │   ├── Logo.tsx
+│   │   ├── PlayIcon.tsx
+│   │   ├── SearchTrigger.tsx
+│   │   └── SearchDialog.tsx
 │   ├── molecules/
-│   │   ├── NavLink.tsx
-│   │   ├── FeatureHeading.tsx
-│   │   ├── StatCard.tsx
-│   │   ├── TransactionRow.tsx
-│   │   └── StatusPill.tsx
+│   │   └── NavLink.tsx
 │   ├── sections/
 │   │   ├── Header.tsx
 │   │   ├── Hero.tsx
-│   │   ├── FeatureColumns.tsx
+│   │   ├── BusinessProblem.tsx
 │   │   ├── HowItWorks.tsx
-│   │   ├── Developers.tsx
-│   │   ├── FAQ.tsx
-│   │   ├── Footer.tsx
-│   │   ├── DashboardDemo.tsx
-│   │   ├── Pricing.tsx
-│   │   ├── SignIn.tsx
-│   │   └── GetStarted.tsx
-│   └── illustrations/
-│       ├── HeroNetwork.tsx
-│       ├── MarketFlow.tsx
-│       ├── EvmHub.tsx
-│       └── WorldMap.tsx
+│   │   ├── SideSection.tsx
+│   │   ├── Features.tsx
+│   │   ├── PromptSection.tsx
+│   │   ├── Developers.tsx      # defined, not mounted on the home route
+│   │   ├── FAQ.tsx             # defined, not mounted on the home route
+│   │   ├── Pricing.tsx         # defined, not mounted on the home route
+│   │   ├── SignIn.tsx          # defined, not mounted on the home route
+│   │   ├── GetStarted.tsx      # defined, not mounted on the home route
+│   │   └── Footer.tsx
+│   └── svg/
+│       └── index.ts            # typed SVGR component registry
+├── pages/
+│   └── Docs.tsx                # Web3j / BPMN / EVM field guide (#/docs hash route)
+├── search/
+│   ├── docsIndex.ts
+│   └── useSiteSearch.ts
 ├── seo/
 │   └── StructuredData.tsx
-├── components/svg/index.ts    # typed SVGR component registry
-├── vite-env.d.ts
-├── assets/svg/                # raw logo, icon, coin, chain, illustration sources
 ├── styles/
 │   └── global.css
+├── vite-env.d.ts
 └── assets/
+    ├── svg/                    # raw logo, icon, coin, chain sources
     └── fonts/
         └── workslate-variable.woff2
 tests/
 ├── unit/
-└── e2e/
+│   ├── components/
+│   ├── pages/
+│   └── app.test.tsx
+├── e2e/
+│   ├── accessibility.spec.ts
+│   ├── marketing-site.spec.ts
+│   ├── navigation-transition.spec.ts
+│   └── responsive.spec.ts
+└── setup.ts
 .github/
 └── workflows/
     ├── ci.yml
@@ -170,11 +184,11 @@ lighthouserc.json
 
 **Structure Decision**: Use one Vite frontend at repository root. Follow the
 constitution's atoms/molecules/sections organization, and keep reusable copy,
-navigation, chains, FAQ, and dashboard demo values in `src/content/*.ts`. Keep
-pricing, sign-in, and get-started anchor destinations as accurately worded regions
-within the planned sections rather than adding separate route or component layers.
-Use `#docs` as the Developers anchor; the feature specification has been updated to
-match the planning request.
+navigation, chains, features, and FAQ in `src/content/*.ts`. Below-the-fold home
+sections are code-split with `React.lazy`/`Suspense`; the Docs field guide lives
+in `src/pages/Docs.tsx` behind the `#/docs` hash route (no router dependency) and
+searches `src/search/docsIndex.ts` via Fuse.js. Feature illustrations are
+optimized raster assets generated by `scripts/optimize-images.mjs`.
 
 ## Phase 0: Research
 

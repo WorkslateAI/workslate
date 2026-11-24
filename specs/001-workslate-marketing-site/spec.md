@@ -6,17 +6,16 @@
 
 **Status**: Draft
 
-**Input**: User description: "Single-page marketing site for Workslate AI (see design/Workslate–SinglePage.png): a platform that tracks and moves tokens across markets and EVM-compatible blockchains with AI-driven automation, peer-to-peer (P2P) transfer workflows and a unified real-time dashboard. Sections: Header with logo, nav (Home, Features, How It Works, Docs, Pricing), Sign In, Get Started; Hero with eyebrow, h1 'From Market to Market. Your Token. Everywhere.', paragraph, two CTAs, SVG market-network illustration (Markets A/B/C, central W token); Feature 01 Seamless Money Movement (market flow with $, €, ₿); Feature 02 EVM Nodes (Ethereum, Polygon, BSC, Arbitrum, Optimism hub diagram); Feature 03 Single Source of Truth (dashboard card: volume, transactions, table); How It Works (P2P workflow steps); Developers (Web3j / Java integration overview); FAQ (supports FAQ structured data) and Footer. SEO keyword targets, used naturally in headings, body copy, alt/aria text and metadata: blockchain, EVM, EVM-compatible nodes, Web3j, Web3j Java integration, P2P workflows, peer-to-peer token transfer, multi-chain token tracking, Web3. Acceptance: matches reference at 1536px; stacks cleanly at 360px; Lighthouse 95+."
+**Input**: User description: "Single-page marketing site for Workslate AI (see design/Workslate–SinglePage.png): an AI-powered financial-orchestration platform for intelligent ledger reconciliation and programmable B2B token movement across EVM-compatible blockchains. Sections: Header with logo, nav (Home, How it works, Global, Docs, Features dropdown), Register for demo CTA, mobile menu; Hero with eyebrow, h1 'Reconcile First. Move Value with Confidence.', typing AI prompt chip, Register for demo and Watch video CTAs, hero image; Business Problem section; How It Works (four-step obligation → reconciliation → authorization → on-chain movement workflow); Global section (Seamless / Secure / Global cards plus world banner image); Features (four cards — Multi-Party Ledger Reconciliation, Corporate Wallet Orchestration, Programmable Settlement Rules, End-to-End Transaction Traceability — with sticky sidebar nav); Prompt section (AI prompt chip with typed 'Ask Workslate AI' response); Footer; Docs page reached via the `#/docs` hash route (Web3j / BPMN / EVM architecture field guide with search); FAQ structured data emitted from typed FAQ records. SEO keyword targets, used naturally in headings, body copy, alt/aria text and metadata: blockchain, EVM, EVM-compatible nodes, Web3j, Web3j Java integration, P2P workflows, peer-to-peer token transfer, multi-chain token tracking, Web3. Acceptance: matches reference at 1536px; stacks cleanly at 360px; Lighthouse 95+."
 
 ## Clarifications
 
 ### Session 2026-10-22
 
 - Q: Does Workslate support Web3j today, or is Web3j integration only planned? → A: Planned only; Web3j integration is not currently supported and must be labeled as roadmap.
-- Q: Where should the Docs navigation link take visitors? → A: The Developers section at `#docs` (the later link-destination decision supersedes the initial external-docs selection).
-- Q: Should the dashboard show static illustrative mock data or a live interactive demo? → A: An interactive demo with simulated data, clearly labeled as a simulation and not live product data.
+- Q: Where should the Docs navigation link take visitors? → A: The Docs page at the `#/docs` hash route — a Web3j / BPMN / EVM architecture field guide with search (supersedes the initial external-docs and in-page Developers-section decisions).
 - Q: What final public domain should the canonical URL and sitemap use? → A: `workslate.ai`, with any `www` variant redirected to the canonical apex domain.
-- Q: What exact destinations should Docs, Pricing, Sign In, Get Started, and Watch Demo use, in that order? → A: Use in-page anchors for all five; link Docs to Developers and add target sections where no matching section exists.
+- Q: What exact destinations should Docs, Pricing, Sign In, Get Started, and Watch Demo use, in that order? → A: Superseded — Docs now uses the `#/docs` hash route and Watch video scrolls to `#how-it-works`; the Pricing, Sign In, and Get Started section components exist but are not mounted on the home route.
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -30,22 +29,22 @@ covers, and how to begin exploring the product.
 marketing site and enables visitors to decide whether to continue.
 
 **Independent Test**: Review the page from its opening section through its feature
-sections and verify the product and its three core capabilities are understandable
+sections and verify the product and its four core capabilities are understandable
 without navigating away.
 
 **Acceptance Scenarios**:
 
 1. **Given** a visitor opens the page, **When** the hero is presented, **Then** it
-   displays the exact heading "From Market to Market. Your Token. Everywhere.", a
-   supporting paragraph, Get Started and Watch Demo calls to action, and a labeled
-   market-network diagram showing Markets A, B, C, and a central W token.
+   displays the exact heading "Reconcile First. Move Value with Confidence.", a
+   supporting paragraph, Register for demo and Watch video calls to action, a typing
+   AI prompt chip, and the hero illustration.
 2. **Given** a visitor explores the feature sections, **When** they reach each
-   capability, **Then** they can identify seamless movement across markets, support
-   for Ethereum, Polygon, BSC, Arbitrum, and Optimism, and the unified dashboard,
-   with demo data clearly identified as simulated.
+   capability, **Then** they can identify multi-party ledger reconciliation,
+   corporate wallet orchestration, programmable settlement rules, and end-to-end
+   transaction traceability.
 3. **Given** a visitor selects a header navigation item, **When** the action completes,
-   **Then** they reach the corresponding page section, including the Developers
-   section for Docs and the matching Pricing, Sign In, or Get Started section.
+   **Then** they reach the corresponding page section or route, including the Docs
+   page at `#/docs` and the Features dropdown entries.
 
 ---
 
@@ -57,17 +56,18 @@ whether the planned Web3j / Java integration is relevant to their needs.
 **Why this priority**: Explaining the workflow and developer integration helps
 qualified visitors evaluate the platform beyond the initial feature summary.
 
-**Independent Test**: Review the How It Works and Developers sections and verify a
-visitor can describe the P2P workflow at a high level and identify Web3j / Java
-integration as planned, not currently supported.
+**Independent Test**: Review the How It Works section and the Docs page at `#/docs`,
+and verify a visitor can describe the P2P workflow at a high level and identify
+Web3j / Java integration as planned, not currently supported.
 
 **Acceptance Scenarios**:
 
 1. **Given** a visitor reaches How It Works, **When** they read the section, **Then**
    they see an ordered, understandable description of the P2P transfer workflow.
-2. **Given** a Java developer reaches Developers, **When** they review the section,
-   **Then** they can find a Web3j Java integration overview explicitly labeled as
-   planned, without claims that it is currently available.
+2. **Given** a Java developer opens the Docs page, **When** they review the field
+   guide, **Then** they can find the Web3j / Java integration overview explicitly
+   labeled as planned, without claims that it is currently available, and can
+   search the guide via the search dialog.
 
 ---
 
@@ -95,7 +95,7 @@ and footer links to verify that they are understandable and usable.
 
 ### Edge Cases
 
-- At a 360px viewport, diagrams, dashboard details, and currency symbols remain
+- At a 360px viewport, diagrams, feature illustrations, and currency symbols remain
   understandable without horizontal page overflow.
 - At a 1536px viewport, the page preserves the reference's section order, composition,
   and visual hierarchy. The available reference images use different page layouts;
@@ -105,8 +105,6 @@ and footer links to verify that they are understandable and usable.
 - If a configured navigation or call-to-action destination is unavailable, the control MUST be disabled (visually grayed out with `aria-disabled="true"`) or removed from the rendered markup.
 - If a product capability or integration detail has not been confirmed, page copy and
   structured data must not state it as fact.
-- If dashboard data is simulated, its status must be clear before visitors can
-  mistake it for live product data.
 - If an FAQ answer changes, its visible content and structured data must remain
   consistent.
 - If external page metadata is unavailable, the page still provides its own complete,
@@ -117,30 +115,32 @@ and footer links to verify that they are understandable and usable.
 ### Functional Requirements
 
 - **FR-001**: The site MUST present the Workslate AI logo and a header with Home,
-  Features, How It Works, Docs, Pricing, Sign In, and Get Started controls. Home MUST
-  navigate to `#home` (the top of the page); Features,
-  How It Works, Docs, and Pricing MUST navigate to `#features`, `#how-it-works`,
-  `#docs`, and `#pricing`, respectively. Sign In and Get Started MUST navigate to
-  `#sign-in` and `#get-started`.
-- **FR-002**: The hero MUST include an eyebrow, the exact heading "From Market to
-  Market. Your Token. Everywhere.", supporting paragraph, Get Started and Watch Demo
-  calls to action, and a market-network illustration identifying Markets A, B, C, and
-  a central W token. Get Started MUST navigate to `#get-started` and Watch Demo MUST
-  navigate to `#dashboard-demo`.
-- **FR-003**: The site MUST present a Seamless Money Movement section with a market
-  flow using $, €, and ₿.
-- **FR-004**: The site MUST present an EVM Nodes section identifying Ethereum,
-  Polygon, BSC, Arbitrum, and Optimism in a hub diagram.
-- **FR-005**: The site MUST present a Single Source of Truth section with a dashboard
-  card showing volume, transactions, and a transaction table in an interactive demo
-  with simulated data that is clearly distinguished from live product data using a
-  prominent "Simulated Data" badge or label visible above or adjacent to the dashboard.
-- **FR-006**: The site MUST present a How It Works section that explains the P2P
-  workflow in ordered steps.
+  How it works, Global, Docs, a Features dropdown (listing the four feature cards),
+  a Register for demo call to action, and a mobile menu. Home MUST navigate to
+  `#home` (the top of the page); How it works and Global MUST navigate to
+  `#how-it-works` and `#global`; Docs MUST navigate to the `#/docs` hash route;
+  Features dropdown entries MUST navigate to `#feature-01` through `#feature-04`.
+- **FR-002**: The hero MUST include an eyebrow, the exact heading "Reconcile First.
+  Move Value with Confidence.", supporting paragraph, Register for demo and Watch
+  video calls to action, a typing AI prompt chip, and the hero illustration. Watch
+  video MUST scroll to `#how-it-works` and trigger the workflow video affordance.
+- **FR-003**: The site MUST present a Business Problem section describing the
+  reconciliation gap with a pain-point card.
+- **FR-004**: The site MUST present a Global section with Seamless, Secure, and
+  Global cards plus a world banner image.
+- **FR-005**: The site MUST present a Features section with four cards — Multi-Party
+  Ledger Reconciliation, Corporate Wallet Orchestration, Programmable Settlement
+  Rules, and End-to-End Transaction Traceability — each with a responsive
+  illustration and a sticky sidebar nav.
+- **FR-006**: The site MUST present a How It Works section that explains the
+  four-step P2P workflow (business obligation, intelligent ledger reconciliation,
+  settlement authorization, on-chain token movement) in ordered steps, plus a
+  Prompt section rendering an AI response with the typing text renderer.
 - **FR-007**: The site MUST present the Web3j / Java integration as planned roadmap
-  work and MUST NOT imply it is currently supported.
-- **FR-008**: The site MUST present an FAQ and footer. FAQ structured data MUST match
-  the questions and answers visible to visitors.
+  work and MUST NOT imply it is currently supported. The Docs page at `#/docs` MUST
+  present the Web3j / BPMN / EVM architecture field guide with working search.
+- **FR-008**: The site MUST present a footer and FAQ structured data. FAQPage JSON-LD
+  MUST be generated from the same typed FAQ records used for FAQ content.
 - **FR-009**: Page copy, headings, metadata, and diagram descriptions MUST use the
   requested terms where contextually appropriate: blockchain, EVM, EVM-compatible nodes,
   Web3j, Web3j Java integration, P2P workflows, peer-to-peer token transfer,
@@ -150,8 +150,10 @@ and footer links to verify that they are understandable and usable.
   product description or independently verified product information.
 - **FR-011**: Equivalent content and controls MUST be presented consistently across
   page sections.
-- **FR-012**: Illustrations, icons, logos, and network badges MUST use vector artwork;
-  raster imagery is not permitted except for an optional Open Graph share image.
+- **FR-012**: Icons, logos, and badges SHOULD prefer vector artwork; raster imagery
+  is permitted for hero, banner, and feature illustrations and MUST be served as
+  responsive AVIF/WebP/JPEG `srcset` variants (480/768/1200/max widths) with
+  explicit dimensions and lazy loading below the fold.
 - **FR-013**: Every page MUST have a unique title, meta description, canonical URL,
   Open Graph metadata, JSON-LD structured data, and exactly one semantic `h1`.
   Content MUST be crawlable in the rendered HTML. The canonical host MUST be
@@ -167,19 +169,18 @@ and footer links to verify that they are understandable and usable.
   seconds, CLS below 0.05, TBT below 150ms, and JavaScript below 100KB gzip.
 - **FR-018**: Lighthouse CI MUST pass as a required merge check.
 - **FR-019**: Every navigation, footer, and call-to-action control MUST have a valid,
-  configured destination or perform a clearly identified in-page action. Docs,
-  Pricing, Sign In, Get Started, and Watch Demo MUST use the in-page destinations
-  specified in FR-001 and FR-002. Footer links MUST be limited to in-page anchors defined in FR-021 until
+  configured destination or perform a clearly identified in-page action. Docs MUST
+  use the `#/docs` route and Watch video the scroll/playback behavior specified in
+  FR-001 and FR-002. Footer links MUST be limited to in-page anchors defined in FR-021 until
   product-approved external destinations are explicitly added to this specification's FR-019 requirement text.
 - **FR-020**: The sitemap MUST use `https://workslate.ai` as its public origin. The
   canonical host `https://workslate.ai` MUST redirect any `www` variant to the apex
   domain (e.g., `https://www.workslate.ai/` → `https://workslate.ai/`).
-- **FR-021**: The page MUST include anchor targets for `#home`, `#features`, `#how-it-works`,
-  `#docs`, `#pricing`, `#sign-in`, `#get-started`, `#dashboard-demo`, `#faq`, and
-  `#footer`. The sign-in, get-started, pricing, and docs sections MUST provide accurate
-  informational content and MUST NOT imply that account authentication, pricing
-  checkout, or other unavailable product functionality is offered by the marketing
-  site.
+- **FR-021**: The page MUST include anchor targets for `#home`, `#how-it-works`,
+  `#global`, `#features`, `#feature-01` through `#feature-04`, `#prompt`, and
+  `#footer`, plus the `#/docs` hash route for the Docs page. Copy MUST NOT imply
+  that account authentication, pricing checkout, or other unavailable product
+  functionality is offered by the marketing site.
 
 ### Key Entities *(include if data involved)*
 
@@ -189,8 +190,6 @@ and footer links to verify that they are understandable and usable.
   destination or in-page action.
 - **Network diagram**: A visual representation of markets or EVM-compatible networks
   and their relationships, with an accessible description.
-- **Dashboard summary**: The sample volume, transaction count, and table content
-  presented in the marketing-site dashboard demo; values are simulated, not live data.
 - **FAQ item**: A visible question and answer pair represented consistently in FAQ
   structured data.
 - **Page metadata**: The page title, description, canonical URL, Open Graph properties,
@@ -222,22 +221,20 @@ and footer links to verify that they are understandable and usable.
 
 ## Assumptions
 
-- This feature is a single public marketing page; it does not implement sign-in,
-  account creation, token transfers, a live transaction feed, or the underlying
-  dashboard product.
-- Docs, Pricing, Sign In, Get Started, and Watch Demo use the in-page anchors specified
-  in FR-001 and FR-002. Footer links are in-page anchors only; external footer
+- This feature is a single public marketing page plus the `#/docs` field-guide
+  route; it does not implement sign-in, account creation, token transfers, or a
+  live transaction feed. The Pricing, Sign In, Get Started, FAQ, and Developers
+  section components remain in the codebase but are not currently mounted on the
+  home route.
+- Footer links are in-page anchors only; external footer
   destinations may be added once product-approved.
 - The final public domain is `workslate.ai`; the `www` variant redirects to the apex
   canonical domain.
-- Home navigates to `#home` (page top); Features, How It Works, Docs, and Pricing navigate to `#features`,
-  `#how-it-works`, `#docs`, and `#pricing`; Sign In and Get Started navigate to
-  `#sign-in` and `#get-started`; Watch Demo navigates to `#dashboard-demo`. Docs is
-  the Developers section. Pricing and account-related copy must be product-approved
-  and must not imply unavailable functionality.
-- Dashboard figures and transaction rows are illustrative marketing content unless
-  verified live data is explicitly provided. The dashboard demo uses simulated data,
-  which must be labeled as such and not presented as live measurements.
+- Home navigates to `#home` (page top); How it works, Global, and Features navigate to
+  `#how-it-works`, `#global`, and `#features` (dropdown entries to `#feature-01`–`#feature-04`);
+  Docs navigates to the `#/docs` hash route; Watch video scrolls to `#how-it-works`.
+  Register for demo is a non-navigating call-to-action affordance. Account-related
+  copy must be product-approved and must not imply unavailable functionality.
 - The provided description is the authority for platform capabilities, except that
   Web3j / Java integration is planned and not currently supported. Additional claims,
   including specific AI behaviors or integration guarantees, require product

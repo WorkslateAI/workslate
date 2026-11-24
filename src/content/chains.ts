@@ -21,14 +21,14 @@ export const roadmapChains: Market[] = [
 
 // SVG icon assets served from public/assets/svg
 export const icons = {
-  loonie: '/assets/svg/loonie-logo.svg',
-  loonieBlue: '/assets/svg/loonie-logo-blue.svg',
-  loonieGoldOnBlack: '/assets/svg/loonie-logo-gold-on-black.svg',
+  LUNAR_512: '/assets/svg/lunar-coin-logo-512.svg',
+  LUNAR_256: '/assets/svg/lunar-coin-logo-256.svg',
+  LUNAR_128: '/assets/svg/lunar-coin-logo-128.svg',
 } as const;
 
 export const currencies = [
   { symbol: '$', name: 'USD' },
   { symbol: '€', name: 'EUR' },
   { symbol: '₿', name: 'BTC' },
-  { symbol: 'Ł', name: 'LOONIE', icon: icons.loonie },
+  { symbol: 'Ł', name: 'LUNAR', icon: icons.LUNAR_256 },
 ];

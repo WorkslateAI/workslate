@@ -22,25 +22,6 @@ export interface Market {
   icon?: string;
 }
 
-// Dashboard Demo and Transaction
-export interface Transaction {
-  id: string;
-  sender: string;
-  receiver: string;
-  chain: string;
-  asset: string;
-  amount: string;
-  status: 'Settled' | 'Pending Authorization';
-}
-
-export interface DashboardData {
-  dataStatus: 'simulated';
-  volume: string;
-  transactionCount: string;
-  transactions: Transaction[];
-  selectedFilter?: string;
-}
-
 // FAQ Item
 export interface FAQItem {
   id: string;

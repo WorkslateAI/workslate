@@ -45,11 +45,11 @@ export const Features: React.FC = () => {
       number: '04',
       title: 'End-to-End Transaction Traceability',
       subtitle: 'Link business records, workflows, smart contracts and blockchain transactions.',
-      image: '/assets/images/token-movement-dashboard.png',
+      image: '/assets/images/token-movement-traceability.png',
       widths: [480, 768, 1200, 2560],
       width: 2560,
       height: 1440,
-      alt: 'End-to-end transaction traceability dashboard',
+      alt: 'End-to-end transaction traceability across records, workflows, and blockchain transactions',
     },
   ];
 

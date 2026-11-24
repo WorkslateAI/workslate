@@ -15,6 +15,9 @@ globalThis.IntersectionObserver = class IntersectionObserver {
 // Mock scrollIntoView
 Element.prototype.scrollIntoView = vi.fn();
 
+// Mock scrollTo (not implemented in jsdom)
+window.scrollTo = vi.fn();
+
 // Mock matchMedia (not implemented in jsdom)
 if (typeof window !== 'undefined' && typeof window.matchMedia !== 'function') {
   window.matchMedia = vi.fn().mockImplementation((query: string) => ({

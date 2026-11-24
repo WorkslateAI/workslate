@@ -36,7 +36,7 @@ Built with **GitHub Spec Kit** (spec-driven development). The spec is the source
 | 2 | Define design tokens (gradient, navy, spacing, fluid type) | One source of styling truth |
 | 3 | Build atoms and the SVG icon library | Button, Badge, GradientText, CoinIcon, ChainBadge |
 | 4 | Build Header and Hero (incl. market network SVG) | LCP-critical section is lightweight |
-| 5 | Build the 3 feature columns and dashboard card | Market flow, EVM hub, token dashboard |
+| 5 | Build the 3 feature columns and traceability card | Market flow, EVM hub, token traceability |
 | 6 | Build How It Works, Developers and FAQ sections | P2P workflow and Web3j content |
 | 7 | Add the SEO layer | Metadata, JSON-LD, sitemap, robots, prerender |
 | 8 | Performance tuning | Lazy-load, font subset, budgets |
@@ -235,11 +235,11 @@ workslate-spa/
 ├── src/
 │   ├── components/
 │   │   ├── atoms/       # Button, Badge, GradientText, CoinIcon, ChainBadge
-│   │   ├── molecules/   # NavLink, StatCard, TransactionRow, StatusPill
+│   │   ├── molecules/   # NavLink
 │   │   ├── sections/    # Header, Hero, BusinessProblem, HowItWorks, SideSection, Features, PromptSection, Footer
 │   │   └── svg/         # Typed SVG component registry
 │   ├── pages/           # Docs page (reached via the #/docs hash route)
-│   ├── content/         # Typed copy, nav, chains, FAQ, mock dashboard data
+│   ├── content/         # Typed copy, nav, chains, FAQ
 │   ├── seo/             # Metadata and JSON-LD helpers
 │   ├── styles/          # Tailwind layers and tokens
 │   └── main.tsx

@@ -14,7 +14,9 @@ npm run dev
 ```
 
 Open the Vite URL and verify the header, section links, and CTAs reach their existing
-anchors, including the Developers section at `#docs`.
+anchors (`#home`, `#how-it-works`, `#global`, `#features`, `#feature-01`–`#feature-04`,
+`#prompt`, `#footer`) and that the Docs link opens the field-guide page at `#/docs`
+with working search (Ctrl/Cmd+K or `/`).
 
 ## Production and test checks
 
@@ -30,8 +32,8 @@ Expected outcomes:
 - Unit/component tests pass.
 - Production output contains prerendered headings, copy, FAQ answers, metadata, and
   structured data.
-- Playwright verifies navigation and layout at 360px, 768px, 1024px, and 1536px,
-  without horizontal overflow.
+- Playwright verifies navigation, the home ↔ `#/docs` route transition, and layout
+  at 360px, 768px, 1024px, and 1536px, without horizontal overflow.
 - Axe checks report no serious or critical accessibility violations; manually
   inspect keyboard use, reduced motion, and diagram descriptions.
 
@@ -47,5 +49,5 @@ threshold is the feature acceptance criterion; record pass or fail per category.
 Verify the canonical URL, Open Graph URL, and sitemap use `https://workslate.ai/`;
 robots.txt references `https://workslate.ai/sitemap.xml`; the page has exactly one
 `h1`; all requested JSON-LD types are in the prerendered document; FAQ JSON-LD
-matches visible FAQ content; dashboard values are labeled simulated; and Web3j
-integration is described as planned, not currently supported.
+matches visible FAQ content; and Web3j integration is described as planned, not
+currently supported.

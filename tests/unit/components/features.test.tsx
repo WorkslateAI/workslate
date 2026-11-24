@@ -1,6 +1,20 @@
-import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 import { Features } from '../../../src/components/sections/Features';
+
+let observerCallback: IntersectionObserverCallback | null = null;
+
+class MockIntersectionObserver {
+  constructor(cb: IntersectionObserverCallback) {
+    observerCallback = cb;
+  }
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+  takeRecords() {
+    return [];
+  }
+}
 
 describe('Features Section', () => {
   it('renders all four feature cards', () => {
@@ -61,5 +75,40 @@ describe('Features Section', () => {
       fireEvent.click(sidebarButtons[0]);
       expect(mockScrollIntoView).toHaveBeenCalled();
     }
+  });
+
+  describe('scroll-spy', () => {
+    beforeEach(() => {
+      observerCallback = null;
+      globalThis.IntersectionObserver =
+        MockIntersectionObserver as unknown as typeof IntersectionObserver;
+    });
+
+    afterEach(() => {
+      vi.restoreAllMocks();
+    });
+
+    it('highlights the sidebar button of the intersecting feature', () => {
+      render(<Features />);
+
+      const sidebarButton = screen.getByRole('button', {
+        name: /Corporate Wallet Orchestration/,
+      });
+      expect(sidebarButton.className).not.toContain('bg-lavender-200');
+
+      act(() => {
+        observerCallback?.(
+          [
+            {
+              isIntersecting: true,
+              target: { id: 'feature-02' } as Element,
+            } as IntersectionObserverEntry,
+          ],
+          {} as IntersectionObserver,
+        );
+      });
+
+      expect(sidebarButton.className).toContain('bg-lavender-200');
+    });
   });
 });

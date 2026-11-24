@@ -14,7 +14,7 @@ const images = [
   'hero-markets-abc-workslate-centre.png',
   'local-wallet-international-tokens.png',
   'evm-nodes-workslate.png',
-  'token-movement-dashboard.png',
+  'token-movement-traceability.png',
   'market-a-b-c-currency-tokens.png',
   'wallet-orchestration.png',
   'logo-mark.png',

@@ -175,4 +175,78 @@ describe('AITextRenderer', () => {
     unmount();
     expect(clearSpy).toHaveBeenCalled();
   });
+
+  it('renders italic emphasis inline', () => {
+    const { container } = render(
+      <AITextRenderer text="an *emphasized* word" speed={50} />,
+    );
+    advanceSteps(3_000);
+
+    expect(container.querySelector('em')?.textContent).toBe('emphasized');
+  });
+
+  it('renders ordered lists in block mode', () => {
+    const { container } = render(
+      <AITextRenderer as="div" speed={1} text={'1. first\n2. second'} />,
+    );
+    advanceSteps(10_000);
+
+    expect(container.querySelectorAll('ol li')).toHaveLength(2);
+  });
+
+  it('scrolls a scrollable ancestor while revealing when autoScroll is set', () => {
+    const scroller = document.createElement('div');
+    scroller.style.overflowY = 'auto';
+    Object.defineProperty(scroller, 'scrollHeight', {
+      value: 500,
+      configurable: true,
+    });
+    Object.defineProperty(scroller, 'clientHeight', {
+      value: 100,
+      configurable: true,
+    });
+    scroller.scrollTo = vi.fn();
+
+    render(<AITextRenderer text="scroll please" speed={50} autoScroll />, {
+      container: scroller,
+    });
+
+    advanceSteps(200);
+    expect(scroller.scrollTo).toHaveBeenCalledWith(
+      expect.objectContaining({ top: 500 }),
+    );
+  });
+
+  it('falls back to a no-op subscription when matchMedia is unavailable', () => {
+    const original = window.matchMedia;
+    // @ts-expect-error intentionally removing the API
+    window.matchMedia = undefined;
+
+    const { container } = render(
+      <AITextRenderer text="no media queries" speed={50} />,
+    );
+    advanceSteps(3_000);
+    expect(container.textContent).toBe('no media queries');
+
+    window.matchMedia = original;
+  });
+
+  it('hydrates server-rendered output without a visual restart', async () => {
+    const { renderToString } = await import('react-dom/server');
+    const { hydrateRoot } = await import('react-dom/client');
+
+    const html = renderToString(<AITextRenderer text="Hydrated" speed={50} />);
+    const host = document.createElement('div');
+    host.innerHTML = html;
+    document.body.appendChild(host);
+
+    await act(async () => {
+      hydrateRoot(host, <AITextRenderer text="Hydrated" speed={50} />);
+    });
+
+    advanceSteps(3_000);
+    expect(host.textContent).toBe('Hydrated');
+
+    host.remove();
+  });
 });

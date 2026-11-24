@@ -118,6 +118,57 @@ describe('App navigation transitions', () => {
     link.remove();
   });
 
+  it('ignores clicks that do not originate inside an anchor', () => {
+    renderApp();
+    const div = document.createElement('div');
+    document.body.appendChild(div);
+
+    const notPrevented = fireEvent.click(div);
+    expect(notPrevented).toBe(true);
+    expect(document.body.classList.contains('page-leaving')).toBe(false);
+
+    div.remove();
+  });
+
+  it('does not intercept .html links that open in a new tab', () => {
+    renderApp();
+    const link = document.createElement('a');
+    link.href = '/privacy.html';
+    link.target = '_blank';
+    document.body.appendChild(link);
+
+    const notPrevented = fireEvent.click(link);
+    expect(notPrevented).toBe(true);
+    expect(document.body.classList.contains('page-leaving')).toBe(false);
+
+    link.remove();
+  });
+
+  it('navigates to .html pages immediately when prefers-reduced-motion is set', () => {
+    vi.spyOn(window, 'matchMedia').mockImplementation((query: string) => ({
+      matches: true,
+      media: query,
+      onchange: null,
+      addListener: vi.fn(),
+      removeListener: vi.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      dispatchEvent: vi.fn(),
+    }) as MediaQueryList);
+
+    renderApp();
+    const link = document.createElement('a');
+    link.href = '/privacy.html';
+    document.body.appendChild(link);
+
+    const notPrevented = fireEvent.click(link);
+    // Navigation is still prevented, but no fade-out class is applied.
+    expect(notPrevented).toBe(false);
+    expect(document.body.classList.contains('page-leaving')).toBe(false);
+
+    link.remove();
+  });
+
   it('swaps instantly without fade classes when prefers-reduced-motion is set', async () => {
     vi.spyOn(window, 'matchMedia').mockImplementation((query: string) => ({
       matches: true,

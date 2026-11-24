@@ -1,4 +1,4 @@
-  data, or currently available Web3j support.
+---
 description: "Implementation tasks for the Workslate AI marketing site"
 ---
 
@@ -48,7 +48,7 @@ and a prerender-compatible app shell required by all user stories.
 - [X] T011 [P] Define Tailwind CSS-first gradient, navy, spacing, typography, breakpoints, focus, and reduced-motion tokens in `src/styles/global.css`.
 - [X] T012 [P] Create shared Button, Badge, GradientText, and Icon SVG atoms in `src/components/atoms/Button.tsx`, `src/components/atoms/Badge.tsx`, `src/components/atoms/GradientText.tsx`, and `src/components/atoms/Icon.tsx`, consuming SVGR components from `src/components/svg/index.ts`; ensure icons have explicit dimensions and meaningful accessible names when not decorative.
 - [X] T013 [P] Create CoinIcon and ChainBadge SVG atoms with explicit dimensions, using SVGR components from `src/components/svg/index.ts`, in `src/components/atoms/CoinIcon.tsx` and `src/components/atoms/ChainBadge.tsx`.
-- [X] T014 Create the semantic page composition with exactly one `h1` and stable anchors for `#home`, `#features`, `#how-it-works`, `#docs`, `#pricing`, `#sign-in`, `#get-started`, `#dashboard-demo`, `#faq`, and `#footer` in `src/App.tsx`.
+- [X] T014 Create the semantic page composition with exactly one `h1` and stable anchors for `#home`, `#features`, `#how-it-works`, `#docs`, `#pricing`, `#sign-in`, `#get-started`, `#faq`, and `#footer` in `src/App.tsx`.
 - [X] T015 [P] Add one appropriately licensed, self-hosted, subsetted variable font file at `src/assets/fonts/workslate-variable.woff2` and declare `font-display: swap` in `src/styles/global.css`.
 - [X] T016 [P] Add a gzip-size checker for production JavaScript that fails above 100KB in `scripts/check-js-budget.mjs`.
 
@@ -57,18 +57,18 @@ stable page anchors are ready for story components.
 
 ## Phase 3: User Story 1 - Understand the Product (Priority: P1) 🎯 MVP
 
-**Goal**: Build the header, hero, three feature columns, and clearly simulated
-dashboard card that communicate the product at a glance.
+**Goal**: Build the header, hero, and feature sections that communicate the
+product at a glance.
 
 **Independent Test**: Preview the prerendered page at 360px and 1536px. Verify the
 exact hero heading, labeled market diagram, three feature descriptions, specified
-chain and currency labels, simulated dashboard notice, and working navigation/CTA
+chain and currency labels, and working navigation/CTA
 anchors with no horizontal overflow.
 
 ### Tests for User Story 1
 
-- [X] T017 [P] [US1] Test header destinations, exact hero heading, market/currency/chain labels, feature titles, and visible simulated-data notice in `tests/unit/components/marketing-content.test.tsx`.
-- [X] T018 [P] [US1] Test hero and dashboard rendering, all in-page links, prerendered content, and responsive overflow at 360px and 1536px in `tests/e2e/marketing-site.spec.ts`.
+- [X] T017 [P] [US1] Test header destinations, exact hero heading, market/currency/chain labels, feature titles in `tests/unit/components/marketing-content.test.tsx`.
+- [X] T018 [P] [US1] Test hero and feature rendering, all in-page links, prerendered content, and responsive overflow at 360px and 1536px in `tests/e2e/marketing-site.spec.ts`.
 
 ### Implementation for User Story 1
 
@@ -79,11 +79,9 @@ anchors with no horizontal overflow.
 - [X] T023 [US1] Implement the typed responsive NavLink molecule and Header with Home (`#home`), Features, How It Works, Docs (`#docs`), Pricing, Sign In, and Get Started anchors in `src/components/molecules/NavLink.tsx` and `src/components/sections/Header.tsx`.
 - [X] T024 [US1] Implement Hero with eyebrow, exact `From Market to Market. Your Token. Everywhere.` heading, supporting paragraph, Get Started and Watch Demo CTAs, and HeroNetwork in `src/components/sections/Hero.tsx`.
 - [X] T025 [P] [US1] Implement FeatureHeading and the three-column Seamless Money Movement, EVM Nodes, and Single Source of Truth sections in `src/components/molecules/FeatureHeading.tsx` and `src/components/sections/FeatureColumns.tsx`.
-- [X] T026 [P] [US1] Add volume, transaction count, and sample transaction rows with a mandatory simulated-data label in `src/content/dashboard.ts`; do not describe samples as live data.
 - [X] T027 [P] [US1] Implement StatCard, TransactionRow, and StatusPill molecules in `src/components/molecules/StatCard.tsx`, `src/components/molecules/TransactionRow.tsx`, and `src/components/molecules/StatusPill.tsx`.
-- [X] T028 [US1] Implement the keyboard-operable dashboard sample at `#dashboard-demo` with an always-visible simulated-data notice in `src/components/sections/DashboardDemo.tsx`.
 - [X] T029 [US1] Add accurate Pricing, Sign In, and Get Started anchor regions without implying checkout or authentication exists in `src/components/sections/Pricing.tsx`, `src/components/sections/SignIn.tsx`, and `src/components/sections/GetStarted.tsx`.
-- [X] T030 [US1] Compose the Header, Hero, FeatureColumns, DashboardDemo, and CTA anchor regions in `src/App.tsx`; ensure the requested links resolve and exactly one `h1` is rendered.
+- [X] T030 [US1] Compose the Header, Hero, Features, and CTA anchor regions in `src/App.tsx`; ensure the requested links resolve and exactly one `h1` is rendered.
 
 **Checkpoint**: The P1 marketing journey is understandable and navigable without
 the later story sections.
@@ -174,7 +172,7 @@ code-split safely, and enforce requested automated quality checks.
 ### User Story Dependencies
 
 - **US1 (P1)**: First deliverable and MVP; includes the core marketing proposition,
-  features, navigation, and dashboard simulation.
+  features, and navigation.
 - **US2 (P2)**: Adds workflow explanation and roadmap disclosure after the common
   page shell is established.
 - **US3 (P3)**: Adds FAQ, FAQ structured data, and footer after shared SEO support is
@@ -208,7 +206,7 @@ Task: T022 Build feature SVG illustrations in src/components/illustrations/Marke
 
 1. Complete Setup and Foundation.
 2. Implement and independently validate US1.
-3. Confirm desktop reference matching, mobile stacking, simulated dashboard labeling,
+3. Confirm desktop reference matching, mobile stacking,
    navigation, and prerendered content.
 4. Continue with US2 and US3, then complete the SEO, performance, accessibility, and
    CI phase before merge.
@@ -265,6 +263,17 @@ gates pass.
 
 - [X] T076 Add a `Trigger Vercel deployment` step that POSTs to `secrets.VERCEL_DEPLOY_HOOK_URL` on pushes to `main` after unit tests, the production build, the JS budget check, and E2E tests pass in `.github/workflows/ci.yml`; document the Vercel deploy-hook creation and secret setup in `README.md`.
 
+## Phase 10: Content Refresh and Docs Route
+
+**Purpose**: Bring the page composition, hero copy, and navigation to the current
+implementation; add the Docs field-guide route; and remove the dashboard demo.
+
+- [X] T077 Replace the FeatureColumns/illustration composition with the current home sections — Header (Home, How it works, Global, Docs, Features dropdown, Register for demo), Hero, BusinessProblem, HowItWorks, SideSection (`#global`), Features (four cards `#feature-01`–`#feature-04` with responsive raster images and sticky sidebar nav), PromptSection, and Footer — in `src/App.tsx` and `src/components/sections/`.
+- [X] T078 Update hero and marketing copy: exact heading "Reconcile First. Move Value with Confidence.", AI prompt chip typing via `AITextRenderer`, and "Register for demo" / "Watch video" CTAs in `src/components/sections/Hero.tsx` and `src/content/copy.ts`.
+- [X] T079 [P] Add the Docs field-guide page on the `#/docs` hash route with Fuse.js search in `src/pages/Docs.tsx`, `src/search/docsIndex.ts`, `src/search/useSiteSearch.ts`, and the `SearchTrigger`/`SearchDialog` atoms.
+- [X] T080 Remove the dashboard demo: delete `src/content/dashboard.ts`, `src/components/sections/DashboardDemo.tsx`, and the `StatCard`/`TransactionRow`/`StatusPill`/`FeatureHeading`/`FeatureColumns` components; clean `src/content/types.ts` and `tests/unit/components/marketing-content.test.tsx`.
+- [X] T081 [P] Rename `token-movement-dashboard` image assets to `token-movement-traceability` across `public/assets/images/` and `design/`, update the Features card image and `scripts/optimize-images.mjs`, and remove dashboard wording from `src/components/sections/Features.tsx`, `src/components/sections/SignIn.tsx`, `src/seo/StructuredData.tsx`, `README.md`, and the spec docs.
+
 ## Notes
 
 - Task IDs are sequential and each task uses a checkbox, ID, explicit file path,
@@ -272,4 +281,7 @@ gates pass.
 - The Lighthouse threshold is >= 0.85 for both the feature acceptance criterion and
   the CI gate, consistent with the constitution.
 - Do not implement authentication, checkout, live token transfer, live transaction
----
+  feed data, or currently available Web3j support.
+- Tasks T021-T030 describe the original page composition; where Phase 10 replaced
+  or removed those components the current codebase and `plan.md` structure tree
+  are authoritative.

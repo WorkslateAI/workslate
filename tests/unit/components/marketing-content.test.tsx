@@ -3,7 +3,6 @@ import { heroCopy } from '../../../src/content/copy';
 import { headerNavigation } from '../../../src/content/navigation';
 import { markets, chains, roadmapChains } from '../../../src/content/chains';
 import { features } from '../../../src/content/features';
-import { dashboardData } from '../../../src/content/dashboard';
 
 describe('Marketing Content', () => {
   describe('Hero Copy', () => {
@@ -75,32 +74,6 @@ describe('Marketing Content', () => {
       expect(features[1].title).toBe('Corporate Wallet Orchestration');
       expect(features[2].title).toBe('Programmable Settlement Rules');
       expect(features[3].title).toBe('End-to-End Transaction Traceability');
-    });
-  });
-
-  describe('Dashboard Data', () => {
-    it('is marked as simulated', () => {
-      expect(dashboardData.dataStatus).toBe('simulated');
-    });
-
-    it('contains volume and transaction count', () => {
-      expect(dashboardData.volume).toBeDefined();
-      expect(dashboardData.transactionCount).toBeDefined();
-    });
-
-    it('contains sample transactions', () => {
-      expect(dashboardData.transactions).toHaveLength(3);
-      expect(dashboardData.transactions[0].id).toBe('tx-001');
-    });
-
-    it('transactions settle between business counterparties on Ethereum', () => {
-      dashboardData.transactions.forEach((tx) => {
-        expect(tx.sender).toBeTruthy();
-        expect(tx.receiver).toBeTruthy();
-        expect(tx.chain).toBe('Ethereum');
-        expect(tx.asset).toBe('USDC');
-        expect(['Settled', 'Pending Authorization']).toContain(tx.status);
-      });
     });
   });
 });

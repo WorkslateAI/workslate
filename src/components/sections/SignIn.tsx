@@ -7,7 +7,7 @@ export const SignIn: React.FC = () => {
         <div className="bg-navy-900 border border-navy-700 rounded-lg p-8 shadow-sm">
           <h2 className="text-2xl font-bold text-white mb-6 text-center">Sign In</h2>
           <p className="text-navy-300 text-center mb-6">
-            Sign in to access your dashboard and manage your token movements.
+            Sign in to track and manage your token movements across markets.
           </p>
           
           <div className="space-y-4">

@@ -39,4 +39,28 @@ describe('FAQ Component', () => {
     const openedAnswer = screen.queryByText(faqItems[0].answer);
     expect(openedAnswer).toBeInTheDocument();
   });
+
+  it('toggles FAQ item with Enter and Space keys', () => {
+    render(<FAQ />);
+    const button = screen.getByRole('button', { name: faqItems[0].question });
+
+    fireEvent.keyDown(button, { key: 'Enter' });
+    expect(screen.getByText(faqItems[0].answer)).toBeInTheDocument();
+
+    fireEvent.keyDown(button, { key: ' ' });
+    expect(screen.queryByText(faqItems[0].answer)).not.toBeInTheDocument();
+  });
+
+  it('closes an open item when a different item is opened', () => {
+    render(<FAQ />);
+    const first = screen.getByRole('button', { name: faqItems[0].question });
+    const second = screen.getByRole('button', { name: faqItems[1].question });
+
+    fireEvent.click(first);
+    expect(screen.getByText(faqItems[0].answer)).toBeInTheDocument();
+
+    fireEvent.click(second);
+    expect(screen.queryByText(faqItems[0].answer)).not.toBeInTheDocument();
+    expect(screen.getByText(faqItems[1].answer)).toBeInTheDocument();
+  });
 });

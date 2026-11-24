@@ -95,7 +95,7 @@
 | hero-markets-abc-workslate-centre.png | 1,489 | PNG | < 150 |
 | local-wallet-international-tokens.png | 1,554 | PNG | < 150 |
 | evm-nodes-workslate.png | 673 | PNG | < 150 |
-| token-movement-dashboard.png | 620 | PNG | < 150 |
+| token-movement-traceability.png | 620 | PNG | < 150 |
 | market-a-b-c-currency-tokens.png | 491 | PNG | < 80 |
 | logo-mark.png | 188 | PNG | < 80 |
 | workslate-Logo.png | 103 | PNG | < 80 |
@@ -159,18 +159,18 @@
 1. ✅ T057: Baseline Lighthouse audit
 2. ✅ T058: Record baseline metrics
 3. ✅ T059: Bundle analysis
-4. ⏭️ T060: Identify all raster images
-5. ⏭️ T061: Install image optimization tooling
-6. ⏭️ T062: Convert images to AVIF/WebP
-7. ⏭️ T063: Generate responsive sizes
-8. ⏭️ T064: Add explicit dimensions
-9. ⏭️ T065: Optimize LCP image
-10. ⏭️ T066: Add preload for LCP image
-11. ⏭️ T067: Add lazy loading
-12. ⏭️ T068: Convert logos to SVG if possible
-13. ⏭️ T069: Re-run Lighthouse audit
-14. ⏭️ T070: Additional optimization if needed
-15. ⏭️ T071: Document final results
+4. ✅ T060: Identify all raster images
+5. ✅ T061: Install image optimization tooling
+6. ✅ T062: Convert images to AVIF/WebP
+7. ✅ T063: Generate responsive sizes
+8. ✅ T064: Add explicit dimensions
+9. ✅ T065: Optimize LCP image
+10. ✅ T066: Add preload for LCP image
+11. ✅ T067: Add lazy loading
+12. ✅ T068: Convert logos to SVG if possible
+13. ✅ T069: Re-run Lighthouse audit
+14. ✅ T070: Additional optimization if needed
+15. ✅ T071: Document final results
 
 ## Success Criteria
 

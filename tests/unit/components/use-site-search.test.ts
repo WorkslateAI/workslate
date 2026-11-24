@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi, afterEach } from 'vitest';
 import { renderHook, act } from '@testing-library/react';
 import { useSiteSearch } from '../../../src/search/useSiteSearch';
 
@@ -41,5 +41,71 @@ describe('useSiteSearch', () => {
       'isReady',
       'error',
     ]);
+  });
+
+  it('returns matching results after the debounce delay', () => {
+    vi.useFakeTimers();
+    const { result } = renderHook(() => useSiteSearch());
+
+    act(() => {
+      result.current.setQuery('web3j');
+    });
+    // Debounced: results stay empty until the timer fires.
+    expect(result.current.results).toEqual([]);
+
+    act(() => {
+      vi.advanceTimersByTime(200);
+    });
+
+    expect(result.current.results.length).toBeGreaterThan(0);
+    expect(result.current.results[0].item.title.toLowerCase()).toContain('web3j');
+  });
+
+  it('clears results for queries shorter than 2 characters', () => {
+    vi.useFakeTimers();
+    const { result } = renderHook(() => useSiteSearch());
+
+    act(() => {
+      result.current.setQuery('web3j');
+      vi.advanceTimersByTime(200);
+    });
+    expect(result.current.results.length).toBeGreaterThan(0);
+
+    act(() => {
+      result.current.setQuery('w');
+      vi.advanceTimersByTime(200);
+    });
+    expect(result.current.results).toEqual([]);
+  });
+
+  it('debounces rapid query changes and searches only the latest value', () => {
+    vi.useFakeTimers();
+    const { result } = renderHook(() => useSiteSearch());
+
+    act(() => {
+      result.current.setQuery('web3j');
+      result.current.setQuery('bpmn');
+      vi.advanceTimersByTime(200);
+    });
+
+    expect(result.current.results.length).toBeGreaterThan(0);
+    expect(result.current.results[0].item.title.toLowerCase()).toContain('bpmn');
+  });
+
+  it('prioritizes exact title matches in result ordering', () => {
+    vi.useFakeTimers();
+    const { result } = renderHook(() => useSiteSearch());
+
+    act(() => {
+      result.current.setQuery('EVM');
+      vi.advanceTimersByTime(200);
+    });
+
+    expect(result.current.results.length).toBeGreaterThan(0);
+    expect(result.current.results[0].item.title).toBe('EVM');
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
   });
 });
