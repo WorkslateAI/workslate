@@ -35,9 +35,9 @@ export const Features: React.FC = () => {
       title: 'Programmable Settlement Rules',
       subtitle: 'Enforce compliance, transfer limits and conditional payment authorization.',
       image: '/assets/images/evm-nodes-workslate.png',
-      widths: [480, 768, 1200],
-      width: 1200,
-      height: 654,
+      widths: [480, 768, 1200, 2560],
+      width: 2560,
+      height: 1440,
       alt: 'EVM nodes enforcing programmable settlement rules',
     },
     {
@@ -150,36 +150,23 @@ export const Features: React.FC = () => {
                 </div>
                 <div className="flex justify-center mt-4 lg:mt-6">
                   <picture>
-                    {/* Mobile (<=640px): fixed 480w variants per format */}
+                    {/* Full width-described srcset per format: the browser
+                        picks the smallest variant that satisfies the rendered
+                        size at the device's DPR, on every viewport. */}
                     <source
-                      media="(max-width: 640px)"
-                      srcSet={feature.image.replace('.png', '-480w.avif')}
+                      srcSet={buildSrcSet(feature.image, feature.widths, 'avif')}
+                      sizes="(max-width: 1024px) calc(100vw - 98px), 720px"
                       type="image/avif"
                     />
                     <source
-                      media="(max-width: 640px)"
-                      srcSet={feature.image.replace('.png', '-480w.webp')}
-                      type="image/webp"
-                    />
-                    <source
-                      media="(max-width: 640px)"
-                      srcSet={feature.image.replace('.png', '-480w.jpeg')}
-                    />
-                    {/* Tablet/desktop: resolution-based variants */}
-                    <source
-                      srcSet={buildSrcSet(feature.image, feature.widths.slice(1), 'avif')}
-                      sizes="(max-width: 1023px) calc(100vw - 96px), 720px"
-                      type="image/avif"
-                    />
-                    <source
-                      srcSet={buildSrcSet(feature.image, feature.widths.slice(1), 'webp')}
-                      sizes="(max-width: 1023px) calc(100vw - 96px), 720px"
+                      srcSet={buildSrcSet(feature.image, feature.widths, 'webp')}
+                      sizes="(max-width: 1024px) calc(100vw - 98px), 720px"
                       type="image/webp"
                     />
                     <img
                       src={feature.image.replace('.png', '-768w.jpeg')}
                       srcSet={buildSrcSet(feature.image, feature.widths, 'jpeg')}
-                      sizes="(max-width: 640px) 480px, (max-width: 1023px) calc(100vw - 96px), 720px"
+                      sizes="(max-width: 1024px) calc(100vw - 98px), 720px"
                       alt={feature.alt}
                       width={feature.width}
                       height={feature.height}
