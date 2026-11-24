@@ -20,7 +20,12 @@ class MockIntersectionObserver {
 function triggerIntersect() {
   act(() => {
     observerCallback?.(
-      [{ isIntersecting: true, target: document.createElement('div') } as IntersectionObserverEntry],
+      [
+        {
+          isIntersecting: true,
+          target: document.createElement('div'),
+        } as unknown as IntersectionObserverEntry,
+      ],
       {} as IntersectionObserver,
     );
   });
