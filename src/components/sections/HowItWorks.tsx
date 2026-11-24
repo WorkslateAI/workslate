@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { PlayIcon } from '../atoms/PlayIcon';
+import { howItWorksCopy } from '../../content/copy';
 
 export const HowItWorks: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -10,32 +11,7 @@ export const HowItWorks: React.FC = () => {
     return () => window.removeEventListener('workslate:play-how-it-works-video', handlePlayRequest);
   }, []);
 
-  const steps = [
-    {
-      id: '01',
-      label: 'Business Obligation',
-      title: 'Connect Your Business Records',
-      description: 'Connect invoices, payment terms and corporate wallets.',
-    },
-    {
-      id: '02',
-      label: 'Intelligent Ledger Reconciliation',
-      title: 'Reconcile Before You Move',
-      description: 'AI agents validate balances and resolve discrepancies.',
-    },
-    {
-      id: '03',
-      label: 'Settlement Authorization',
-      title: 'Validate. Approve. Authorize.',
-      description: 'Approve reconciled amounts, wallets and compliance rules',
-    },
-    {
-      id: '04',
-      label: 'On-Chain Token Movement',
-      title: 'Execute. Verify. Settle.',
-      description: 'Execute smart contract transfers and verify settlement.',
-    },
-  ];
+  const steps = howItWorksCopy.steps;
 
   return (
     <section id="how-it-works" className="py-12 lg:py-20 bg-white">
@@ -46,7 +22,7 @@ export const HowItWorks: React.FC = () => {
               How it works-
             </h2>
             <p className="text-primary-600 font-semibold text-[12px] lg:text-xs uppercase tracking-widest">
-              Four steps from obligation to settlement
+              {howItWorksCopy.eyebrow}
             </p>
           </div>
 

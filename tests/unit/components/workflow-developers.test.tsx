@@ -1,20 +1,22 @@
 import { describe, it, expect } from 'vitest';
-import { p2pWorkflowCopy, developersCopy } from '../../../src/content/copy';
+import { howItWorksCopy, developersCopy } from '../../../src/content/copy';
 
 describe('Workflow and Developers Content', () => {
-  describe('P2P Workflow', () => {
+  describe('How It Works Workflow', () => {
     it('contains ordered steps', () => {
-      expect(p2pWorkflowCopy.steps).toHaveLength(3);
-      expect(p2pWorkflowCopy.steps[0].step).toBe(1);
-      expect(p2pWorkflowCopy.steps[1].step).toBe(2);
-      expect(p2pWorkflowCopy.steps[2].step).toBe(3);
+      expect(howItWorksCopy.steps).toHaveLength(4);
+      expect(howItWorksCopy.steps[0].id).toBe('01');
+      expect(howItWorksCopy.steps[1].id).toBe('02');
+      expect(howItWorksCopy.steps[2].id).toBe('03');
+      expect(howItWorksCopy.steps[3].id).toBe('04');
     });
 
     it('step titles are descriptive', () => {
-      const titles = p2pWorkflowCopy.steps.map(s => s.title);
-      expect(titles).toContain('Connect Your Wallet');
-      expect(titles).toContain('Select Source & Destination');
-      expect(titles).toContain('Execute P2P Transfer');
+      const titles = howItWorksCopy.steps.map(s => s.title);
+      expect(titles).toContain('Connect Your Business Records');
+      expect(titles).toContain('Reconcile Before You Move');
+      expect(titles).toContain('Validate. Approve. Authorize.');
+      expect(titles).toContain('Execute. Verify. Settle.');
     });
   });
 

@@ -3,17 +3,22 @@ import type { Feature } from './types';
 export const features: Feature[] = [
   {
     number: '01',
-    title: 'Seamless Money Movement',
-    description: 'Move tokens across markets and currencies with automated routing and real-time tracking.',
+    title: 'Multi-Party Ledger Reconciliation',
+    description: 'Match business obligations, invoices, credits and settlements across counterparties.',
   },
   {
     number: '02',
-    title: 'EVM Nodes',
-    description: 'Support for Ethereum, Polygon, BSC, Arbitrum, and Optimism with unified multi-chain management.',
+    title: 'Corporate Wallet Orchestration',
+    description: 'Connect verified business wallets and coordinate token movements.',
   },
   {
     number: '03',
-    title: 'Single Source of Truth',
-    description: 'Unified dashboard showing volume, transactions, and real-time token positions across all markets.',
+    title: 'Programmable Settlement Rules',
+    description: 'Enforce compliance, transfer limits and conditional payment authorization.',
+  },
+  {
+    number: '04',
+    title: 'End-to-End Transaction Traceability',
+    description: 'Link business records, workflows, smart contracts and blockchain transactions.',
   },
 ];

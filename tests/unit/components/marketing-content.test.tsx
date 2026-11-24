@@ -1,23 +1,23 @@
 import { describe, it, expect } from 'vitest';
 import { heroCopy } from '../../../src/content/copy';
 import { headerNavigation } from '../../../src/content/navigation';
-import { markets, chains } from '../../../src/content/chains';
+import { markets, chains, roadmapChains } from '../../../src/content/chains';
 import { features } from '../../../src/content/features';
 import { dashboardData } from '../../../src/content/dashboard';
 
 describe('Marketing Content', () => {
   describe('Hero Copy', () => {
-    it('contains exact heading "From Market to Market. Your Token. Everywhere."', () => {
-      expect(heroCopy.heading).toBe('From Market to Market. Your Token. Everywhere.');
+    it('contains exact heading "Reconcile First. Move Value with Confidence."', () => {
+      expect(heroCopy.heading).toBe('Reconcile First. Move Value with Confidence.');
     });
 
     it('contains eyebrow text', () => {
-      expect(heroCopy.eyebrow).toBe('AI-Powered Token Movement');
+      expect(heroCopy.eyebrow).toContain('AI-Powered');
     });
 
-    it('contains Get Started and Watch Demo CTAs', () => {
-      expect(heroCopy.getStarted).toBe('Get Started');
-      expect(heroCopy.watchDemo).toBe('Watch Demo');
+    it('contains Register for demo and Watch video CTAs', () => {
+      expect(heroCopy.getStarted).toBe('Register for demo');
+      expect(heroCopy.watchDemo).toBe('Watch video');
     });
   });
 
@@ -47,28 +47,34 @@ describe('Marketing Content', () => {
       expect(marketNames).toContain('Market C');
     });
 
-    it('contains Ethereum, Polygon, BSC, Arbitrum, and Optimism', () => {
+    it('supports Ethereum as the current chain', () => {
       const chainNames = chains.map(c => c.name);
       expect(chainNames).toContain('Ethereum');
-      expect(chainNames).toContain('Polygon');
-      expect(chainNames).toContain('BSC');
-      expect(chainNames).toContain('Arbitrum');
-      expect(chainNames).toContain('Optimism');
+    });
+
+    it('lists Polygon, BSC, Arbitrum, and Optimism as roadmap chains', () => {
+      const roadmapNames = roadmapChains.map(c => c.name);
+      expect(roadmapNames).toContain('Polygon');
+      expect(roadmapNames).toContain('BSC');
+      expect(roadmapNames).toContain('Arbitrum');
+      expect(roadmapNames).toContain('Optimism');
     });
   });
 
   describe('Features', () => {
-    it('contains three features with correct numbers', () => {
-      expect(features).toHaveLength(3);
+    it('contains four features with correct numbers', () => {
+      expect(features).toHaveLength(4);
       expect(features[0].number).toBe('01');
       expect(features[1].number).toBe('02');
       expect(features[2].number).toBe('03');
+      expect(features[3].number).toBe('04');
     });
 
-    it('feature titles match specification', () => {
-      expect(features[0].title).toBe('Seamless Money Movement');
-      expect(features[1].title).toBe('EVM Nodes');
-      expect(features[2].title).toBe('Single Source of Truth');
+    it('feature titles match the live section', () => {
+      expect(features[0].title).toBe('Multi-Party Ledger Reconciliation');
+      expect(features[1].title).toBe('Corporate Wallet Orchestration');
+      expect(features[2].title).toBe('Programmable Settlement Rules');
+      expect(features[3].title).toBe('End-to-End Transaction Traceability');
     });
   });
 
@@ -85,6 +91,16 @@ describe('Marketing Content', () => {
     it('contains sample transactions', () => {
       expect(dashboardData.transactions).toHaveLength(3);
       expect(dashboardData.transactions[0].id).toBe('tx-001');
+    });
+
+    it('transactions settle between business counterparties on Ethereum', () => {
+      dashboardData.transactions.forEach((tx) => {
+        expect(tx.sender).toBeTruthy();
+        expect(tx.receiver).toBeTruthy();
+        expect(tx.chain).toBe('Ethereum');
+        expect(tx.asset).toBe('USDC');
+        expect(['Settled', 'Pending Authorization']).toContain(tx.status);
+      });
     });
   });
 });

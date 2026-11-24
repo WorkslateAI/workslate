@@ -11,8 +11,5 @@
 // Chains (will be populated as chain badges are added)
 // export { default as ChainName } from '../../assets/svg/chains/chain-name.svg?react';
 
-// Illustrations
-export { default as HeroNetwork } from '../../assets/svg/illustrations/hero-network.svg?react';
-export { default as MarketFlow } from '../../assets/svg/illustrations/market-flow.svg?react';
-export { default as EvmHub } from '../../assets/svg/illustrations/evm-hub.svg?react';
-export { default as WorldMap } from '../../assets/svg/illustrations/world-map.svg?react';
+// Illustrations (will be populated as illustrations are added)
+// export { default as IllustrationName } from '../../assets/svg/illustrations/illustration-name.svg?react';

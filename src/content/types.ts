@@ -5,18 +5,9 @@ export interface NavigationItem {
   location: 'header' | 'footer';
 }
 
-// Content Section
-export interface ContentSection {
-  id: string;
-  heading: string;
-  eyebrow?: string;
-  copy: string;
-  order: number;
-}
-
 // Feature and Illustration
 export interface Feature {
-  number: '01' | '02' | '03';
+  number: '01' | '02' | '03' | '04';
   title: string;
   description: string;
   illustration?: string;
@@ -34,11 +25,12 @@ export interface Market {
 // Dashboard Demo and Transaction
 export interface Transaction {
   id: string;
-  sourceMarket: string;
-  destinationMarket: string;
+  sender: string;
+  receiver: string;
   chain: string;
+  asset: string;
   amount: string;
-  status: string;
+  status: 'Settled' | 'Pending Authorization';
 }
 
 export interface DashboardData {
@@ -54,24 +46,4 @@ export interface FAQItem {
   id: string;
   question: string;
   answer: string;
-}
-
-// Page Metadata
-export interface PageMetadata {
-  title: string;
-  description: string;
-  canonicalUrl: string;
-  openGraph: {
-    title: string;
-    description: string;
-    type: string;
-    url: string;
-    image?: string;
-  };
-  twitter: {
-    card: string;
-    title: string;
-    description: string;
-    image?: string;
-  };
 }

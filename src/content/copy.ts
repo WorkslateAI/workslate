@@ -1,28 +1,38 @@
 export const heroCopy = {
-  eyebrow: 'AI-Powered Token Movement',
-  heading: 'From Market to Market. Your Token. Everywhere.',
-  description: 'Track and move tokens across markets and EVM-compatible blockchains with AI-driven automation, peer-to-peer transfer workflows, and a unified real-time dashboard.',
-  getStarted: 'Get Started',
-  watchDemo: 'Watch Demo',
+  eyebrow: 'AI-Powered • Financial Orchestration • Blockchain-Ready',
+  heading: 'Reconcile First. Move Value with Confidence.',
+  description: 'Workslate connects business obligations, financial ledgers and corporate wallets to enable validated, compliant and auditable business-to-business token transfers.',
+  getStarted: 'Register for demo',
+  watchDemo: 'Watch video',
 };
 
-export const p2pWorkflowCopy = {
-  heading: 'How It Works',
+export const howItWorksCopy = {
+  heading: 'How it works',
+  eyebrow: 'Four steps from obligation to settlement',
   steps: [
     {
-      step: 1,
-      title: 'Connect Your Wallet',
-      description: 'Securely link your wallet to access cross-market token tracking and movement capabilities.',
+      id: '01',
+      label: 'Business Obligation',
+      title: 'Connect Your Business Records',
+      description: 'Connect invoices, payment terms and corporate wallets.',
     },
     {
-      step: 2,
-      title: 'Select Source & Destination',
-      description: 'Choose your source market and destination blockchain from supported EVM-compatible networks.',
+      id: '02',
+      label: 'Intelligent Ledger Reconciliation',
+      title: 'Reconcile Before You Move',
+      description: 'AI agents validate balances and resolve discrepancies.',
     },
     {
-      step: 3,
-      title: 'Execute P2P Transfer',
-      description: 'Initiate peer-to-peer token transfers with AI-optimized routing for best execution.',
+      id: '03',
+      label: 'Settlement Authorization',
+      title: 'Validate. Approve. Authorize.',
+      description: 'Approve reconciled amounts, wallets and compliance rules.',
+    },
+    {
+      id: '04',
+      label: 'On-Chain Token Movement',
+      title: 'Execute. Verify. Settle.',
+      description: 'Execute smart contract transfers and verify settlement.',
     },
   ],
 };
@@ -37,17 +47,22 @@ export const developersCopy = {
 export const featureCopy = {
   feature01: {
     number: '01',
-    title: 'Seamless Money Movement',
-    description: 'Move tokens across markets and currencies with automated routing and real-time tracking.',
+    title: 'Multi-Party Ledger Reconciliation',
+    description: 'Match business obligations, invoices, credits and settlements across counterparties.',
   },
   feature02: {
     number: '02',
-    title: 'EVM Nodes',
-    description: 'Support for Ethereum, Polygon, BSC, Arbitrum, and Optimism with unified multi-chain management.',
+    title: 'Corporate Wallet Orchestration',
+    description: 'Connect verified business wallets and coordinate token movements.',
   },
   feature03: {
     number: '03',
-    title: 'Single Source of Truth',
-    description: 'Unified dashboard showing volume, transactions, and real-time token positions across all markets.',
+    title: 'Programmable Settlement Rules',
+    description: 'Enforce compliance, transfer limits and conditional payment authorization.',
+  },
+  feature04: {
+    number: '04',
+    title: 'End-to-End Transaction Traceability',
+    description: 'Link business records, workflows, smart contracts and blockchain transactions.',
   },
 };

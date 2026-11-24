@@ -4,12 +4,12 @@ export const faqItems: FAQItem[] = [
   {
     id: 'faq-1',
     question: 'What is Workslate AI?',
-    answer: 'Workslate AI is a platform that tracks and moves tokens across markets and EVM-compatible blockchains with AI-driven automation, peer-to-peer transfer workflows, and a unified real-time dashboard.',
+    answer: 'Workslate AI connects business obligations, financial ledgers and corporate wallets to enable validated, compliant and auditable business-to-business token transfers with intelligent ledger reconciliation.',
   },
   {
     id: 'faq-2',
     question: 'Which blockchains does Workslate support?',
-    answer: 'Workslate supports Ethereum, Polygon, BSC, Arbitrum, and Optimism. We are continuously adding support for additional EVM-compatible networks.',
+    answer: 'Workslate supports Ethereum and Stablecoin. We are continuously adding support for additional EVM-compatible networks.',
   },
   {
     id: 'faq-3',
@@ -18,8 +18,8 @@ export const faqItems: FAQItem[] = [
   },
   {
     id: 'faq-4',
-    question: 'How does the P2P transfer work?',
-    answer: 'Our P2P transfer workflow allows you to connect your wallet, select source and destination markets, and execute token transfers with AI-optimized routing for best execution across supported blockchains.',
+    question: 'How does the transfer workflow work?',
+    answer: 'Connect your business records and corporate wallets, let AI agents reconcile obligations, approve the settlement authorization, then execute on-chain token transfers with verified settlement.'
   },
   {
     id: 'faq-5',

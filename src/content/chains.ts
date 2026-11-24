@@ -6,16 +6,29 @@ export const markets: Market[] = [
   { id: 'market-c', name: 'Market C', category: 'market', order: 3 },
 ];
 
+// Currently supported chain: Ethereum (stablecoin settlement)
 export const chains: Market[] = [
   { id: 'ethereum', name: 'Ethereum', category: 'chain', order: 1 },
-  { id: 'polygon', name: 'Polygon', category: 'chain', order: 2 },
-  { id: 'bsc', name: 'BSC', category: 'chain', order: 3 },
-  { id: 'arbitrum', name: 'Arbitrum', category: 'chain', order: 4 },
-  { id: 'optimism', name: 'Optimism', category: 'chain', order: 5 },
 ];
+
+// EVM-compatible networks on the roadmap (see FAQ: continuously adding support)
+export const roadmapChains: Market[] = [
+  { id: 'polygon', name: 'Polygon', category: 'chain', order: 1 },
+  { id: 'bsc', name: 'BSC', category: 'chain', order: 2 },
+  { id: 'arbitrum', name: 'Arbitrum', category: 'chain', order: 3 },
+  { id: 'optimism', name: 'Optimism', category: 'chain', order: 4 },
+];
+
+// SVG icon assets served from public/assets/svg
+export const icons = {
+  loonie: '/assets/svg/loonie-logo.svg',
+  loonieBlue: '/assets/svg/loonie-logo-blue.svg',
+  loonieGoldOnBlack: '/assets/svg/loonie-logo-gold-on-black.svg',
+} as const;
 
 export const currencies = [
   { symbol: '$', name: 'USD' },
   { symbol: '€', name: 'EUR' },
   { symbol: '₿', name: 'BTC' },
+  { symbol: 'Ł', name: 'LOONIE', icon: icons.loonie },
 ];
