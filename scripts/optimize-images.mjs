@@ -16,6 +16,7 @@ const images = [
   'evm-nodes-workslate.png',
   'token-movement-dashboard.png',
   'market-a-b-c-currency-tokens.png',
+  'wallet-orchestration.png',
   'logo-mark.png',
   'workslate-Logo.png',
   'logo.png',
