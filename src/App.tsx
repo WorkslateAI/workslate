@@ -115,7 +115,7 @@ function App() {
 
       if (prefersReducedMotion()) {
         routeRef.current = next;
-        window.scrollTo(0, 0);
+        window.scrollTo({ top: 0, behavior: 'instant' });
         setRoute(next);
         return;
       }
@@ -139,7 +139,7 @@ function App() {
     const timeout = window.setTimeout(() => {
       pendingRouteRef.current = null;
       routeRef.current = next;
-      window.scrollTo(0, 0);
+      window.scrollTo({ top: 0, behavior: 'instant' });
       setRoute(next);
       setDidNavigate(true);
       setVisible(true);
