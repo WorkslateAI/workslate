@@ -84,13 +84,15 @@ describe('Hero Section', () => {
     window.removeEventListener('workslate:play-how-it-works-video', playListener);
   });
 
-  it('animates loading dots and applies the confidence class when typing completes', () => {
+  it('applies the confidence class at first paint and animates loading dots', () => {
     vi.useFakeTimers();
     vi.spyOn(Math, 'random').mockReturnValue(0.5);
 
     const { container } = render(<Hero />);
     const confidence = container.querySelector('.hero-confidence')!;
-    expect(confidence.className).not.toContain('hero-confidence-animate');
+    // Applied from first paint — gating it on the typing effect delayed the
+    // h1's settled paint and inflated LCP.
+    expect(confidence.className).toContain('hero-confidence-animate');
 
     // Dots interval ticks every 500ms
     const dots = () => container.querySelector('[class*="3ch"]')?.textContent;
@@ -99,13 +101,10 @@ describe('Hero Section', () => {
     });
     expect(dots()).toBe('.');
 
-    // Character-by-character typing completes after ~2.5s at speed 35
-    for (let i = 0; i < 80; i++) {
-      act(() => {
-        vi.advanceTimersByTime(100);
-      });
-    }
-    expect(confidence.className).toContain('hero-confidence-animate');
+    act(() => {
+      vi.advanceTimersByTime(500);
+    });
+    expect(dots()).toBe('..');
 
     vi.useRealTimers();
   });

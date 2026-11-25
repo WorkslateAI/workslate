@@ -1,8 +1,19 @@
-import { describe, it, expect, vi, afterEach } from 'vitest';
+import { describe, it, expect, vi, afterEach, beforeAll } from 'vitest';
 import { renderHook, act } from '@testing-library/react';
 import { useSiteSearch } from '../../../src/search/useSiteSearch';
 
 describe('useSiteSearch', () => {
+  // Fuse.js loads via dynamic import on first search. Warm the module-level
+  // singleton once with real timers so the fake-timer tests below resolve
+  // getFuse() within a single microtask flush.
+  beforeAll(async () => {
+    const { result } = renderHook(() => useSiteSearch());
+    await act(async () => {
+      result.current.setQuery('web3j');
+      await new Promise((resolve) => setTimeout(resolve, 250));
+    });
+  });
+
   it('initializes ready with empty state', () => {
     const { result } = renderHook(() => useSiteSearch());
 
@@ -43,7 +54,7 @@ describe('useSiteSearch', () => {
     ]);
   });
 
-  it('returns matching results after the debounce delay', () => {
+  it('returns matching results after the debounce delay', async () => {
     vi.useFakeTimers();
     const { result } = renderHook(() => useSiteSearch());
 
@@ -53,7 +64,9 @@ describe('useSiteSearch', () => {
     // Debounced: results stay empty until the timer fires.
     expect(result.current.results).toEqual([]);
 
-    act(() => {
+    // Fuse.js loads via dynamic import — the async act flushes its promise
+    // alongside the debounce timer.
+    await act(async () => {
       vi.advanceTimersByTime(200);
     });
 
@@ -61,28 +74,28 @@ describe('useSiteSearch', () => {
     expect(result.current.results[0].item.title.toLowerCase()).toContain('web3j');
   });
 
-  it('clears results for queries shorter than 2 characters', () => {
+  it('clears results for queries shorter than 2 characters', async () => {
     vi.useFakeTimers();
     const { result } = renderHook(() => useSiteSearch());
 
-    act(() => {
+    await act(async () => {
       result.current.setQuery('web3j');
       vi.advanceTimersByTime(200);
     });
     expect(result.current.results.length).toBeGreaterThan(0);
 
-    act(() => {
+    await act(async () => {
       result.current.setQuery('w');
       vi.advanceTimersByTime(200);
     });
     expect(result.current.results).toEqual([]);
   });
 
-  it('debounces rapid query changes and searches only the latest value', () => {
+  it('debounces rapid query changes and searches only the latest value', async () => {
     vi.useFakeTimers();
     const { result } = renderHook(() => useSiteSearch());
 
-    act(() => {
+    await act(async () => {
       result.current.setQuery('web3j');
       result.current.setQuery('bpmn');
       vi.advanceTimersByTime(200);
@@ -92,11 +105,11 @@ describe('useSiteSearch', () => {
     expect(result.current.results[0].item.title.toLowerCase()).toContain('bpmn');
   });
 
-  it('prioritizes exact title matches in result ordering', () => {
+  it('prioritizes exact title matches in result ordering', async () => {
     vi.useFakeTimers();
     const { result } = renderHook(() => useSiteSearch());
 
-    act(() => {
+    await act(async () => {
       result.current.setQuery('EVM');
       vi.advanceTimersByTime(200);
     });

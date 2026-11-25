@@ -53,7 +53,10 @@ export const Hero: React.FC = () => {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center mt-8 lg:mt-12">
           <div className="space-y-6 order-2 lg:order-1">
             <h1 id="page-heading" className="text-[40.8px] font-heading font-bold text-text-900 leading-[1.1] tracking-tight">
-              Reconcile First. Move Value <span className={`hero-confidence text-primary-600${promptDone ? ' hero-confidence-animate' : ''}`}>with Confidence.</span>
+              {/* The confidence span animates from first paint — gating it on
+                  promptDone (~2.4s of typing) delayed the h1's settled paint
+                  and inflated LCP. */}
+              Reconcile First. Move Value <span className="hero-confidence hero-confidence-animate text-primary-600">with Confidence.</span>
             </h1>
 
             <p className="text-text-900 font-semibold text-sm lg:text-base leading-relaxed max-w-xl">
@@ -123,6 +126,9 @@ export const Hero: React.FC = () => {
                   sizes="(max-width: 1023px) calc(100vw - 48px), 680px"
                   type="image/webp"
                 />
+                {/* fetchpriority spread: React 18 drops camelCase
+                    fetchPriority with a warning; the lowercase DOM spelling
+                    is correct but missing from its JSX typings. */}
                 <img
                   src="/assets/images/hero-markets-abc-workslate-centre-1200w.jpeg"
                   srcSet="/assets/images/hero-markets-abc-workslate-centre-480w.jpeg 480w,
@@ -134,8 +140,8 @@ export const Hero: React.FC = () => {
                   width="2400"
                   height="1350"
                   loading="eager"
-                  fetchPriority="high"
                   decoding="async"
+                  {...({ fetchpriority: 'high' } as React.ImgHTMLAttributes<HTMLImageElement>)}
                   className="w-full h-auto"
                 />
               </picture>

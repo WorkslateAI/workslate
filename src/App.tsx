@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useRef, useState } from 'react';
+import { lazy, Suspense, useEffect, useRef, useState, type ComponentType } from 'react';
 import './styles/global.css';
 import { Header } from './components/sections/Header';
 import { Hero } from './components/sections/Hero';
@@ -6,23 +6,42 @@ import { Footer } from './components/sections/Footer';
 import { StructuredData } from './seo/StructuredData';
 
 // Below-fold sections are lazy: the streaming SSG render still emits their
-// full HTML (SEO/paint unaffected), but they leave the entry bundle and React
-// hydrates each Suspense boundary on demand — smaller eval, smaller TBT.
-const LazyBusinessProblem = lazy(() =>
+// full HTML (SEO/paint unaffected), but they leave the entry bundle.
+// Chunk fetches are deferred to idle time so below-fold hydration doesn't
+// compete with the LCP window — dehydrated Suspense boundaries keep the
+// server DOM until React can render them.
+function lazyIdle<T extends { default: ComponentType<{}> }>(
+  loader: () => Promise<T>,
+) {
+  return lazy(() => {
+    if (
+      typeof window === 'undefined' ||
+      typeof window.requestIdleCallback !== 'function'
+    ) {
+      return loader();
+    }
+    return new Promise<T>((resolve) => {
+      window.requestIdleCallback(() => resolve(loader()), { timeout: 3000 });
+    });
+  });
+}
+
+const LazyBusinessProblem = lazyIdle(() =>
   import('./components/sections/BusinessProblem').then((module) => ({ default: module.BusinessProblem })),
 );
-const LazyHowItWorks = lazy(() =>
+const LazyHowItWorks = lazyIdle(() =>
   import('./components/sections/HowItWorks').then((module) => ({ default: module.HowItWorks })),
 );
-const LazySideSection = lazy(() =>
+const LazySideSection = lazyIdle(() =>
   import('./components/sections/SideSection').then((module) => ({ default: module.SideSection })),
 );
-const LazyFeatures = lazy(() =>
+const LazyFeatures = lazyIdle(() =>
   import('./components/sections/Features').then((module) => ({ default: module.Features })),
 );
-const LazyPromptSection = lazy(() =>
+const LazyPromptSection = lazyIdle(() =>
   import('./components/sections/PromptSection').then((module) => ({ default: module.PromptSection })),
 );
+// Docs stays eager-warm: main.tsx preloads this chunk for /#/docs deep links.
 const LazyDocs = lazy(() =>
   import('./pages/Docs').then((module) => ({ default: module.Docs })),
 );

@@ -6,6 +6,7 @@ export const Docs: React.FC = () => {
   const [termFilter, setTermFilter] = useState<string>('all');
   const [copyButtonText, setCopyButtonText] = useState<string>('Copy example');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [renderStage, setRenderStage] = useState(0);
 
   const handleFilterTerms = (category: string) => {
     setTermFilter(category);
@@ -64,6 +65,23 @@ String txHash = receipt.getTransactionHash();
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [isSearchOpen]);
+
+  // Progressive render: paint the hero + first section in the initial commit
+  // (that's the LCP element), then mount the remaining sections over successive
+  // idle tasks. Splitting this page's large render into smaller tasks keeps the
+  // main thread free for paint and shrinks TBT.
+  useEffect(() => {
+    if (renderStage >= 2 || typeof window === 'undefined') return;
+    if (typeof window.requestIdleCallback === 'function') {
+      const id = window.requestIdleCallback(
+        () => setRenderStage((s) => s + 1),
+        { timeout: 600 },
+      );
+      return () => window.cancelIdleCallback(id);
+    }
+    const id = window.setTimeout(() => setRenderStage((s) => s + 1), 0);
+    return () => window.clearTimeout(id);
+  }, [renderStage]);
 
   const terms = [
     { id: 'web3j', cat: 'workflow', title: 'Web3j', badge: 'Java SDK', desc: 'Java integration library for Ethereum JSON-RPC, ABI encoding, contract wrappers, transaction submission and event/log access.', code: 'Java → JSON-RPC → node' },
@@ -148,6 +166,7 @@ String txHash = receipt.getTransactionHash();
           </article>
         </div>
 
+        {renderStage >= 1 && (<>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', gap: '20px', margin: '36px 0 18px', flexWrap: 'wrap' }}>
           <div>
             <div style={{ color: '#0c9b79', fontSize: '13.2px', letterSpacing: '.13em', textTransform: 'uppercase', fontWeight: '850' }}>02 / System view</div>
@@ -319,7 +338,9 @@ String txHash = receipt.getTransactionHash();
           <span style={{ color: '#85b8a7' }}>{'//'} duplicate events, reorg handling, key custody, gas and nonce coordination.</span>
         </div>
         <p style={{ color: '#62736e', fontSize: '15.6px', lineHeight: '1.65', maxWidth: '650px' }}>The snippet is illustrative and assumes a compatible contract wrapper and APIs. In production, avoid blocking a workflow worker for long confirmation waits; persist the hash and resume the process from a message, timer or job.</p>
+        </>)}
 
+        {renderStage >= 2 && (<>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', gap: '20px', margin: '36px 0 18px', flexWrap: 'wrap' }}>
           <div>
             <div style={{ color: '#0c9b79', fontSize: '13.2px', letterSpacing: '.13em', textTransform: 'uppercase', fontWeight: '850' }}>06 / Design decisions</div>
@@ -386,6 +407,7 @@ String txHash = receipt.getTransactionHash();
           <span>Web3j × BPMN × EVM · Architecture reference</span>
           <span>Self-contained document webpage · Use as a learning and design aid</span>
         </footer>
+        </>)}
       </div>
 
       <SearchDialog isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />

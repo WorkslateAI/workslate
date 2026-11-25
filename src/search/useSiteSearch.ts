@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
-import Fuse, { type FuseResult } from 'fuse.js';
+import type Fuse from 'fuse.js';
+import type { FuseResult } from 'fuse.js';
 import { docsIndex, type SearchRecord } from './docsIndex';
 
 interface UseSiteSearchReturn {
@@ -11,29 +12,34 @@ interface UseSiteSearchReturn {
   error: string | null;
 }
 
-// Fuse instance is built lazily on first search — it ships inside the
-// lazy-loaded Docs chunk, so it never affects the initial page bundle, and
-// deferring index construction keeps it out of chunk evaluation (TBT).
+// Fuse is imported dynamically on first search — the ~26 KB library splits
+// into its own chunk, keeping the Docs page chunk small for route LCP, and
+// index construction is deferred off the critical path (TBT).
 let fuse: Fuse<SearchRecord> | null = null;
+let fusePromise: Promise<Fuse<SearchRecord>> | null = null;
 
-function getFuse(): Fuse<SearchRecord> {
-  if (!fuse) {
-    fuse = new Fuse<SearchRecord>(docsIndex, {
-      keys: [
-        { name: 'title', weight: 0.5 },
-        { name: 'breadcrumb', weight: 0.2 },
-        { name: 'content', weight: 0.25 },
-        { name: 'code', weight: 0.05 },
-      ],
-      threshold: 0.3,
-      ignoreLocation: true,
-      minMatchCharLength: 2,
-      includeMatches: true,
-      includeScore: true,
-      useExtendedSearch: false,
+async function getFuse(): Promise<Fuse<SearchRecord>> {
+  if (fuse) return fuse;
+  if (!fusePromise) {
+    fusePromise = import('fuse.js').then(({ default: FuseModule }) => {
+      fuse = new FuseModule<SearchRecord>(docsIndex, {
+        keys: [
+          { name: 'title', weight: 0.5 },
+          { name: 'breadcrumb', weight: 0.2 },
+          { name: 'content', weight: 0.25 },
+          { name: 'code', weight: 0.05 },
+        ],
+        threshold: 0.3,
+        ignoreLocation: true,
+        minMatchCharLength: 2,
+        includeMatches: true,
+        includeScore: true,
+        useExtendedSearch: false,
+      });
+      return fuse;
     });
   }
-  return fuse;
+  return fusePromise;
 }
 
 export function useSiteSearch(): UseSiteSearchReturn {
@@ -41,30 +47,37 @@ export function useSiteSearch(): UseSiteSearchReturn {
   const [results, setResults] = useState<FuseResult<SearchRecord>[]>([]);
   const debounceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Debounced search
+  // Debounced search — Fuse resolves async on first use; discard stale
+  // results if the query moved on while the module was loading.
+  const latestQueryRef = useRef('');
   const performSearch = useCallback((searchQuery: string) => {
     const trimmedQuery = searchQuery.trim();
-    
+    latestQueryRef.current = trimmedQuery;
+
     if (trimmedQuery.length < 2) {
       setResults([]);
       return;
     }
 
-    const searchResults = getFuse().search(trimmedQuery, { limit: 10 });
-    
-    // Sort exact title matches first
-    searchResults.sort((a: FuseResult<SearchRecord>, b: FuseResult<SearchRecord>) => {
-      const aExact = a.item.title.toLowerCase() === trimmedQuery.toLowerCase();
-      const bExact = b.item.title.toLowerCase() === trimmedQuery.toLowerCase();
-      
-      if (aExact && !bExact) return -1;
-      if (!aExact && bExact) return 1;
-      
-      // Then by score
-      return (a.score || 0) - (b.score || 0);
-    });
+    void getFuse().then((instance) => {
+      if (latestQueryRef.current !== trimmedQuery) return;
 
-    setResults(searchResults);
+      const searchResults = instance.search(trimmedQuery, { limit: 10 });
+
+      // Sort exact title matches first
+      searchResults.sort((a: FuseResult<SearchRecord>, b: FuseResult<SearchRecord>) => {
+        const aExact = a.item.title.toLowerCase() === trimmedQuery.toLowerCase();
+        const bExact = b.item.title.toLowerCase() === trimmedQuery.toLowerCase();
+
+        if (aExact && !bExact) return -1;
+        if (!aExact && bExact) return 1;
+
+        // Then by score
+        return (a.score || 0) - (b.score || 0);
+      });
+
+      setResults(searchResults);
+    });
   }, []);
 
   // Debounced query handler
