@@ -6,8 +6,18 @@ export const HowItWorks: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
-    const handlePlayRequest = () => setIsPlaying(true);
+    const win = window as unknown as { __workslatePlayHowItWorks?: boolean };
+    const handlePlayRequest = () => {
+      win.__workslatePlayHowItWorks = false;
+      setIsPlaying(true);
+    };
     window.addEventListener('workslate:play-how-it-works-video', handlePlayRequest);
+    // The play request can fire before this idle-deferred section hydrates;
+    // honor the persisted flag so it isn't lost.
+    if (win.__workslatePlayHowItWorks) {
+      win.__workslatePlayHowItWorks = false;
+      setIsPlaying(true);
+    }
     return () => window.removeEventListener('workslate:play-how-it-works-video', handlePlayRequest);
   }, []);
 

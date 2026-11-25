@@ -83,6 +83,10 @@ export const Hero: React.FC = () => {
                 size="lg"
                 className="flex items-center justify-center space-x-2"
                 onClick={() => {
+                  // HowItWorks hydrates on idle; the flag lets it honor a
+                  // play request that fired before its listener registered.
+                  (window as unknown as { __workslatePlayHowItWorks?: boolean })
+                    .__workslatePlayHowItWorks = true;
                   document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' });
                   window.dispatchEvent(new CustomEvent('workslate:play-how-it-works-video'));
                 }}
