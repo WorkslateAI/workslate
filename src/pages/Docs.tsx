@@ -319,7 +319,7 @@ String txHash = receipt.getTransactionHash();
             <div style={{ color: '#0c9b79', fontSize: '13.2px', letterSpacing: '.13em', textTransform: 'uppercase', fontWeight: '850' }}>05 / Example interaction</div>
             <h2 id="web3j-flow" style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', letterSpacing: '-.035em', fontSize: '33.6px', margin: '7px 0 0', scrollMarginTop: '80px' }}>Illustrative Java + Web3j flow</h2>
           </div>
-          <button onClick={handleCopyCode} style={{ cursor: 'pointer', font: 'inherit', border: '1px solid #dce7e1', color: '#182a28', background: '#123b36', borderRadius: '9px', padding: '9px 12px', fontSize: '14.4px', fontWeight: '750' }}>{copyButtonText}</button>
+          <button onClick={handleCopyCode} style={{ cursor: 'pointer', font: 'inherit', border: '1px solid #dce7e1', color: '#ffffff', background: '#123b36', borderRadius: '9px', padding: '9px 12px', fontSize: '14.4px', fontWeight: '750' }}>{copyButtonText}</button>
         </div>
 
         <div style={{ background: '#152a27', color: '#e1f6ed', padding: '19px', borderRadius: '14px', overflow: 'auto', overflowWrap: 'anywhere', fontFamily: 'ui-monospace,SFMono-Regular,Consolas,monospace', fontSize: '14.4px', lineHeight: '1.8' }}>
