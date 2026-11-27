@@ -21,7 +21,7 @@ export const StructuredData: React.FC = () => {
     '@type': 'Organization',
     name: 'Workslate AI',
     url: 'https://workslate.ai',
-    description: 'AI-powered financial orchestration for ledger reconciliation and peer-to-peer token transfer across EVM-compatible blockchains and Web3 networks.',
+    description: 'AI-powered financial orchestration: ledger reconciliation and programmable B2B token transfers across EVM-compatible blockchains and Web3 networks.',
   };
 
   const webSiteData = {
@@ -29,7 +29,7 @@ export const StructuredData: React.FC = () => {
     '@type': 'WebSite',
     name: 'Workslate AI',
     url: 'https://workslate.ai',
-    description: 'Multi-chain token tracking, ledger reconciliation and P2P token transfer workflows across EVM-compatible blockchains.',
+    description: 'Reconcile first, move value with confidence. Ledger reconciliation and programmable B2B token transfers across EVM-compatible blockchains.',
   };
 
   const softwareApplicationData = {
@@ -38,7 +38,7 @@ export const StructuredData: React.FC = () => {
     name: 'Workslate AI',
     applicationCategory: 'FinanceApplication',
     operatingSystem: 'Web',
-    description: 'AI-powered platform for ledger reconciliation, programmable settlement and multi-chain token tracking across EVM-compatible blockchain networks.',
+    description: 'AI-powered platform for intelligent ledger reconciliation, programmable settlement rules and multi-chain token tracking across EVM-compatible blockchain networks.',
     offers: {
       '@type': 'Offer',
       price: '0',
@@ -48,8 +48,8 @@ export const StructuredData: React.FC = () => {
 
   return (
     <Helmet>
-      <title>Workslate AI - From Market to Market. Your Token. Everywhere.</title>
-      <meta name="description" content="Workslate AI: AI-powered ledger reconciliation and peer-to-peer token transfer across EVM-compatible blockchains. Multi-chain token tracking for Web3 finance." />
+      <title>Workslate | Ledger Reconciliation & Programmable B2B Token Transfers</title>
+      <meta name="description" content="Reconcile first, move value with confidence. Workslate links obligations, ledgers and corporate wallets for validated, compliant, auditable B2B token transfers." />
       <meta name="keywords" content="blockchain, EVM, EVM-compatible nodes, Web3j, Web3j Java integration, P2P workflows, peer-to-peer token transfer, multi-chain token tracking, Web3, ledger reconciliation, B2B token movement" />
       <link rel="canonical" href="https://workslate.ai/" />
 
@@ -73,15 +73,15 @@ export const StructuredData: React.FC = () => {
       />
 
       {/* Open Graph */}
-      <meta property="og:title" content="Workslate AI - From Market to Market. Your Token. Everywhere." />
-      <meta property="og:description" content="AI-powered ledger reconciliation and peer-to-peer token transfer across EVM-compatible blockchains. Multi-chain token tracking for Web3 finance." />
+      <meta property="og:title" content="Workslate | Ledger Reconciliation & Programmable B2B Token Transfers" />
+      <meta property="og:description" content="Reconcile first, move value with confidence. Workslate links obligations, ledgers and corporate wallets for validated, compliant, auditable B2B token transfers." />
       <meta property="og:type" content="website" />
       <meta property="og:url" content="https://workslate.ai/" />
       
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content="Workslate AI - From Market to Market. Your Token. Everywhere." />
-      <meta name="twitter:description" content="AI-powered ledger reconciliation and peer-to-peer token transfer across EVM-compatible blockchains. Multi-chain token tracking for Web3 finance." />
+      <meta name="twitter:title" content="Workslate | Ledger Reconciliation & Programmable B2B Token Transfers" />
+      <meta name="twitter:description" content="Ledger Reconciliation & Programmable B2B Token Transfers. Reconcile first, move value with confidence. Workslate links obligations, ledgers and corporate wallets for validated, compliant, auditable B2B token transfers." />
       
       {/* JSON-LD */}
       <script type="application/ld+json">{JSON.stringify(faqPageData)}</script>
