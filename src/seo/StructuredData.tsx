@@ -21,7 +21,7 @@ export const StructuredData: React.FC = () => {
     '@type': 'Organization',
     name: 'Workslate AI',
     url: 'https://workslate.ai',
-    description: 'AI-powered token tracking and movement across markets and EVM-compatible blockchains.',
+    description: 'AI-powered financial orchestration for ledger reconciliation and peer-to-peer token transfer across EVM-compatible blockchains and Web3 networks.',
   };
 
   const webSiteData = {
@@ -29,7 +29,7 @@ export const StructuredData: React.FC = () => {
     '@type': 'WebSite',
     name: 'Workslate AI',
     url: 'https://workslate.ai',
-    description: 'Track and move tokens across markets and EVM-compatible blockchains with AI-driven automation.',
+    description: 'Multi-chain token tracking, ledger reconciliation and P2P token transfer workflows across EVM-compatible blockchains.',
   };
 
   const softwareApplicationData = {
@@ -38,7 +38,7 @@ export const StructuredData: React.FC = () => {
     name: 'Workslate AI',
     applicationCategory: 'FinanceApplication',
     operatingSystem: 'Web',
-    description: 'AI-powered platform for token tracking and movement across markets and blockchains.',
+    description: 'AI-powered platform for ledger reconciliation, programmable settlement and multi-chain token tracking across EVM-compatible blockchain networks.',
     offers: {
       '@type': 'Offer',
       price: '0',
@@ -49,7 +49,8 @@ export const StructuredData: React.FC = () => {
   return (
     <Helmet>
       <title>Workslate AI - From Market to Market. Your Token. Everywhere.</title>
-      <meta name="description" content="Track and move tokens across markets and EVM-compatible blockchains with AI-driven automation and peer-to-peer transfer workflows." />
+      <meta name="description" content="Workslate AI: AI-powered ledger reconciliation and peer-to-peer token transfer across EVM-compatible blockchains. Multi-chain token tracking for Web3 finance." />
+      <meta name="keywords" content="blockchain, EVM, EVM-compatible nodes, Web3j, Web3j Java integration, P2P workflows, peer-to-peer token transfer, multi-chain token tracking, Web3, ledger reconciliation, B2B token movement" />
       <link rel="canonical" href="https://workslate.ai/" />
 
       {/* Preload LCP image — mobile gets the 480w variant, larger screens the responsive set */}
@@ -73,14 +74,14 @@ export const StructuredData: React.FC = () => {
 
       {/* Open Graph */}
       <meta property="og:title" content="Workslate AI - From Market to Market. Your Token. Everywhere." />
-      <meta property="og:description" content="Track and move tokens across markets and EVM-compatible blockchains with AI-driven automation." />
+      <meta property="og:description" content="AI-powered ledger reconciliation and peer-to-peer token transfer across EVM-compatible blockchains. Multi-chain token tracking for Web3 finance." />
       <meta property="og:type" content="website" />
       <meta property="og:url" content="https://workslate.ai/" />
       
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content="Workslate AI - From Market to Market. Your Token. Everywhere." />
-      <meta name="twitter:description" content="Track and move tokens across markets and EVM-compatible blockchains with AI-driven automation." />
+      <meta name="twitter:description" content="AI-powered ledger reconciliation and peer-to-peer token transfer across EVM-compatible blockchains. Multi-chain token tracking for Web3 finance." />
       
       {/* JSON-LD */}
       <script type="application/ld+json">{JSON.stringify(faqPageData)}</script>
