@@ -48,7 +48,7 @@ export const StructuredData: React.FC = () => {
 
   return (
     <Helmet>
-      <title>Workslate | Ledger Reconciliation & Programmable B2B Token Transfers</title>
+      <title>Workslate AI - From Market to Market. Your Token. Everywhere.</title>
       <meta name="description" content="Reconcile first, move value with confidence. Workslate links obligations, ledgers and corporate wallets for validated, compliant, auditable B2B token transfers." />
       <meta name="keywords" content="blockchain, EVM, EVM-compatible nodes, Web3j, Web3j Java integration, P2P workflows, peer-to-peer token transfer, multi-chain token tracking, Web3, ledger reconciliation, B2B token movement" />
       <link rel="canonical" href="https://workslate.ai/" />
